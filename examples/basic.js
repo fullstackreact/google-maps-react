@@ -11,7 +11,26 @@ const Container = React.createClass({
     return {
       showingInfoWindow: false,
       activeMarker: {},
-      selectedPlace: {}
+      selectedPlace: {},
+      time: new Date()
+    }
+  },
+
+  componentDidMount: function() {
+    this.updateTimeout()
+  },
+
+  updateTimeout: function() {
+    this.timeout = setTimeout(() => {
+      this.setState({
+        time: new Date()
+      }, this.updateTimeout)
+    }, 2000)
+  },
+
+  componentWillUnmount: function() {
+    if (this.timeout) {
+      clearTimeout(this.timeout);
     }
   },
 
@@ -36,7 +55,10 @@ const Container = React.createClass({
 
   onMapClicked: function(props) {
     if (this.state.showingInfoWindow) {
-      this.onInfoWindowClose()
+      this.setState({
+        showingInfoWindow: false,
+        activeMarker: null
+      })
     }
   },
 
@@ -65,7 +87,13 @@ const Container = React.createClass({
             marker={this.state.activeMarker}
             visible={this.state.showingInfoWindow}
             onClose={this.onInfoWindowClose}>
-              <h1>{this.state.selectedPlace.name}</h1>
+              <div>
+                <h1>{this.state.selectedPlace.name}</h1>
+                <strong>{this.state.showingInfoWindow}</strong>
+                <pre>
+                  <code>{this.state.time.toString()}</code>
+                </pre>
+              </div>
           </InfoWindow>
         </Map>
       </div>

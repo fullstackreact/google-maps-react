@@ -2,14 +2,6 @@ import React, { PropTypes as T } from 'react'
 import ReactDOM from 'react-dom'
 import ReactDOMServer from 'react-dom/server'
 
-const camelize = function(str) {
-    return str.split(' ').map(function(word){
-      return word.charAt(0).toUpperCase() + word.slice(1);
-    }).join('');
-}
-
-const evtNames = ['click', 'mouseover'];
-
 export class InfoWindow extends React.Component {
 
   constructor(props) {
@@ -21,10 +13,9 @@ export class InfoWindow extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if ((this.props.map !== prevProps.map) ||
-      (this.props.place !== prevProps.place)) {
+    if ((this.props.map !== prevProps.map)) {
         let {
-          map, google, place, mapCenter
+          map, google, mapCenter
         } = this.props;
 
         const iw = this.infowindow = new google.maps.InfoWindow({
@@ -47,6 +38,10 @@ export class InfoWindow extends React.Component {
           this.closeWindow();
       })
     }
+
+    if (this.props.children !== prevProps.children) {
+      this.updateContent();
+    }
   }
 
   onOpen() {
@@ -62,9 +57,13 @@ export class InfoWindow extends React.Component {
   }
 
   openWindow() {
+    this.updateContent();
+    this.infowindow.open(this.props.map, this.props.marker);
+  }
+
+  updateContent() {
     const content = this.renderChildren();
     this.infowindow.setContent(content);
-    this.infowindow.open(this.props.map, this.props.marker);
   }
 
   closeWindow() {
@@ -73,11 +72,7 @@ export class InfoWindow extends React.Component {
 
   renderChildren() {
     const {children} = this.props;
-    const component = React.cloneElement(children, {
-
-    })
-
-    return ReactDOMServer.renderToString(component);
+    return ReactDOMServer.renderToString(children);
   }
 
   render() {
@@ -91,11 +86,10 @@ InfoWindow.propTypes = {
   marker: React.PropTypes.object,
   visible: React.PropTypes.bool,
 
-  // callback
-  onClose: React.PropTypes.func
+  // callbacks
+  onClose: React.PropTypes.func,
+  onOpen: React.PropTypes.func
 }
-
-evtNames.forEach(e => InfoWindow.propTypes[camelize(e)] = T.func)
 
 InfoWindow.defaultProps = {
   visible: false
