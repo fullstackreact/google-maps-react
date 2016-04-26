@@ -15,8 +15,9 @@ const Container = React.createClass({
     }
   },
 
-  onMapMoved: function(map) {
+  onMapMoved: function(props, map) {
     const center = map.center;
+    console.log('center ->', props);
   },
 
   onMarkerClick: function(props, marker, e) {
@@ -34,6 +35,14 @@ const Container = React.createClass({
     })
   },
 
+  onMapClicked: function(props) {
+    if (this.state.showingInfoWindow) {
+      this.setState({
+        showingInfoWindow: false
+      });
+    }
+  },
+
   render: function() {
     if (!this.props.loaded) {
       return <div>Loading...</div>
@@ -43,7 +52,8 @@ const Container = React.createClass({
       <div ref='map' style={{width: '100vw', height: '100vh'}}>
         <Map google={this.props.google}
             zoom={14}
-            onMove={this.onMapMoved}>
+            onClick={this.onMapClicked}
+            onDragend={this.onMapMoved}>
           <Marker
             onClick={this.onMarkerClick}
             name={'SOMA'}

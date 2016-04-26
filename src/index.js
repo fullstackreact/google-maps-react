@@ -10,6 +10,14 @@ const mapStyles = {
     }
 }
 
+const camelize = function(str) {
+  return str.split(' ').map(function(word){
+    return word.charAt(0).toUpperCase() + word.slice(1);
+  }).join('');
+}
+
+const evtNames = ['click', 'dragend'];
+
 class Map extends React.Component {
     constructor(props) {
         super(props)
@@ -62,17 +70,27 @@ class Map extends React.Component {
 
             this.map = new maps.Map(node, mapConfig);
 
-            let centerChangedTimeout;
-            this.map.addListener('dragend', (evt) => {
-                if (centerChangedTimeout) {
-                    clearTimeout(centerChangedTimeout);
-                    centerChangedTimeout = null;
-                }
-                centerChangedTimeout = setTimeout(() => {
-                    this.props.onMove(this.map);
-                }, 0);
+            evtNames.forEach(e => {
+              this.map.addListener(e, this.handleEvent(e));
             });
         }
+    }
+
+    handleEvent(evtName) {
+      let timeout;
+      const handlerName = `on${camelize(evtName)}`
+
+      return (e) => {
+        if (timeout) {
+          clearTimeout(timeout);
+          timeout = null;
+        }
+        timeout = setTimeout(() => {
+          if (this.props[handlerName]) {
+            this.props[handlerName](this.props, this.map, e);
+          }
+        }, 0);
+      }
     }
 
     recenterMap() {
@@ -118,19 +136,17 @@ Map.propTypes = {
     centerAroundCurrentLocation: T.bool,
     initialCenter: T.object,
     className: T.string,
-    onMove: T.func
 }
 
-const identityFn = (t) => t;
+evtNames.forEach(e => Map.propTypes[camelize(e)] = T.func)
 
 Map.defaultProps = {
-    zoom: 14,
-    initialCenter: {
-      lat: 37.774929,
-      lng: -122.419416
-    },
-    centerAroundCurrentLocation: true,
-    onMove: identityFn
+  zoom: 14,
+  initialCenter: {
+    lat: 37.774929,
+    lng: -122.419416
+  },
+  centerAroundCurrentLocation: true,
 }
 
 export default Map;

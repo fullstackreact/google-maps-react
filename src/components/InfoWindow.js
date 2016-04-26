@@ -65,7 +65,6 @@ export class InfoWindow extends React.Component {
 
   openWindow() {
     const content = this.renderChildren();
-    // const contentString = ReactDOMServer.renderToString(node);
     this.infowindow.setContent(content);
     this.infowindow.open(this.props.map, this.props.marker);
   }
