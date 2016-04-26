@@ -131,11 +131,11 @@ class Map extends React.Component {
 };
 
 Map.propTypes = {
-    google: T.object,
-    zoom: T.number,
-    centerAroundCurrentLocation: T.bool,
-    initialCenter: T.object,
-    className: T.string,
+  google: T.object,
+  zoom: T.number,
+  centerAroundCurrentLocation: T.bool,
+  initialCenter: T.object,
+  className: T.string,
 }
 
 evtNames.forEach(e => Map.propTypes[camelize(e)] = T.func)

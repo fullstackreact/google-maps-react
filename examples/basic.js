@@ -17,7 +17,6 @@ const Container = React.createClass({
 
   onMapMoved: function(props, map) {
     const center = map.center;
-    console.log('center ->', props);
   },
 
   onMarkerClick: function(props, marker, e) {
@@ -37,9 +36,7 @@ const Container = React.createClass({
 
   onMapClicked: function(props) {
     if (this.state.showingInfoWindow) {
-      this.setState({
-        showingInfoWindow: false
-      });
+      this.onInfoWindowClose()
     }
   },
 

@@ -27,10 +27,8 @@ export class InfoWindow extends React.Component {
           map, google, place, mapCenter
         } = this.props;
 
-        const content = this.renderChildren();
-        // const contentString = ReactDOMServer.renderToString(node);
         const iw = this.infowindow = new google.maps.InfoWindow({
-          content: content
+          content: ''
         });
 
         google.maps.event
@@ -96,6 +94,8 @@ InfoWindow.propTypes = {
   // callback
   onClose: React.PropTypes.func
 }
+
+evtNames.forEach(e => InfoWindow.propTypes[camelize(e)] = T.func)
 
 InfoWindow.defaultProps = {
   visible: false
