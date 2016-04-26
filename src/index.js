@@ -1,8 +1,6 @@
 import React, {PropTypes as T} from 'react';
 import ReactDOM from 'react-dom'
 
-import {Marker} from './MarkerComponent'
-
 const mapStyles = {
     map: {
         width: '100%',
@@ -16,23 +14,7 @@ class Map extends React.Component {
     constructor(props) {
         super(props)
 
-        if (props.centerAroundCurrentLocation) {
-            if (navigator && navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition((pos) => {
-                    console.log('getCurrentPosition ->', pos)
-                    const coords = pos.coords;
-                    this.setState({
-                        currentLocation: {
-                            lat: coords.latitude,
-                            lng: coords.longitude
-                        }
-                    })
-                })
-            }
-        }
-
         this.state = {
-            map: null,
             currentLocation: {
                 lat: this.props.initialCenter.lat,
                 lng: this.props.initialCenter.lng
@@ -41,7 +23,20 @@ class Map extends React.Component {
     }
 
     componentDidMount() {
-        this.loadMap();
+      if (this.props.centerAroundCurrentLocation) {
+          if (navigator && navigator.geolocation) {
+              navigator.geolocation.getCurrentPosition((pos) => {
+                  const coords = pos.coords;
+                  this.setState({
+                      currentLocation: {
+                          lat: coords.latitude,
+                          lng: coords.longitude
+                      }
+                  })
+              })
+          }
+      }
+      this.loadMap();
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -55,7 +50,7 @@ class Map extends React.Component {
 
     loadMap() {
         if (this.props && this.props.google) {
-            const google = this.props.google;
+            const {google} = this.props;
             const maps = google.maps;
 
             const mapRef = this.refs.map;
@@ -66,8 +61,6 @@ class Map extends React.Component {
             let mapConfig = Object.assign({}, {center, zoom: this.props.zoom})
 
             this.map = new maps.Map(node, mapConfig);
-
-            this.setState({map: this.map})
 
             let centerChangedTimeout;
             this.map.addListener('dragend', (evt) => {
@@ -83,7 +76,7 @@ class Map extends React.Component {
     }
 
     recenterMap() {
-        const map = this.state.map;
+        const map = this.map;
         const curr = this.state.currentLocation;
 
         const google = this.props.google;
@@ -100,11 +93,13 @@ class Map extends React.Component {
 
       if (!children) return;
 
-      return React.cloneElement(children, {
-        map: this.state.map,
-        google: this.props.google,
-        mapCenter: this.state.currentLocation
-      });
+      return React.Children.map(children, c => {
+        return React.cloneElement(c, {
+          map: this.map,
+          google: this.props.google,
+          mapCenter: this.state.currentLocation
+        });
+      })
     }
 
     render() {
@@ -131,8 +126,8 @@ const identityFn = (t) => t;
 Map.defaultProps = {
     zoom: 14,
     initialCenter: {
-        lat: 101,
-        lng: -10
+      lat: 37.774929,
+      lng: -122.419416
     },
     centerAroundCurrentLocation: true,
     onMove: identityFn
