@@ -89,10 +89,6 @@ const Container = React.createClass({
             onClose={this.onInfoWindowClose}>
               <div>
                 <h1>{this.state.selectedPlace.name}</h1>
-                <strong>{this.state.showingInfoWindow}</strong>
-                <pre>
-                  <code>{this.state.time.toString()}</code>
-                </pre>
               </div>
           </InfoWindow>
         </Map>

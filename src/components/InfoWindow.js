@@ -4,7 +4,7 @@ import ReactDOMServer from 'react-dom/server'
 
 export class InfoWindow extends React.Component {
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps) {
     if (this.props.map !== prevProps.map) {
         let {map, google, mapCenter} = this.props;
 
@@ -18,15 +18,15 @@ export class InfoWindow extends React.Component {
           .addListener(iw, 'domready', this.onOpen.bind(this));
     }
 
-    if (this.props.visible !== prevProps.visible ||
-        this.props.marker !== prevProps.marker) {
+    if (this.props.children !== prevProps.children) {
+      this.updateContent();
+    }
+
+    if ((this.props.visible !== prevProps.visible ||
+        this.props.marker !== prevProps.marker)) {
         this.props.visible ?
           this.openWindow() :
           this.closeWindow();
-    }
-
-    if (this.props.children !== prevProps.children) {
-      this.updateContent();
     }
   }
 
@@ -43,7 +43,6 @@ export class InfoWindow extends React.Component {
   }
 
   openWindow() {
-    this.updateContent();
     this.infowindow.open(this.props.map, this.props.marker);
   }
 
