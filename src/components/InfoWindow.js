@@ -4,19 +4,9 @@ import ReactDOMServer from 'react-dom/server'
 
 export class InfoWindow extends React.Component {
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      isOpen: false
-    }
-  }
-
   componentDidUpdate(prevProps, prevState) {
-    if ((this.props.map !== prevProps.map)) {
-        let {
-          map, google, mapCenter
-        } = this.props;
+    if (this.props.map !== prevProps.map) {
+        let {map, google, mapCenter} = this.props;
 
         const iw = this.infowindow = new google.maps.InfoWindow({
           content: ''
@@ -30,13 +20,9 @@ export class InfoWindow extends React.Component {
 
     if (this.props.visible !== prevProps.visible ||
         this.props.marker !== prevProps.marker) {
-      this.setState({
-        isOpen: this.props.visible,
-      }, () => {
         this.props.visible ?
           this.openWindow() :
           this.closeWindow();
-      })
     }
 
     if (this.props.children !== prevProps.children) {
