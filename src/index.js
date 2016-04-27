@@ -1,5 +1,6 @@
 import React, {PropTypes as T} from 'react';
 import ReactDOM from 'react-dom'
+import { camelize } from './lib/String'
 
 const mapStyles = {
     map: {
@@ -8,12 +9,6 @@ const mapStyles = {
         overflowY: 'scroll',
         display: 'flex'
     }
-}
-
-const camelize = function(str) {
-  return str.split(' ').map(function(word){
-    return word.charAt(0).toUpperCase() + word.slice(1);
-  }).join('');
 }
 
 const evtNames = ['click', 'dragend'];

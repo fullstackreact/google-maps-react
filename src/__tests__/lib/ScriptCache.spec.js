@@ -10,7 +10,7 @@ import {
 } from 'chai';
 
 const createCache = (obj, newElement) => {
-    const ScriptCache = require('../lib/ScriptCache').ScriptCache;
+    const ScriptCache = require('../../lib/ScriptCache').ScriptCache;
     let cache = ScriptCache(obj);
     cache._scriptTag = sinon.spy(cache, '_scriptTag')
     return cache;

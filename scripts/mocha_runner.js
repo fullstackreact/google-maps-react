@@ -2,6 +2,9 @@ require('babel-core/register');
 require('babel-polyfill');
 
 var jsdom = require('jsdom').jsdom;
+var chai = require('chai'),
+    spies = require('chai-spies');
+var sinon = require('sinon');
 
 var exposedProperties = ['window', 'navigator', 'document'];
 
@@ -17,5 +20,7 @@ Object.keys(document.defaultView).forEach((property) => {
 global.navigator = {
   userAgent: 'node.js'
 };
+
+chai.use(spies);
 
 documentRef = document;

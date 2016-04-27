@@ -4,7 +4,7 @@ import {shallow, mount, render} from 'enzyme';
 import {expect} from 'chai';
 import sinon from 'sinon';
 
-import GoogleApi from '../lib/GoogleApi'
+import GoogleApi from '../../lib/GoogleApi'
 
 const base = 'https://maps.googleapis.com/maps/api/js'
 
