@@ -38,8 +38,6 @@ export class Marker extends React.Component {
     };
     this.marker = new google.maps.Marker(pref);
 
-    console.log('marker ->', this.marker);
-
     evtNames.forEach(e => {
       this.marker.addListener(e, this.handleEvent(e));
     })
