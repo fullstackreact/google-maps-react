@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import GoogleApiComponent from '../src/GoogleApiComponent'
-import Map from '../src/index'
+// import GoogleApiComponent from '../src/GoogleApiComponent'
+import Map, {GoogleApiWrapper} from '../src/index'
 import Marker from '../src/components/Marker'
 import InfoWindow from '../src/components/InfoWindow'
 
@@ -97,7 +97,7 @@ const Container = React.createClass({
   }
 });
 
-const Wrapped = GoogleApiComponent({
+const Wrapped = GoogleApiWrapper({
   apiKey: __GAPI_KEY__
 })(Container)
 

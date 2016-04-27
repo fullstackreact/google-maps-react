@@ -122,16 +122,21 @@
       value: function componentDidUpdate(prevProps) {
         var _this2 = this;
 
-        if (this.props.map !== prevProps.map || this.props.position !== prevProps.position) {
+console.log('yay from here ->', this.props.position !== prevProps.position, this.props.map !== prevProps.map);
+
+        // if (this.props.map !== prevProps.map || this.props.position !== prevProps.position) {
           var _props = this.props;
           var map = _props.map;
           var google = _props.google;
           var position = _props.position;
           var mapCenter = _props.mapCenter;
 
-
           var pos = position || mapCenter;
-          position = new google.maps.LatLng(pos.lat, pos.lng);
+
+          if (!position.instanceof(google.maps.LatLng))
+            position = new google.maps.LatLng(pos.lat, pos.lng);
+
+          console.log('yay from here ->', position);
 
           var pref = {
             map: map,
@@ -142,7 +147,7 @@
           evtNames.forEach(function (e) {
             _this2.marker.addListener(e, _this2.handleEvent(e));
           });
-        }
+        // }
       }
     }, {
       key: 'handleEvent',

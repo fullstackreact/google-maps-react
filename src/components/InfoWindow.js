@@ -4,18 +4,13 @@ import ReactDOMServer from 'react-dom/server'
 
 export class InfoWindow extends React.Component {
 
+  componentDidMount() {
+    this.renderInfoWindow();
+  }
+  
   componentDidUpdate(prevProps) {
     if (this.props.map !== prevProps.map) {
-        let {map, google, mapCenter} = this.props;
-
-        const iw = this.infowindow = new google.maps.InfoWindow({
-          content: ''
-        });
-
-        google.maps.event
-          .addListener(iw, 'closeclick', this.onClose.bind(this))
-        google.maps.event
-          .addListener(iw, 'domready', this.onOpen.bind(this));
+      this.renderInfoWindow();
     }
 
     if (this.props.children !== prevProps.children) {
@@ -28,6 +23,19 @@ export class InfoWindow extends React.Component {
           this.openWindow() :
           this.closeWindow();
     }
+  }
+
+  renderInfoWindow() {
+    let {map, google, mapCenter} = this.props;
+
+    const iw = this.infowindow = new google.maps.InfoWindow({
+      content: ''
+    });
+
+    google.maps.event
+      .addListener(iw, 'closeclick', this.onClose.bind(this))
+    google.maps.event
+      .addListener(iw, 'domready', this.onOpen.bind(this));
   }
 
   onOpen() {

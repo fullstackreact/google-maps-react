@@ -11,9 +11,12 @@ const mapStyles = {
     }
 }
 
-const evtNames = ['click', 'dragend'];
+const evtNames = ['ready', 'click', 'dragend', 'recenter'];
 
-class Map extends React.Component {
+export {wrapper as GoogleApiWrapper} from './GoogleApiComponent'
+export {Marker} from './components/Marker'
+
+export class Map extends React.Component {
     constructor(props) {
         super(props)
 
@@ -43,32 +46,33 @@ class Map extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (prevProps.google !== this.props.google) {
-            this.loadMap();
-        }
-        if (prevState.currentLocation !== this.state.currentLocation) {
-            this.recenterMap();
-        }
+      if (prevProps.google !== this.props.google) {
+        this.loadMap();
+      }
+      if (prevState.currentLocation !== this.state.currentLocation) {
+        this.recenterMap();
+      }
     }
 
     loadMap() {
-        if (this.props && this.props.google) {
-            const {google} = this.props;
-            const maps = google.maps;
+      if (this.props && this.props.google) {
+        const {google} = this.props;
+        const maps = google.maps;
 
-            const mapRef = this.refs.map;
-            const node = ReactDOM.findDOMNode(mapRef);
-            const curr = this.state.currentLocation;
-            let center = new maps.LatLng(curr.lat, curr.lng)
+        const mapRef = this.refs.map;
+        const node = ReactDOM.findDOMNode(mapRef);
+        const curr = this.state.currentLocation;
+        let center = new maps.LatLng(curr.lat, curr.lng)
 
-            let mapConfig = Object.assign({}, {center, zoom: this.props.zoom})
+        let mapConfig = Object.assign({}, {center, zoom: this.props.zoom})
 
-            this.map = new maps.Map(node, mapConfig);
+        this.map = new maps.Map(node, mapConfig);
 
-            evtNames.forEach(e => {
-              this.map.addListener(e, this.handleEvent(e));
-            });
-        }
+        evtNames.forEach(e => {
+          this.map.addListener(e, this.handleEvent(e));
+        });
+        maps.event.trigger(this.map, 'ready')
+      }
     }
 
     handleEvent(evtName) {
@@ -96,8 +100,9 @@ class Map extends React.Component {
         const maps = google.maps;
 
         if (map) {
-            let center = new maps.LatLng(curr.lat, curr.lng)
-            map.panTo(center)
+          let center = new maps.LatLng(curr.lat, curr.lng)
+          map.panTo(center)
+          maps.event.trigger(map, 'recenter')
         }
     }
 

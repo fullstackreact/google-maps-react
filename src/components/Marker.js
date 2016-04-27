@@ -5,26 +5,44 @@ const evtNames = ['click', 'mouseover'];
 
 export class Marker extends React.Component {
 
+  componentDidMount() {
+    this.renderMarker();
+  }
+
   componentDidUpdate(prevProps) {
     if ((this.props.map !== prevProps.map) ||
       (this.props.position !== prevProps.position)) {
-        let {
-          map, google, position, mapCenter
-        } = this.props;
-
-        let pos = position || mapCenter;
-        position = new google.maps.LatLng(pos.lat, pos.lng);
-
-        const pref = {
-          map: map,
-          position: position
-        };
-        this.marker = new google.maps.Marker(pref);
-
-        evtNames.forEach(e => {
-          this.marker.addListener(e, this.handleEvent(e));
-        })
+        this.renderMarker();
     }
+  }
+
+  componentWillUnmount() {
+    if (this.marker) {
+      this.marker.setMap(null);
+    }
+  }
+
+  renderMarker() {
+    let {
+      map, google, position, mapCenter
+    } = this.props;
+
+    let pos = position || mapCenter;
+    if (!(pos instanceof google.maps.LatLng)) {
+      position = new google.maps.LatLng(pos.lat, pos.lng);
+    }
+
+    const pref = {
+      map: map,
+      position: position
+    };
+    this.marker = new google.maps.Marker(pref);
+
+    console.log('marker ->', this.marker);
+
+    evtNames.forEach(e => {
+      this.marker.addListener(e, this.handleEvent(e));
+    })
   }
 
   handleEvent(evt) {

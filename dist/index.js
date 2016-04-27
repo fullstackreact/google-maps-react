@@ -1,20 +1,33 @@
 (function (global, factory) {
     if (typeof define === "function" && define.amd) {
-        define(['module', 'exports', '/Users/auser/Development/fullstack/GoogleMapComponent/node_modules/redbox-react/lib/index.js', '/Users/auser/Development/fullstack/GoogleMapComponent/node_modules/react-transform-catch-errors/lib/index.js', 'react', '/Users/auser/Development/fullstack/GoogleMapComponent/node_modules/react-transform-hmr/lib/index.js', 'react-dom', './lib/String'], factory);
+        define(['module', 'exports', './GoogleApiComponent', './components/Marker', '/Users/auser/Development/fullstack/GoogleMapComponent/node_modules/redbox-react/lib/index.js', '/Users/auser/Development/fullstack/GoogleMapComponent/node_modules/react-transform-catch-errors/lib/index.js', 'react', '/Users/auser/Development/fullstack/GoogleMapComponent/node_modules/react-transform-hmr/lib/index.js', 'react-dom', './lib/String'], factory);
     } else if (typeof exports !== "undefined") {
-        factory(module, exports, require('/Users/auser/Development/fullstack/GoogleMapComponent/node_modules/redbox-react/lib/index.js'), require('/Users/auser/Development/fullstack/GoogleMapComponent/node_modules/react-transform-catch-errors/lib/index.js'), require('react'), require('/Users/auser/Development/fullstack/GoogleMapComponent/node_modules/react-transform-hmr/lib/index.js'), require('react-dom'), require('./lib/String'));
+        factory(module, exports, require('./GoogleApiComponent'), require('./components/Marker'), require('/Users/auser/Development/fullstack/GoogleMapComponent/node_modules/redbox-react/lib/index.js'), require('/Users/auser/Development/fullstack/GoogleMapComponent/node_modules/react-transform-catch-errors/lib/index.js'), require('react'), require('/Users/auser/Development/fullstack/GoogleMapComponent/node_modules/react-transform-hmr/lib/index.js'), require('react-dom'), require('./lib/String'));
     } else {
         var mod = {
             exports: {}
         };
-        factory(mod, mod.exports, global.index, global.index, global.react, global.index, global.reactDom, global.String);
+        factory(mod, mod.exports, global.GoogleApiComponent, global.Marker, global.index, global.index, global.react, global.index, global.reactDom, global.String);
         global.index = mod.exports;
     }
-})(this, function (module, exports, _index, _index3, _react2, _index5, _reactDom, _String) {
+})(this, function (module, exports, _GoogleApiComponent, _Marker, _index, _index3, _react2, _index5, _reactDom, _String) {
     'use strict';
 
     Object.defineProperty(exports, "__esModule", {
         value: true
+    });
+    exports.Map = exports.Marker = exports.GoogleApiWrapper = undefined;
+    Object.defineProperty(exports, 'GoogleApiWrapper', {
+        enumerable: true,
+        get: function () {
+            return _GoogleApiComponent.wrapper;
+        }
+    });
+    Object.defineProperty(exports, 'Marker', {
+        enumerable: true,
+        get: function () {
+            return _Marker.Marker;
+        }
     });
 
     var _index2 = _interopRequireDefault(_index);
@@ -118,7 +131,7 @@
 
     var evtNames = ['click', 'dragend'];
 
-    var Map = _wrapComponent('Map')(function (_React$Component) {
+    var Map = exports.Map = _wrapComponent('Map')(function (_React$Component) {
         _inherits(Map, _React$Component);
 
         function Map(props) {
@@ -187,6 +200,10 @@
                     evtNames.forEach(function (e) {
                         _this3.map.addListener(e, _this3.handleEvent(e));
                     });
+
+                    if (this.props.onReady) {
+                        this.props.onReady(this.map);
+                    }
                 }
             }
         }, {
