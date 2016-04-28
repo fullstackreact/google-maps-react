@@ -11,6 +11,10 @@ export const Container = React.createClass({
     children: T.element.isRequired
   },
 
+  contextTypes: {
+    router: T.object
+  },
+
   renderChildren: function() {
     const {children} = this.props;
     if (!children) return;
@@ -27,24 +31,30 @@ export const Container = React.createClass({
   },
 
   render: function() {
-    const {routeMap} = this.props;
+    const {routeMap, routeDef} = this.props;
+    const {router} = this.context;
+    
     const c = this.renderChildren();
     return (
       <div className={styles.container}>
-        <h1>Examples</h1>
         <div className={styles.wrapper}>
           <div className={styles.list}>
             <ul>
               {Object.keys(routeMap).map(key => {
-                return (<li key={key}>
-                  <Link to={key}>
-                    {key}
+                return (
+                  <Link to={key}
+                        activeClassName={styles.active}
+                        key={key}>
+                    <li>{routeMap[key].name}</li>
                   </Link>
-                </li>)
+                )
               })}
             </ul>
           </div>
           <div className={styles.content}>
+            <div className={styles.header}>
+              <h1>{routeDef.name} Example</h1>
+            </div>
             {c}
           </div>
         </div>

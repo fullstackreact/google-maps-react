@@ -1,19 +1,29 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {Router, browserHistory, Redirect, Route, Link} from 'react-router'
+import {Router, browserHistory, Redirect, Route, IndexRoute, Link} from 'react-router'
 
 import Container from './Container'
-import Basic from './basic'
-import WithMarkers from './withMarkers'
 
 const routeMap = {
-  'basic': Basic,
-  'markers': WithMarkers,
+  'basic': {
+    name: 'Simple',
+    filename: 'basic'
+  },
+  'markers': {
+    name: 'Marker',
+    filename: 'withMarkers'
+  },
+  'clickable_markers': {
+    name: 'Clickable markers',
+    filename: 'clickableMarkers'
+  }
 }
 
 const createElement = (Component, props) => {
+  const pathname = props.location.pathname.replace('/', '')
+  const routeDef = routeMap[pathname];
   const newProps = {
-    routeMap: routeMap
+    routeMap, pathname, routeDef
   }
   return <Component {...newProps} {...props} />
 }
@@ -22,15 +32,16 @@ const routes = (
   <Router createElement={createElement}
           history={browserHistory}>
     <Route component={Container}
-           path=''>
-
+           path='/'>
       {Object.keys(routeMap).map(key => {
+        const C = require('./components/' + routeMap[key].filename).default;
         return (<Route
                 key={key}
                 path={key}
-                component={routeMap[key]} />)
+                name={key}
+                component={C} />)
       })}
-      <Redirect from='*' to='/basic' />
+      <Redirect from='*' to='basic' />
     </Route>
   </Router>
 )

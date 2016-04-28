@@ -1,10 +1,26 @@
+$dominantColor: #1BCAFF;
+$listColor: #333;
+$textColor: #333;
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300);
+
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
 }
 .container {
-
+  font-family: 'Open Sans', sans-serif;
+  font-weight: lighter;
+}
+.header {
+  font-size: 0.5em;
+  background: color($dominantColor a(80%));
+  padding: 10px;
+  margin: 0;
+  color: $textColor;
+  text-align: center;
+  border-bottom: 2px solid color($dominantColor blackness(40%));
 }
 .wrapper {
   display: flex;
@@ -17,17 +33,33 @@ html, body {
     order: 1;
     margin: 0;
     padding: 0;
+    background: color($listColor lightness(25%));
+    border-right: 2px solid color($dominantColor blackness(40%));
     ul {
-      font-size: 18px;
+      font-size: 1.5em;
+      padding: 0;
+      margin: 0;
+      a {
+        color: color($textColor contrast(60%));
+        text-decoration: none;
+      }
+      .active {
+        color: color($textColor contrast(90%));
+        li {
+          background: color($listColor a(80%));
+        }
+      }
       li {
         list-style-type: none;
-        padding: 20px 0;
+        padding: 10px 20px;
+        &:hover {
+          background: color($dominantColor a(20%));
+        }
       }
     }
   }
 
   .content {
-    border: 1px solid orange;
     flex: 3;
     order: 2;
     position: relative;

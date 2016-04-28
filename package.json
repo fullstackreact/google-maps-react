@@ -38,10 +38,12 @@
     "eslint": "^2.7.0",
     "eslint-plugin-babel": "^3.1.0",
     "eslint-plugin-react": "^4.2.3",
+    "file-loader": "^0.8.5",
     "hjs-webpack": "^8.1.0",
     "jsdom": "^8.1.0",
     "mocha": "^2.4.5",
     "nodemon": "^1.9.1",
+    "npm-font-open-sans": "0.0.3",
     "postcss-loader": "^0.8.2",
     "precss": "^1.4.0",
     "react": "^15.0.0",
@@ -49,6 +51,7 @@
     "react-dom": "^15.0.0",
     "sinon": "^1.17.3",
     "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
     "webpack": "^1.13.0"
   },
   "peerDependencies": {
