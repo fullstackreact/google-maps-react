@@ -11,7 +11,7 @@ import Marker from '../../components/Marker';
 // google.maps.LatLng = function(lat, lng, opt_noWrap) {};
 
 describe('Marker', () => {
-  let map = null, google = null;
+  let map = null, google = global.google;
   let sandbox;
   let LatLng = null;
   let location;
@@ -21,58 +21,6 @@ describe('Marker', () => {
 
     map = {}
     location = {lat: 37.759703, lng: -122.428093}
-
-    google = {
-    	maps: {
-    		LatLng: function(lat, lng) {
-    			return {
-    				latitude: parseFloat(lat),
-    				longitude: parseFloat(lng),
-
-    				lat: function() {
-              return this.latitude;
-            },
-    				lng: function() {
-              return this.longitude;
-            }
-    			};
-    		},
-    		LatLngBounds: function(ne, sw) {
-    			return {
-    				getSouthWest: function() {
-              return sw;
-            },
-    				getNorthEast: function() {
-              return ne;
-            }
-    			};
-    		},
-    		OverlayView: function() {
-    			return {};
-    		},
-    		InfoWindow: function() {
-    			return {};
-    		},
-    		Marker: function() {
-    			return {
-            addListener: function() {}
-          };
-    		},
-    		MarkerImage: function() {
-    			return {};
-    		},
-    		Map: function() {
-    			return {};
-    		},
-    		Point: function() {
-    			return {};
-    		},
-    		Size: function() {
-    			return {};
-    		}
-    	}
-    };
-
 
     sandbox.stub(google.maps, 'Map').returns(google.maps.Map);
     // sandbox.stub(google.maps, 'Marker').returns(google.maps.Marker);

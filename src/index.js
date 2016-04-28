@@ -29,7 +29,7 @@ export class Map extends React.Component {
         super(props)
 
         invariant(!!props.google, 'You must include a `google` prop.');
-        
+
         this.listeners = {}
         this.state = {
           currentLocation: {
@@ -179,7 +179,7 @@ export class Map extends React.Component {
 };
 
 Map.propTypes = {
-  google: T.object.isRequired,
+  google: T.object,
   zoom: T.number,
   centerAroundCurrentLocation: T.bool,
   initialCenter: T.object,

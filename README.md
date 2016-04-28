@@ -2,7 +2,7 @@
 
 ![](http://d.pr/i/C7qr.png)
 
-> A declarative Google Map React component using React, lazy-loading dependencies, and a test-driven approach by the [fullstack react](https://fullstackreact.com) team.
+> A declarative Google Map React component using React, lazy-loading dependencies, current-location finder and a test-driven approach by the [fullstack react](https://fullstackreact.com) team.
 
 ## Quickstart
 
@@ -27,6 +27,16 @@ Usage:
   </InfoWindow>
 </Map>
 ```
+
+## Map
+
+The `<Map />` component _requires_ a `google` prop be included to work. Without the `google` prop, it will explode.
+
+```javascript
+<Map google={window.google} />
+```
+
+###
 
 ## Automatically Lazy-loading google api
 
