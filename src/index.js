@@ -2,6 +2,7 @@ import React, {PropTypes as T} from 'react';
 import ReactDOM from 'react-dom'
 import { camelize } from './lib/String'
 import {makeCancelable} from './lib/cancelablePromise'
+import invariant from 'invariant'
 
 const mapStyles = {
   container: {
@@ -27,6 +28,8 @@ export class Map extends React.Component {
     constructor(props) {
         super(props)
 
+        invariant(!!props.google, 'You must include a `google` prop.');
+        
         this.listeners = {}
         this.state = {
           currentLocation: {
@@ -176,7 +179,7 @@ export class Map extends React.Component {
 };
 
 Map.propTypes = {
-  google: T.object,
+  google: T.object.isRequired,
   zoom: T.number,
   centerAroundCurrentLocation: T.bool,
   initialCenter: T.object,
