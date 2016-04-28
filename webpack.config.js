@@ -26,6 +26,8 @@ var config = getConfig({
   clearBeforeBuild: true,
   html: function(context) {
     context.relative = true;
+    console.log(context);
+    context.publicPath = isDev ? 'http://localhost:3000/' : ''
     return {
       'index.html': context.defaultTemplate(),
     }

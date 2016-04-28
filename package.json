@@ -12,6 +12,7 @@
     "prepublish": "babel --plugins 'transform-es2015-modules-umd' src --ignore __tests__ --out-dir ./dist",
     "dev": "NODE_ENV=development ./node_modules/hjs-webpack/bin/hjs-dev-server.js",
     "build": "NODE_ENV=production webpack",
+    "publish": "gh-pages -d public/",
     "lint": "eslint ./src",
     "lintfix": "eslint ./src --fix",
     "testonly": "NODE_ENV=test mocha $npm_package_options_mocha",

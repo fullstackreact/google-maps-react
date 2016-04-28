@@ -9,8 +9,5 @@ build:
 example:
 	npm run build
 
-publish:
-	git checkout gh-pages
-	git merge master
-	git push origin gh-pages
-	git checkout master
+publish: example
+	gh-pages -d ./public
