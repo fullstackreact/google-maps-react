@@ -16,6 +16,10 @@ const routeMap = {
   'clickable_markers': {
     name: 'Clickable markers',
     component: require('./components/clickableMarkers').default
+  },
+  'places': {
+    name: 'Google places',
+    component: require('./components/places').default
   }
 }
 

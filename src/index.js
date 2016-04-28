@@ -168,7 +168,7 @@ export class Map extends React.Component {
       });
 
       return (
-        <div style={mapStyles.container} className={this.props.className}>
+        <div style={this.props.visible ? mapStyles.container : {}} className={this.props.className}>
           <div style={style} ref='map'>
             Loading map...
           </div>

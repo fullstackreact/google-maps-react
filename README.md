@@ -36,7 +36,9 @@ The `<Map />` component _requires_ a `google` prop be included to work. Without 
 <Map google={window.google} />
 ```
 
-###
+### Visibility
+
+You can control the visibility of the map by using the `visible` prop. This is useful for situations when you want to use the Google Maps API without a map. The `<Map />` component will load like normal
 
 ## Automatically Lazy-loading google api
 
