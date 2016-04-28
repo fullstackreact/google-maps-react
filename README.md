@@ -6,10 +6,49 @@
 
 ## Quickstart
 
+First, install the library:
+
 ```shell
 npm install --save google-maps-react
-
 ```
+
+Usage:
+
+```javascript
+<Map google={this.props.google} zoom={14}>
+
+  <Marker onClick={this.onMarkerClick}
+          name={'Current location'} />
+
+  <InfoWindow onClose={this.onInfoWindowClose}>
+      <div>
+        <h1>{this.state.selectedPlace.name}</h1>
+      </div>
+  </InfoWindow>
+</Map>
+```
+
+## Automatically Lazy-loading google api
+
+The library includes a helper to wrap around the google maps API. The `GoogleApiWrapper` Higher-Order component accepts a configuration object which *must* include an `apiKey`. See [lib/GoogleApi.js](https://github.com/fullstackreact/google-maps-react/blob/master/src/lib/GoogleApi.js#L4) for all options it accepts.
+
+```javascript
+import {GoogleApiWrapper} from 'GoogleMapsReactComponent'
+
+// ...
+
+export class Container extends React.Component {}
+
+export default GoogleApiWrapper({
+  apiKey: __GAPI_KEY__
+})(Container)
+```
+
+The `GoogleApiWrapper` automatically passes the `google` instance loaded when the component mounts (and will only load it once).
+
+## Manually loading the google api
+
+If you prefer not to use the automatic loading option, you can also pass the `window.google` instance as a `prop` to your `<Map />` component.
 
 ## Quickstart
 

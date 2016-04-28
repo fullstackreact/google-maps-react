@@ -17,6 +17,10 @@ describe('GoogleApi', () => {
         it('appends the apiKey to the url', () => {
             expect(GoogleApi({apiKey: 'abc-123-456'}).indexOf('abc-123-456')).to.be.at.least(0);
         });
+
+        it('explodes if no apiKey is given as an option', () => {
+          expect(() => GoogleApi()).to.throw(Error);
+        })
     })
 
     describe('libraries', () => {

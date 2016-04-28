@@ -28,7 +28,7 @@ export class Marker extends React.Component {
     } = this.props;
 
     let pos = position || mapCenter;
-    if (!(pos instanceof google.maps.LatLng)) {
+    if (pos && !(pos instanceof google.maps.LatLng)) {
       position = new google.maps.LatLng(pos.lat, pos.lng);
     }
 

@@ -1,4 +1,4 @@
-.PHONY: publish
+.PHONY: publish dev test example
 
 dev:
 	npm run dev
@@ -6,8 +6,17 @@ dev:
 build:
 	npm run prepublish
 
+publish:
+	npm publish .
+
+test:
+	npm run test
+
+testwatch:
+	npm run test-watch
+
 example:
 	npm run build
 
-publish: example
+publish_pages: example
 	gh-pages -d ./public

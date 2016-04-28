@@ -29,14 +29,22 @@ describe('Marker', () => {
     				latitude: parseFloat(lat),
     				longitude: parseFloat(lng),
 
-    				lat: function() { return this.latitude; },
-    				lng: function() { return this.longitude; }
+    				lat: function() {
+              return this.latitude;
+            },
+    				lng: function() {
+              return this.longitude;
+            }
     			};
     		},
     		LatLngBounds: function(ne, sw) {
     			return {
-    				getSouthWest: function() { return sw; },
-    				getNorthEast: function() { return ne; }
+    				getSouthWest: function() {
+              return sw;
+            },
+    				getNorthEast: function() {
+              return ne;
+            }
     			};
     		},
     		OverlayView: function() {

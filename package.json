@@ -1,5 +1,5 @@
 {
-  "name": "GoogleMapsReactComponent",
+  "name": "google-maps-react",
   "version": "1.0.0",
   "description": "Google maps container",
   "author": "Fullstack.io <us@fullstack.io>",
@@ -7,12 +7,16 @@
   "options": {
     "mocha": "--require scripts/mocha_runner -t rewireify src/**/__tests__/**/*.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fullstackreact/google-maps-react.git"
+  },
   "main": "dist/index.js",
   "scripts": {
     "prepublish": "babel --plugins 'transform-es2015-modules-umd' src --ignore __tests__ --out-dir ./dist",
     "dev": "NODE_ENV=development ./node_modules/hjs-webpack/bin/hjs-dev-server.js",
     "build": "NODE_ENV=production webpack",
-    "publish": "gh-pages -d public/",
+    "publish_pages": "gh-pages -d public/",
     "lint": "eslint ./src",
     "lintfix": "eslint ./src --fix",
     "testonly": "NODE_ENV=test mocha $npm_package_options_mocha",
