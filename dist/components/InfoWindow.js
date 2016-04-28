@@ -120,21 +120,15 @@
     }
 
     _createClass(InfoWindow, [{
+      key: 'componentDidMount',
+      value: function componentDidMount() {
+        this.renderInfoWindow();
+      }
+    }, {
       key: 'componentDidUpdate',
       value: function componentDidUpdate(prevProps) {
         if (this.props.map !== prevProps.map) {
-          var _props = this.props;
-          var map = _props.map;
-          var google = _props.google;
-          var mapCenter = _props.mapCenter;
-
-
-          var iw = this.infowindow = new google.maps.InfoWindow({
-            content: ''
-          });
-
-          google.maps.event.addListener(iw, 'closeclick', this.onClose.bind(this));
-          google.maps.event.addListener(iw, 'domready', this.onOpen.bind(this));
+          this.renderInfoWindow();
         }
 
         if (this.props.children !== prevProps.children) {
@@ -144,6 +138,22 @@
         if (this.props.visible !== prevProps.visible || this.props.marker !== prevProps.marker) {
           this.props.visible ? this.openWindow() : this.closeWindow();
         }
+      }
+    }, {
+      key: 'renderInfoWindow',
+      value: function renderInfoWindow() {
+        var _props = this.props;
+        var map = _props.map;
+        var google = _props.google;
+        var mapCenter = _props.mapCenter;
+
+
+        var iw = this.infowindow = new google.maps.InfoWindow({
+          content: ''
+        });
+
+        google.maps.event.addListener(iw, 'closeclick', this.onClose.bind(this));
+        google.maps.event.addListener(iw, 'domready', this.onOpen.bind(this));
       }
     }, {
       key: 'onOpen',

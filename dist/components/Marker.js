@@ -106,7 +106,7 @@
     };
   }
 
-  var evtNames = ['click', 'mouseover'];
+  var evtNames = ['click', 'mouseover', 'recenter'];
 
   var Marker = exports.Marker = _wrapComponent('Marker')(function (_React$Component) {
     _inherits(Marker, _React$Component);
@@ -118,36 +118,50 @@
     }
 
     _createClass(Marker, [{
+      key: 'componentDidMount',
+      value: function componentDidMount() {
+        this.renderMarker();
+      }
+    }, {
       key: 'componentDidUpdate',
       value: function componentDidUpdate(prevProps) {
+        if (this.props.map !== prevProps.map || this.props.position !== prevProps.position) {
+          this.renderMarker();
+        }
+      }
+    }, {
+      key: 'componentWillUnmount',
+      value: function componentWillUnmount() {
+        if (this.marker) {
+          this.marker.setMap(null);
+        }
+      }
+    }, {
+      key: 'renderMarker',
+      value: function renderMarker() {
         var _this2 = this;
 
-console.log('yay from here ->', this.props.position !== prevProps.position, this.props.map !== prevProps.map);
+        var _props = this.props;
+        var map = _props.map;
+        var google = _props.google;
+        var position = _props.position;
+        var mapCenter = _props.mapCenter;
 
-        // if (this.props.map !== prevProps.map || this.props.position !== prevProps.position) {
-          var _props = this.props;
-          var map = _props.map;
-          var google = _props.google;
-          var position = _props.position;
-          var mapCenter = _props.mapCenter;
 
-          var pos = position || mapCenter;
+        var pos = position || mapCenter;
+        if (!(pos instanceof google.maps.LatLng)) {
+          position = new google.maps.LatLng(pos.lat, pos.lng);
+        }
 
-          if (!position.instanceof(google.maps.LatLng))
-            position = new google.maps.LatLng(pos.lat, pos.lng);
+        var pref = {
+          map: map,
+          position: position
+        };
+        this.marker = new google.maps.Marker(pref);
 
-          console.log('yay from here ->', position);
-
-          var pref = {
-            map: map,
-            position: position
-          };
-          this.marker = new google.maps.Marker(pref);
-
-          evtNames.forEach(function (e) {
-            _this2.marker.addListener(e, _this2.handleEvent(e));
-          });
-        // }
+        evtNames.forEach(function (e) {
+          _this2.marker.addListener(e, _this2.handleEvent(e));
+        });
       }
     }, {
       key: 'handleEvent',

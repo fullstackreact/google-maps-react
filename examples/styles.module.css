@@ -1,0 +1,36 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+.container {
+
+}
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  min-height: 100vh;
+
+  .list {
+    flex: 1;
+    order: 1;
+    margin: 0;
+    padding: 0;
+    ul {
+      font-size: 18px;
+      li {
+        list-style-type: none;
+        padding: 20px 0;
+      }
+    }
+  }
+
+  .content {
+    border: 1px solid orange;
+    flex: 3;
+    order: 2;
+    position: relative;
+    min-height: 100%;
+  }
+}

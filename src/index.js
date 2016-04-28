@@ -1,14 +1,21 @@
 import React, {PropTypes as T} from 'react';
 import ReactDOM from 'react-dom'
 import { camelize } from './lib/String'
+import {makeCancelable} from './lib/cancelablePromise'
 
 const mapStyles = {
-    map: {
-        width: '100%',
-        height: '100%',
-        overflowY: 'scroll',
-        display: 'flex'
-    }
+  container: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%'
+  },
+  map: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    top: 0
+  }
 }
 
 const evtNames = ['ready', 'click', 'dragend', 'recenter'];
@@ -20,27 +27,34 @@ export class Map extends React.Component {
     constructor(props) {
         super(props)
 
+        this.listeners = {}
         this.state = {
-            currentLocation: {
-                lat: this.props.initialCenter.lat,
-                lng: this.props.initialCenter.lng
-            }
+          currentLocation: {
+            lat: this.props.initialCenter.lat,
+            lng: this.props.initialCenter.lng
+          }
         }
     }
 
     componentDidMount() {
       if (this.props.centerAroundCurrentLocation) {
-          if (navigator && navigator.geolocation) {
-              navigator.geolocation.getCurrentPosition((pos) => {
-                  const coords = pos.coords;
-                  this.setState({
-                      currentLocation: {
-                          lat: coords.latitude,
-                          lng: coords.longitude
-                      }
-                  })
-              })
-          }
+        if (navigator && navigator.geolocation) {
+          this.geoPromise = makeCancelable(
+            new Promise((resolve, reject) => {
+              navigator.geolocation.getCurrentPosition(resolve, reject);
+            })
+          );
+
+        this.geoPromise.promise.then(pos => {
+            const coords = pos.coords;
+            this.setState({
+              currentLocation: {
+                lat: coords.latitude,
+                lng: coords.longitude
+              }
+            })
+          }).catch(e => e);
+        }
       }
       this.loadMap();
     }
@@ -49,9 +63,22 @@ export class Map extends React.Component {
       if (prevProps.google !== this.props.google) {
         this.loadMap();
       }
+      if (this.props.visible !== prevProps.visible) {
+        this.restyleMap();
+      }
       if (prevState.currentLocation !== this.state.currentLocation) {
         this.recenterMap();
       }
+    }
+
+    componentWillUnmount() {
+      const {google} = this.props;
+      if (this.geoPromise) {
+        this.geoPromise.cancel();
+      }
+      Object.keys(this.listeners).forEach(e => {
+        google.maps.event.removeListener(this.listeners[e]);
+      });
     }
 
     loadMap() {
@@ -64,14 +91,18 @@ export class Map extends React.Component {
         const curr = this.state.currentLocation;
         let center = new maps.LatLng(curr.lat, curr.lng)
 
-        let mapConfig = Object.assign({}, {center, zoom: this.props.zoom})
+        let mapConfig = Object.assign({}, {
+          center,
+          zoom: this.props.zoom
+        });
 
         this.map = new maps.Map(node, mapConfig);
 
         evtNames.forEach(e => {
-          this.map.addListener(e, this.handleEvent(e));
+          this.listeners[e] = this.map.addListener(e, this.handleEvent(e));
         });
-        maps.event.trigger(this.map, 'ready')
+        maps.event.trigger(this.map, 'ready');
+        this.forceUpdate();
       }
     }
 
@@ -96,14 +127,22 @@ export class Map extends React.Component {
         const map = this.map;
         const curr = this.state.currentLocation;
 
-        const google = this.props.google;
+        const {google} = this.props;
         const maps = google.maps;
 
         if (map) {
           let center = new maps.LatLng(curr.lat, curr.lng)
-          map.panTo(center)
+          // map.panTo(center)
+          map.setCenter(center);
           maps.event.trigger(map, 'recenter')
         }
+    }
+
+    restyleMap() {
+      if (this.map) {
+        const {google} = this.props;
+        google.maps.event.trigger(this.map, 'resize');
+      }
     }
 
     renderChildren() {
@@ -121,12 +160,18 @@ export class Map extends React.Component {
     }
 
     render() {
-        return (
-            <div style={mapStyles.map} className={this.props.className} ref='map'>
-                Loading map...
-                {this.renderChildren()}
-            </div>
-        )
+      const style = Object.assign({}, mapStyles.map, this.props.style, {
+        display: this.props.visible ? 'inherit' : 'none'
+      });
+
+      return (
+        <div style={mapStyles.container} className={this.props.className}>
+          <div style={style} ref='map'>
+            Loading map...
+          </div>
+          {this.renderChildren()}
+        </div>
+      )
     }
 };
 
@@ -136,6 +181,8 @@ Map.propTypes = {
   centerAroundCurrentLocation: T.bool,
   initialCenter: T.object,
   className: T.string,
+  style: T.object,
+  visible: T.bool
 }
 
 evtNames.forEach(e => Map.propTypes[camelize(e)] = T.func)
@@ -147,6 +194,8 @@ Map.defaultProps = {
     lng: -122.419416
   },
   centerAroundCurrentLocation: true,
+  style: {},
+  visible: true
 }
 
 export default Map;

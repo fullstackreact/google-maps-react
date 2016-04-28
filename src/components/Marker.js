@@ -1,7 +1,7 @@
 import React, { PropTypes as T } from 'react'
 
 import { camelize } from '../lib/String'
-const evtNames = ['click', 'mouseover'];
+const evtNames = ['click', 'mouseover', 'recenter'];
 
 export class Marker extends React.Component {
 
