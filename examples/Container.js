@@ -33,7 +33,7 @@ export const Container = React.createClass({
   render: function() {
     const {routeMap, routeDef} = this.props;
     const {router} = this.context;
-    
+
     const c = this.renderChildren();
     return (
       <div className={styles.container}>
@@ -53,7 +53,7 @@ export const Container = React.createClass({
           </div>
           <div className={styles.content}>
             <div className={styles.header}>
-              <h1>{routeDef.name} Example</h1>
+              <h1>{routeDef && routeDef.name} Example</h1>
             </div>
             {c}
           </div>

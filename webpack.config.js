@@ -15,7 +15,7 @@ const root  = resolve(__dirname);
 const src   = join(root, 'src');
 const examples = join(root, 'examples');
 const modules = join(root, 'node_modules');
-const dest  = join(root, 'dist');
+const dest  = join(root, 'public');
 
 const getConfig = require('hjs-webpack')
 
@@ -25,6 +25,7 @@ var config = getConfig({
   out: dest,
   clearBeforeBuild: true,
   html: function(context) {
+    context.relative = true;
     return {
       'index.html': context.defaultTemplate(),
     }
@@ -85,10 +86,5 @@ config.postcss = [].concat([
   require('autoprefixer')({}),
   require('cssnano')({})
 ])
-
-
-config.output = Object.assign({}, config.output, {
-  publicPath: isDev ? 'http://localhost:3000/' : '/'
-})
 
 module.exports = config;
