@@ -3,14 +3,15 @@ import invariant from 'invariant'
 export const GoogleApi = function(opts) {
     opts = opts || {}
 
+    invariant(opts.hasOwnProperty('apiKey'),
+              'You must pass an apiKey to use GoogleApi');
+
     const apiKey = opts.apiKey;
     const libraries = opts.libraries || ['places'];
     const client = opts.client;
     const URL = 'https://maps.googleapis.com/maps/api/js';
 
     const googleVersion = opts.version || '3.22';
-
-    invariant(!!apiKey, 'You must pass an apiKey to use GoogleApi');
 
     let script = null;
     let google = window.google = null;
