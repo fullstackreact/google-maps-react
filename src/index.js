@@ -70,6 +70,11 @@ export class Map extends React.Component {
       if (this.props.visible !== prevProps.visible) {
         this.restyleMap();
       }
+      if (this.props.center !== prevProps.center) {
+        this.setState({
+          currentLocation: this.props.center
+        })
+      }
       if (prevState.currentLocation !== this.state.currentLocation) {
         this.recenterMap();
       }
@@ -129,13 +134,17 @@ export class Map extends React.Component {
 
     recenterMap() {
         const map = this.map;
-        const curr = this.state.currentLocation;
 
         const {google} = this.props;
         const maps = google.maps;
 
+        if (!google) return;
+
         if (map) {
-          let center = new maps.LatLng(curr.lat, curr.lng)
+          let center = this.state.currentLocation;
+          if (!(center instanceof google.maps.LatLng)) {
+            center = new google.maps.LatLng(center.lat, center.lng);
+          }
           // map.panTo(center)
           map.setCenter(center);
           maps.event.trigger(map, 'recenter')
@@ -186,6 +195,7 @@ Map.propTypes = {
   google: T.object,
   zoom: T.number,
   centerAroundCurrentLocation: T.bool,
+  center: T.object,
   initialCenter: T.object,
   className: T.string,
   style: T.object,
@@ -201,6 +211,7 @@ Map.defaultProps = {
     lat: 37.774929,
     lng: -122.419416
   },
+  center: {},
   centerAroundCurrentLocation: true,
   style: {},
   containerStyle: {},
