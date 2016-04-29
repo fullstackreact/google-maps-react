@@ -7,6 +7,7 @@ build:
 	npm run prepublish
 
 publish:
+	npm version patch
 	npm publish .
 
 test:
