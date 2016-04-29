@@ -28,7 +28,8 @@ export class Map extends React.Component {
     constructor(props) {
         super(props)
 
-        invariant(!!props.google, 'You must include a `google` prop.');
+        invariant(props.hasOwnProperty('google'),
+                    'You must include a `google` prop.');
 
         this.listeners = {}
         this.state = {
