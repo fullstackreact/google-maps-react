@@ -2,7 +2,13 @@ import React, {PropTypes as T} from 'react'
 import ReactDOM from 'react-dom'
 import {Link} from 'react-router'
 
-import {GoogleApiWrapper} from '../src/index'
+let GoogleApiWrapper;
+if (__IS_DEV__) {
+  GoogleApiWrapper = require('../src/index').GoogleApiWrapper
+} else {
+  GoogleApiWrapper = require('../dist').GoogleApiWrapper
+}
+
 import styles from './styles.module.css'
 
 export const Container = React.createClass({

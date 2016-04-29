@@ -7,7 +7,6 @@
 .babelrc
 .eslintrc
 npm-debug.log
-lib
 src/
 examples/
 public/
