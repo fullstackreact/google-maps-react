@@ -189,7 +189,83 @@ const Container = React.createClass({
 });
 ```
 
-// TODO: Document InfoWindow component
+### InfoWindow
+
+The `<InfoWindow />` component included in this library is gives us the ability to pop up a "more info" window on our google map.
+
+![](http://d.pr/i/16w0V.png)
+
+The visibility of the `<InfoWindow />` component is controlled by a `visible` prop. The `visible` prop is a boolean (`React.PropTypes.bool`) that shows the `<InfoWindow />` when true and hides it when false.
+
+```javascript
+const WithMarkers = React.createClass({
+  getInitialState: function() {
+    return {
+      showingInfoWindow: false,
+      activeMarker: {},
+      selectedPlace: {},
+    }
+  },
+
+  onMarkerClick: function(props, marker, e) {
+    this.setState({
+      selectedPlace: props,
+      activeMarker: marker,
+      showingInfoWindow: true
+    });
+  },
+
+  onMapClicked: function(props) {
+    if (this.state.showingInfoWindow) {
+      this.setState({
+        showingInfoWindow: false,
+        activeMarker: null
+      })
+    }
+  },
+
+  render: function() {
+    return (
+      <Map google={this.props.google}
+          onClick={this.onMapClicked}>
+        <Marker onClick={this.onMarkerClick}
+                name={'Current location'} />
+
+        <InfoWindow
+          marker={this.state.activeMarker}
+          visible={this.state.showingInfoWindow}>
+            <div>
+              <h1>{this.state.selectedPlace.name}</h1>
+            </div>
+        </InfoWindow>
+      </Map>
+    )
+  }
+});
+```
+
+### Events
+
+The `<InfoWindow />` throws events when it's showing/hiding. Every event is optional and can accept a handler to be called when the event is fired.
+
+```javascript
+<InfoWindow
+  onOpen={this.windowHasOpened}
+  onClose={this.windowHasClosed}
+  visible={this.state.showingInfoWindow}>
+    <div>
+      <h1>{this.state.selectedPlace.name}</h1>
+    </div>
+</InfoWindow>
+```
+
+#### onClose
+
+The `onClose` event is fired when the `<InfoWindow />` has been closed. It's useful for changing state in the parent component to keep track of the state of the `<InfoWindow />`.
+
+#### onOpen
+
+The `onOpen` event is fired when the window has been mounted in the google map instance. It's useful for keeping track of the state of the `<InfoWindow />` from within the parent component.
 
 ## Automatically Lazy-loading google api
 
@@ -221,8 +297,6 @@ cd google-maps-react
 npm install
 make dev
 ```
-
-
 
 The Google Map React component library uses React and the Google API to give easy access to the Google Maps library. This Google Map React component library was built alongside the blog post [blog.fullstack.io/articles/react-google-map-component/](http://blog.fullstack.io/articles/react-google-map-component/).
 

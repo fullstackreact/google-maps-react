@@ -55,6 +55,7 @@ const routes = (
 )
 
 const mountNode = document.querySelector('#root')
+console.log(mountNode);
 if (mountNode) {
   ReactDOM.render(routes, mountNode);
 } else {

@@ -14,10 +14,6 @@ const WithMarkers = React.createClass({
     }
   },
 
-  onMapMoved: function(props, map) {
-    const center = map.center;
-  },
-
   onMarkerClick: function(props, marker, e) {
     this.setState({
       selectedPlace: props,
@@ -52,8 +48,7 @@ const WithMarkers = React.createClass({
           style={{width: '100%', height: '100%', position: 'relative'}}
           className={'map'}
           zoom={14}
-          onClick={this.onMapClicked}
-          onDragend={this.onMapMoved}>
+          onClick={this.onMapClicked}>
         <Marker
           onClick={this.onMarkerClick}
           name={'SOMA'}
