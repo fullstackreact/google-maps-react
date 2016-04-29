@@ -168,8 +168,11 @@ export class Map extends React.Component {
         display: this.props.visible ? 'inherit' : 'none'
       });
 
+      const containerStyles = Object.assign({}, this.props.containerStyle, {
+      })
+
       return (
-        <div style={this.props.visible ? mapStyles.container : {}} className={this.props.className}>
+        <div style={containerStyles} className={this.props.className}>
           <div style={style} ref='map'>
             Loading map...
           </div>
@@ -186,6 +189,7 @@ Map.propTypes = {
   initialCenter: T.object,
   className: T.string,
   style: T.object,
+  containerStyle: T.object,
   visible: T.bool
 }
 
@@ -199,6 +203,7 @@ Map.defaultProps = {
   },
   centerAroundCurrentLocation: true,
   style: {},
+  containerStyle: {},
   visible: true
 }
 
