@@ -4,8 +4,6 @@ import {Router, hashHistory, Redirect, Route, IndexRoute, Link} from 'react-rout
 
 import styles from './global.styles.css';
 
-console.log(styles);
-
 import Container from './Container'
 
 const routeMap = {
@@ -55,7 +53,6 @@ const routes = (
 )
 
 const mountNode = document.querySelector('#root')
-console.log(mountNode);
 if (mountNode) {
   ReactDOM.render(routes, mountNode);
 } else {
