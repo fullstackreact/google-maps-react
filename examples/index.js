@@ -2,6 +2,10 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import {Router, hashHistory, Redirect, Route, IndexRoute, Link} from 'react-router'
 
+import styles from './global.styles.css';
+
+console.log(styles);
+
 import Container from './Container'
 
 const routeMap = {
@@ -51,4 +55,14 @@ const routes = (
 )
 
 const mountNode = document.querySelector('#root')
-ReactDOM.render(routes, mountNode);
+if (mountNode) {
+  ReactDOM.render(routes, mountNode);
+} else {
+  const hljs = require('highlight.js');
+
+  const codes = document.querySelectorAll('pre code');
+  for (var i = 0; i < codes.length; i++) {
+    const block = codes[i]
+    hljs.highlightBlock(block);
+  }
+}

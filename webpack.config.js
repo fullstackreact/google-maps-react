@@ -6,6 +6,7 @@ const isDev  = NODE_ENV === 'development';
 const isTest = NODE_ENV === 'test';
 
 const webpack = require('webpack');
+const marked  = require('marked');
 const fs      = require('fs');
 const path    = require('path'),
       join    = path.join,
@@ -24,11 +25,25 @@ var config = getConfig({
   in: join(examples, 'index.js'),
   out: dest,
   clearBeforeBuild: true,
-  html: function(context) {
+  html: function(context, cb) {
     context.publicPath = isDev ? 'http://localhost:3000/' : ''
-    return {
-      'index.html': context.defaultTemplate(),
-    }
+
+    fs.readFile(join(root, 'README.md'), (err, data) => {
+      if (err) {
+        return cb(err);
+      }
+      cb(null, {
+        'index.html': context.defaultTemplate(),
+        // 'readme.html': context.defaultTemplate({
+        //   html: `<div id="readme">
+        //           ${marked(data.toString('utf-8'))}
+        //         </div>`,
+        //   metaTags: {
+        //     bootApp: false
+        //   }
+        // })
+      })
+    })
   }
 });
 
@@ -68,7 +83,9 @@ const newloader = Object.assign({}, cssloader, {
 })
 config.module.loaders.push(newloader);
 cssloader.test = new RegExp(`[^module]${cssloader.test.source}`)
-cssloader.loader = newloader.loader
+cssloader.loader = 'style!css!postcss'
+
+cssloader.include = [src, examples];
 
 config.module.loaders.push({
   test: /\.css$/,

@@ -48,6 +48,7 @@
     "hjs-webpack": "^8.1.0",
     "invariant": "^2.2.1",
     "jsdom": "^8.1.0",
+    "marked": "^0.3.5",
     "mocha": "^2.4.5",
     "nodemon": "^1.9.1",
     "npm-font-open-sans": "0.0.3",
@@ -67,6 +68,7 @@
   },
   "dependencies": {
     "babel-runtime": "^6.6.1",
+    "highlight.js": "^9.3.0",
     "react-router": "^2.4.0"
   }
 }

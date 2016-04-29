@@ -11,25 +11,6 @@ const WithMarkers = React.createClass({
       showingInfoWindow: false,
       activeMarker: {},
       selectedPlace: {},
-      time: new Date()
-    }
-  },
-
-  componentDidMount: function() {
-    this.updateTimeout()
-  },
-
-  updateTimeout: function() {
-    this.timeout = setTimeout(() => {
-      this.setState({
-        time: new Date()
-      }, this.updateTimeout)
-    }, 2000)
-  },
-
-  componentWillUnmount: function() {
-    if (this.timeout) {
-      clearTimeout(this.timeout);
     }
   },
 

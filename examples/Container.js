@@ -54,6 +54,7 @@ export const Container = React.createClass({
           <div className={styles.content}>
             <div className={styles.header}>
               <h1>{routeDef && routeDef.name} Example</h1>
+              <h2><a href="https://github.com/fullstackreact/google-maps-react/blob/master/README.md">Readme</a></h2>
             </div>
             {c}
           </div>
