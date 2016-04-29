@@ -3,9 +3,23 @@ import React, { PropTypes as T } from 'react'
 import { camelize } from '../lib/String'
 const evtNames = ['click', 'mouseover', 'recenter'];
 
+const wrappedPromise = function() {
+    var wrappedPromise = {},
+        promise = new Promise(function (resolve, reject) {
+            wrappedPromise.resolve = resolve;
+            wrappedPromise.reject = reject;
+        });
+    wrappedPromise.then = promise.then.bind(promise);
+    wrappedPromise.catch = promise.catch.bind(promise);
+    wrappedPromise.promise = promise;
+
+    return wrappedPromise;
+}
+
 export class Marker extends React.Component {
 
   componentDidMount() {
+    this.markerPromise = wrappedPromise();
     this.renderMarker();
   }
 
@@ -43,7 +57,13 @@ export class Marker extends React.Component {
 
     evtNames.forEach(e => {
       this.marker.addListener(e, this.handleEvent(e));
-    })
+    });
+
+    this.markerPromise.resolve(this.marker);
+  }
+
+  getMarker() {
+    return this.markerPromise;
   }
 
   handleEvent(evt) {

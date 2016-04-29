@@ -23,6 +23,7 @@ const evtNames = ['ready', 'click', 'dragend', 'recenter'];
 
 export {wrapper as GoogleApiWrapper} from './GoogleApiComponent'
 export {Marker} from './components/Marker'
+export {InfoWindow} from './components/InfoWindow'
 
 export class Map extends React.Component {
     constructor(props) {
@@ -212,7 +213,7 @@ Map.defaultProps = {
     lng: -122.419416
   },
   center: {},
-  centerAroundCurrentLocation: true,
+  centerAroundCurrentLocation: false,
   style: {},
   containerStyle: {},
   visible: true

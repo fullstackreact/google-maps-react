@@ -7,9 +7,15 @@ export class InfoWindow extends React.Component {
   componentDidMount() {
     this.renderInfoWindow();
   }
-  
+
   componentDidUpdate(prevProps) {
-    if (this.props.map !== prevProps.map) {
+    const {google, map} = this.props;
+
+    if (!google || !map) {
+      return;
+    }
+
+    if (map !== prevProps.map) {
       this.renderInfoWindow();
     }
 
@@ -27,6 +33,10 @@ export class InfoWindow extends React.Component {
 
   renderInfoWindow() {
     let {map, google, mapCenter} = this.props;
+
+    if (!google || !google.maps) {
+      return;
+    }
 
     const iw = this.infowindow = new google.maps.InfoWindow({
       content: ''
