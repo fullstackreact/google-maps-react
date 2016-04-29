@@ -213,7 +213,7 @@ The `GoogleApiWrapper` automatically passes the `google` instance loaded when th
 
 If you prefer not to use the automatic loading option, you can also pass the `window.google` instance as a `prop` to your `<Map />` component.
 
-## Quickstart
+## Contributing
 
 ```shell
 git clone https://github.com/fullstackreact/google-maps-react.git
@@ -221,6 +221,8 @@ cd google-maps-react
 npm install
 make dev
 ```
+
+
 
 The Google Map React component library uses React and the Google API to give easy access to the Google Maps library. This Google Map React component library was built alongside the blog post [blog.fullstack.io/articles/react-google-map-component/](http://blog.fullstack.io/articles/react-google-map-component/).
 
