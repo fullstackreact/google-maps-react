@@ -6,7 +6,7 @@ dev:
 build:
 	npm run prepublish
 
-publish: build
+publish:
 	npm version patch
 	npm publish .
 
