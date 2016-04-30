@@ -22,6 +22,10 @@ const routeMap = {
   'places': {
     name: 'Google places',
     component: require('./components/places').default
+  },
+  'autocomplete': {
+    name: 'Autocomplete',
+    component: require('./components/autocomplete').default
   }
 }
 
