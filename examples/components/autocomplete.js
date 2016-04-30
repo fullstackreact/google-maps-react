@@ -30,7 +30,7 @@ const Contents = React.createClass({
   renderAutoComplete: function() {
     const {google, map} = this.props;
 
-    if (!google) return;
+    if (!google || !map) return;
 
     const aref = this.refs.autocomplete;
     const node = ReactDOM.findDOMNode(aref);

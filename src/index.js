@@ -178,8 +178,8 @@ export class Map extends React.Component {
         display: this.props.visible ? 'inherit' : 'none'
       });
 
-      const containerStyles = Object.assign({}, this.props.containerStyle, {
-      })
+      const containerStyles = Object.assign({},
+        mapStyles.container, this.props.containerStyle)
 
       return (
         <div style={containerStyles} className={this.props.className}>
