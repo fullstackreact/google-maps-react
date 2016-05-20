@@ -1,10 +1,13 @@
-# Google Map React component
 
-![](http://d.pr/i/C7qr.png)
+<p align="center">
+  <img src="resources/readme/fullstackreact-google-maps-tutorial.png" alt="Fullstack React Google Maps Tutorial" width="500" height="299"/>
+</p>
 
-> A declarative Google Map React component using React, lazy-loading dependencies, current-location finder and a test-driven approach by the [fullstack react](https://fullstackreact.com) team.
+# Google Map React Component Tutorial
 
-See the [demo](https://fullstackreact.github.io/google-maps-react).
+> A declarative Google Map React component using React, lazy-loading dependencies, current-location finder and a test-driven approach by the [Fullstack React](https://fullstackreact.com) team.
+
+See the [demo](https://fullstackreact.github.io/google-maps-react) and [accompanying blog post](https://www.fullstackreact.com/articles/how-to-write-a-google-maps-react-component/).
 
 ## Quickstart
 
@@ -29,6 +32,8 @@ Usage:
   </InfoWindow>
 </Map>
 ```
+
+![](http://d.pr/i/C7qr.png)
 
 ## Map
 
@@ -103,7 +108,7 @@ React.createClass({
 
 ### Visibility
 
-You can control the visibility of the map by using the `visible` prop. This is useful for situations when you want to use the Google Maps API without a map. The `<Map />` component will load like normal. See the [google places demo](https://fullstackreact.github.io/google-maps-react/#/places)
+You can control the visibility of the map by using the `visible` prop. This is useful for situations when you want to use the Google Maps API without a map. The `<Map />` component will load like normal. See the [Google places demo](https://fullstackreact.github.io/google-maps-react/#/places)
 
 For example:
 
@@ -118,9 +123,9 @@ For example:
 
 The `<Map />` api includes subcomponents intended on being used as children of the `Map` component. Any child can be used within the `Map` component and will receive the three `props` (as children):
 
-* map - the Google instance of the `map`
-* google - a reference to the `window.google` object
-* mapCenter - the `google.maps.LatLng()` object referring to the center of the map instance
+* `map` - the Google instance of the `map`
+* `google` - a reference to the `window.google` object
+* `mapCenter` - the `google.maps.LatLng()` object referring to the center of the map instance
 
 ### Marker
 
@@ -191,7 +196,7 @@ const Container = React.createClass({
 
 ### InfoWindow
 
-The `<InfoWindow />` component included in this library is gives us the ability to pop up a "more info" window on our google map.
+The `<InfoWindow />` component included in this library is gives us the ability to pop up a "more info" window on our Google map.
 
 ![](http://d.pr/i/16w0V.png)
 
@@ -265,11 +270,11 @@ The `onClose` event is fired when the `<InfoWindow />` has been closed. It's use
 
 #### onOpen
 
-The `onOpen` event is fired when the window has been mounted in the google map instance. It's useful for keeping track of the state of the `<InfoWindow />` from within the parent component.
+The `onOpen` event is fired when the window has been mounted in the Google map instance. It's useful for keeping track of the state of the `<InfoWindow />` from within the parent component.
 
-## Automatically Lazy-loading google api
+## Automatically Lazy-loading Google API
 
-The library includes a helper to wrap around the google maps API. The `GoogleApiWrapper` Higher-Order component accepts a configuration object which *must* include an `apiKey`. See [lib/GoogleApi.js](https://github.com/fullstackreact/google-maps-react/blob/master/src/lib/GoogleApi.js#L4) for all options it accepts.
+The library includes a helper to wrap around the Google maps API. The `GoogleApiWrapper` Higher-Order component accepts a configuration object which *must* include an `apiKey`. See [lib/GoogleApi.js](https://github.com/fullstackreact/google-maps-react/blob/master/src/lib/GoogleApi.js#L4) for all options it accepts.
 
 ```javascript
 import {GoogleApiWrapper} from 'GoogleMapsReactComponent'
@@ -285,7 +290,7 @@ export default GoogleApiWrapper({
 
 The `GoogleApiWrapper` automatically passes the `google` instance loaded when the component mounts (and will only load it once).
 
-## Manually loading the google api
+## Manually loading the Google API
 
 If you prefer not to use the automatic loading option, you can also pass the `window.google` instance as a `prop` to your `<Map />` component.
 
@@ -298,8 +303,24 @@ npm install
 make dev
 ```
 
-The Google Map React component library uses React and the Google API to give easy access to the Google Maps library. This Google Map React component library was built alongside the blog post [blog.fullstack.io/articles/react-google-map-component/](http://blog.fullstack.io/articles/react-google-map-component/).
+The Google Map React component library uses React and the Google API to give easy access to the Google Maps library. 
 
+___
 
+# Fullstack React Book
 
-[fullstackreact.com](https://fullstackreact.com)
+<a href="https://fullstackreact.com">
+<img align="right" src="resources/readme/fullstack-react-hero-book.png" alt="Fullstack React Book" width="155" height="250" />
+</a>
+
+This Google Map React component library was built alongside the blog post [How to Write a Google Maps React Component](https://www.fullstackreact.com/articles/how-to-write-a-google-maps-react-component/).
+
+This repo was written and is maintained by the [Fullstack React](https://fullstackreact.com) team. In the book we cover many more projects like this. We walk through each line of code, explain why it's there and how it works.
+
+This app is only one of several apps we have in the book. If you're looking to learn React, there's no faster way than by spending a few hours with the Fullstack React book.
+
+<div style="clear:both"></div>
+
+## License
+ [MIT](/LICENSE)
+
