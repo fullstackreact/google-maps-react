@@ -3,7 +3,7 @@
   <img src="resources/readme/fullstackreact-google-maps-tutorial.png" alt="Fullstack React Google Maps Tutorial" />
 </p>
 
-# Google Map React Component Tutorial [![Dolpins](resources/readme/dolphins-badge-ff00ff.svg?raw=true)](https://www.fullstackreact.com)
+# Google Map React Component Tutorial
 
 > A declarative Google Map React component using React, lazy-loading dependencies, current-location finder and a test-driven approach by the [Fullstack React](https://fullstackreact.com) team.
 
