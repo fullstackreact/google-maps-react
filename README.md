@@ -1,6 +1,6 @@
 
 <p align="center">
-  <img src="resources/readme/fullstackreact-google-maps-tutorial.png" alt="Fullstack React Google Maps Tutorial" width="500" height="299"/>
+  <img src="resources/readme/fullstackreact-google-maps-tutorial.png" alt="Fullstack React Google Maps Tutorial" />
 </p>
 
 # Google Map React Component Tutorial
