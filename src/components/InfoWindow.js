@@ -84,14 +84,14 @@ export class InfoWindow extends React.Component {
 }
 
 InfoWindow.propTypes = {
-  children: React.PropTypes.element.isRequired,
-  map: React.PropTypes.object,
-  marker: React.PropTypes.object,
-  visible: React.PropTypes.bool,
+  children: T.element.isRequired,
+  map: T.object,
+  marker: T.object,
+  visible: T.bool,
 
   // callbacks
-  onClose: React.PropTypes.func,
-  onOpen: React.PropTypes.func
+  onClose: T.func,
+  onOpen: T.func
 }
 
 InfoWindow.defaultProps = {
