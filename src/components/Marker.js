@@ -82,7 +82,7 @@ export class Marker extends React.Component {
 
 Marker.propTypes = {
   position: T.object,
-  map: React.PropTypes.object
+  map: T.object
 }
 
 evtNames.forEach(e => Marker.propTypes[e] = T.func)
