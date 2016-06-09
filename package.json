@@ -45,17 +45,16 @@
     "enzyme": "^2.2.0",
     "eslint": "^2.7.0",
     "eslint-plugin-babel": "^3.1.0",
-    "eslint-plugin-react": "^4.2.3",
+    "eslint-plugin-react": "^5.1.1",
     "file-loader": "^0.8.5",
     "highlight.js": "^9.3.0",
     "hjs-webpack": "^8.1.0",
-    "invariant": "^2.2.1",
-    "jsdom": "^8.1.0",
+    "jsdom": "^9.2.1",
     "marked": "^0.3.5",
     "mocha": "^2.4.5",
     "nodemon": "^1.9.1",
     "npm-font-open-sans": "0.0.3",
-    "postcss-loader": "^0.8.2",
+    "postcss-loader": "^0.9.1",
     "precss": "^1.4.0",
     "react": "^15.0.0",
     "react-addons-test-utils": "^15.0.0",
@@ -72,6 +71,7 @@
     "react-dom": "~0.14.8 || ^15.0.0"
   },
   "dependencies": {
-    "history": "^3.0.0"
+    "history": "^3.0.0",
+    "invariant": "^2.2.1"
   }
 }
