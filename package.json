@@ -71,5 +71,7 @@
     "react": "~0.14.8 || ^15.0.0",
     "react-dom": "~0.14.8 || ^15.0.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "history": "^3.0.0"
+  }
 }
