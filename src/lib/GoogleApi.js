@@ -14,7 +14,7 @@ export const GoogleApi = function(opts) {
     const googleVersion = opts.version || '3.24';
 
     let script = null;
-    let google = window.google = null;
+    let google = window.google || null;
     let loading = false;
     let channel = null;
     let language = null;
