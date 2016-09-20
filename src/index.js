@@ -71,6 +71,9 @@ export class Map extends React.Component {
       if (this.props.visible !== prevProps.visible) {
         this.restyleMap();
       }
+      if (this.props.zoom !== prevProps.zoom) {
+        this.map.setZoom(this.props.zoom);
+      }
       if (this.props.center !== prevProps.center) {
         this.setState({
           currentLocation: this.props.center
