@@ -31,7 +31,9 @@ describe('Marker', () => {
   })
 
   it('accepts a `map` and a `google` prop', () => {
-    const wrapper = mount(<Marker google={google} map={map} />);
+    const wrapper = mount(<Marker google={google}
+                                  map={map}
+                                  position={location} />);
     expect(wrapper.props().google).to.equal(google);
     expect(wrapper.props().map).to.equal(map);
   });
