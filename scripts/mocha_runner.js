@@ -56,7 +56,8 @@ const google = {
     },
     Marker: function() {
       return {
-        addListener: function() {}
+        addListener: function() {},
+        setMap: function() {}
       };
     },
     MarkerImage: function() {
