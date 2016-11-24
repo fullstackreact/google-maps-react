@@ -19,7 +19,28 @@ const mapStyles = {
   }
 }
 
-const evtNames = ['ready', 'click', 'dragend', 'recenter'];
+const evtNames = [
+  'ready',
+  'click',
+  'dragend',
+  'recenter',
+  'bounds_changed',
+  'center_changed',
+  'dblclick',
+  'dragstart',
+  'heading_change',
+  'idle',
+  'maptypeid_changed',
+  'mousemove',
+  'mouseout',
+  'mouseover',
+  'projection_changed',
+  'resize',
+  'rightclick',
+  'tilesloaded',
+  'tilt_changed',
+  'zoom_changed'
+];
 
 export {wrapper as GoogleApiWrapper} from './GoogleApiComponent'
 export {Marker} from './components/Marker'
