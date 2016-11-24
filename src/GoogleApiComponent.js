@@ -9,7 +9,7 @@ const defaultCreateCache = (options) => {
     options = options || {};
     const apiKey = options.apiKey;
     const libraries = options.libraries || ['places'];
-    const version = options.version || '3.24';
+    const version = options.version || '3';
 
     return ScriptCache({
         google: GoogleApi({apiKey: apiKey, libraries: libraries, version: version})
@@ -19,7 +19,7 @@ const defaultCreateCache = (options) => {
 export const wrapper = (options) => (WrappedComponent) => {
     const apiKey = options.apiKey;
     const libraries = options.libraries || ['places'];
-    const version = options.version || '3.24';
+    const version = options.version || '3';
     const createCache = options.createCache || defaultCreateCache;
 
     class Wrapper extends React.Component {
