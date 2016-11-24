@@ -26,6 +26,10 @@ const routeMap = {
   'autocomplete': {
     name: 'Autocomplete',
     component: require('./components/autocomplete').default
+  },
+  'heatMap': {
+    name: 'Heat Map',
+    component: require('./components/withHeatMap').default
   }
 }
 
