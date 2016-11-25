@@ -1,7 +1,7 @@
 import React, { PropTypes as T } from 'react'
 
 import { camelize } from '../lib/String'
-const evtNames = ['click', 'mouseover', 'recenter'];
+const evtNames = ['click', 'mouseover', 'recenter', 'dragend'];
 
 const wrappedPromise = function() {
     var wrappedPromise = {},
@@ -41,7 +41,7 @@ export class Marker extends React.Component {
 
   renderMarker() {
     let {
-      map, google, position, mapCenter, icon, label
+      map, google, position, mapCenter, icon, label, draggable
     } = this.props;
     if (!google) {
       return null
@@ -56,7 +56,8 @@ export class Marker extends React.Component {
       map: map,
       position: position,
       icon: icon,
-      label: label
+      label: label,
+      draggable: draggable
     };
     this.marker = new google.maps.Marker(pref);
 
