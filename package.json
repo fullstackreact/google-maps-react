@@ -11,6 +11,11 @@
     "type": "git",
     "url": "https://github.com/fullstackreact/google-maps-react.git"
   },
+  "files": [
+    "dist",
+    "lib",
+    "src"
+  ]
   "main": "dist/index.js",
   "scripts": {
     "preversion": ". ./scripts/prepublish.sh",
