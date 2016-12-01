@@ -15,7 +15,7 @@
     "dist",
     "lib",
     "src"
-  ]
+  ],
   "main": "dist/index.js",
   "scripts": {
     "preversion": ". ./scripts/prepublish.sh",
