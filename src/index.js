@@ -152,7 +152,8 @@ export class Map extends React.Component {
         });
 
         Object.keys(mapConfig).forEach((key) => {
-          if (!mapConfig[key]) {
+          // Allow to configure mapConfig with 'false'
+          if (mapConfig[key] == null) {
             delete mapConfig[key];
           }
         });
