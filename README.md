@@ -20,6 +20,10 @@ npm install --save google-maps-react
 Usage:
 
 ```javascript
+import Map from 'google-maps-react'
+
+// ...
+
 <Map google={this.props.google} zoom={14}>
 
   <Marker onClick={this.onMarkerClick}
