@@ -1,6 +1,6 @@
 let counter = 0;
 let scriptMap = typeof window !== 'undefined' && window._scriptMap || new Map();
-const window = typeof window !== 'undefined' && window || global;
+const window = require('./windowOrGlobal');
 
 export const ScriptCache = (function(global) {
     global._scriptMap = global._scriptMap || scriptMap;
