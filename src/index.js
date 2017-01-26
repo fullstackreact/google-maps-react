@@ -46,6 +46,7 @@ export {wrapper as GoogleApiWrapper} from './GoogleApiComponent'
 export {Marker} from './components/Marker'
 export {InfoWindow} from './components/InfoWindow'
 export {HeatMap} from './components/HeatMap'
+export {Polygon} from './components/Polygon'
 
 export class Map extends React.Component {
     constructor(props) {
@@ -154,7 +155,7 @@ export class Map extends React.Component {
 
         Object.keys(mapConfig).forEach((key) => {
           // Allow to configure mapConfig with 'false'
-          if (mapConfig[key] == null) {
+          if (mapConfig[key] === null) {
             delete mapConfig[key];
           }
         });
