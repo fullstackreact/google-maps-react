@@ -63,15 +63,6 @@ Note: Marker and InfoWindow components are disscussed below: (Provide link?)
 
 ![](http://d.pr/i/C7qr.png)
 
-(WHAT DO I DO WITH THIS PART?) 
-## Map
-
-The `<Map />` component _requires_ a `google` prop be included to work. Without the `google` prop, it will explode.
-
-```javascript
-<Map google={window.google} />
-```
-
 ## Additional Map Props 
 The Map component takes a number of optional props. 
 
@@ -92,8 +83,8 @@ initalCenter: Takes an object containing latitude and longitude coordinates. Set
           google={this.props.google}
           style={style}
           initialCenter={{
-            lat: 40.454785,
-            lng: -80.021807
+            lat: 40.854885,
+            lng: -88.081807
           }}
           zoom={15}
           onClick={this.onMapClicked}
@@ -260,7 +251,7 @@ const Container = React.createClass({
 });
 ```
 
-### InfoWindow
+### InfoWindow & Sample Event Handler Functions 
 
 The `<InfoWindow />` component included in this library is gives us the ability to pop up a "more info" window on our Google map.
 
@@ -269,15 +260,19 @@ The `<InfoWindow />` component included in this library is gives us the ability 
 The visibility of the `<InfoWindow />` component is controlled by a `visible` prop. The `visible` prop is a boolean (`React.PropTypes.bool`) that shows the `<InfoWindow />` when true and hides it when false.
 
 ```javascript
-const WithMarkers = React.createClass({
-  getInitialState: function() {
-    return {
+export class MapView extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
       showingInfoWindow: false,
       activeMarker: {},
       selectedPlace: {},
     }
-  },
 
+    this.onMarkerClick = this.onMarkerClick.bind(this);
+    this.onMapClicked = this.onMapClicked.bind(this);
+  }
+  
   onMarkerClick: function(props, marker, e) {
     this.setState({
       selectedPlace: props,
@@ -339,12 +334,15 @@ The `onClose` event is fired when the `<InfoWindow />` has been closed. It's use
 The `onOpen` event is fired when the window has been mounted in the Google map instance. It's useful for keeping track of the state of the `<InfoWindow />` from within the parent component.
 
 
-
 The `GoogleApiWrapper` automatically passes the `google` instance loaded when the component mounts (and will only load it once).
 
 ## Manually loading the Google API
 
 If you prefer not to use the automatic loading option, you can also pass the `window.google` instance as a `prop` to your `<Map />` component.
+
+```javascript
+<Map google={window.google} />
+```
 
 ## Contributing
 
