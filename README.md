@@ -59,7 +59,7 @@ export default GoogleApiWrapper({
   apiKey: (YOUR_GOOGLE_API_KEY_GOES_HERE)
 })(MapContainer)
 ```
-Note: Marker and InfoWindow components are disscussed below: (Provide link?) 
+Note: [Marker](#Marker) and [InfoWindow](#InfoWindow-&-Sample-Event-Handler-Functions) components are disscussed below.
 
 ![](http://d.pr/i/C7qr.png)
 
