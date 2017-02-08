@@ -59,9 +59,11 @@ export default GoogleApiWrapper({
   apiKey: (YOUR_GOOGLE_API_KEY_GOES_HERE)
 })(MapContainer)
 ```
+Note: Marker and InfoWindow components are disscussed below: (Provide link?) 
 
 ![](http://d.pr/i/C7qr.png)
 
+(WHAT DO I DO WITH THIS PART?) 
 ## Map
 
 The `<Map />` component _requires_ a `google` prop be included to work. Without the `google` prop, it will explode.
@@ -69,6 +71,35 @@ The `<Map />` component _requires_ a `google` prop be included to work. Without 
 ```javascript
 <Map google={window.google} />
 ```
+
+## Additional Map Props 
+The Map component takes a number of optional props. 
+
+Zoom: (Shown Above) takes a number with the higher value representing a tighter focus on the map's center. 
+
+Style: Takes CSS style object - commonly width and height. 
+
+```javascript
+const style = {
+  width: '100%',
+  height: '100%'
+}
+```
+initalCenter: Takes an object containing latitude and longitude coordinates. Sets the maps center upon loading.
+
+```javascript
+    <Map
+          google={this.props.google}
+          style={style}
+          initialCenter={{
+            lat: 40.454785,
+            lng: -80.021807
+          }}
+          zoom={15}
+          onClick={this.onMapClicked}
+        >
+```
+It also takes event handlers described below: 
 
 ### Events
 
