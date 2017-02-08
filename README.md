@@ -16,25 +16,48 @@ First, install the library:
 ```shell
 npm install --save google-maps-react
 ```
+## Automatically Lazy-loading Google API
 
-Usage:
+The library includes a helper to wrap around the Google maps API. The `GoogleApiWrapper` Higher-Order component accepts a configuration object which *must* include an `apiKey`. See [lib/GoogleApi.js](https://github.com/fullstackreact/google-maps-react/blob/master/src/lib/GoogleApi.js#L4) for all options it accepts.
 
 ```javascript
-import Map from 'google-maps-react'
+import {GoogleApiWrapper} from 'google-maps-react';
 
 // ...
 
-<Map google={this.props.google} zoom={14}>
+export class MapContainer extends React.Component {}
 
-  <Marker onClick={this.onMarkerClick}
-          name={'Current location'} />
+export default GoogleApiWrapper({
+  apiKey: (YOUR_GOOGLE_API_KEY_GOES_HERE)
+})(MapContainer)
+```
 
-  <InfoWindow onClose={this.onInfoWindowClose}>
-      <div>
-        <h1>{this.state.selectedPlace.name}</h1>
-      </div>
-  </InfoWindow>
-</Map>
+## Sample Usage With Lazy-loading Google API:
+
+```javascript
+import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
+
+export class MapContainer extends Component {
+render() {
+    return (
+      <Map google={this.props.google} zoom={14}>
+
+        <Marker onClick={this.onMarkerClick}
+                name={'Current location'} />
+
+        <InfoWindow onClose={this.onInfoWindowClose}>
+            <div>
+              <h1>{this.state.selectedPlace.name}</h1>
+            </div>
+        </InfoWindow>
+      </Map>
+    );
+  }
+}
+
+export default GoogleApiWrapper({
+  apiKey: (YOUR_GOOGLE_API_KEY_GOES_HERE)
+})(MapContainer)
 ```
 
 ![](http://d.pr/i/C7qr.png)
@@ -284,21 +307,7 @@ The `onClose` event is fired when the `<InfoWindow />` has been closed. It's use
 
 The `onOpen` event is fired when the window has been mounted in the Google map instance. It's useful for keeping track of the state of the `<InfoWindow />` from within the parent component.
 
-## Automatically Lazy-loading Google API
 
-The library includes a helper to wrap around the Google maps API. The `GoogleApiWrapper` Higher-Order component accepts a configuration object which *must* include an `apiKey`. See [lib/GoogleApi.js](https://github.com/fullstackreact/google-maps-react/blob/master/src/lib/GoogleApi.js#L4) for all options it accepts.
-
-```javascript
-import {GoogleApiWrapper} from 'GoogleMapsReactComponent'
-
-// ...
-
-export class Container extends React.Component {}
-
-export default GoogleApiWrapper({
-  apiKey: __GAPI_KEY__
-})(Container)
-```
 
 The `GoogleApiWrapper` automatically passes the `google` instance loaded when the component mounts (and will only load it once).
 
