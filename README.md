@@ -260,7 +260,7 @@ The `<InfoWindow />` component included in this library is gives us the ability 
 The visibility of the `<InfoWindow />` component is controlled by a `visible` prop. The `visible` prop is a boolean (`React.PropTypes.bool`) that shows the `<InfoWindow />` when true and hides it when false.
 
 ```javascript
-export class MapView extends Component {
+export class MapContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
