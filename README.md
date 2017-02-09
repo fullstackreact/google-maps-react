@@ -260,6 +260,7 @@ The `<InfoWindow />` component included in this library is gives us the ability 
 The visibility of the `<InfoWindow />` component is controlled by a `visible` prop. The `visible` prop is a boolean (`React.PropTypes.bool`) that shows the `<InfoWindow />` when true and hides it when false.
 
 ```javascript
+//note: code formatted for ES6 here
 export class MapContainer extends Component {
   constructor(props) {
     super(props);
@@ -268,7 +269,8 @@ export class MapContainer extends Component {
       activeMarker: {},
       selectedPlace: {},
     }
-
+    
+    // binding this to event-handler functions
     this.onMarkerClick = this.onMarkerClick.bind(this);
     this.onMapClicked = this.onMapClicked.bind(this);
   }
