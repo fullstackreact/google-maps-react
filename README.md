@@ -141,6 +141,7 @@ To place a marker on the Map, include it as a child of the `<Map />` component.
     className={'map'}
     zoom={14}>
   <Marker
+    title={'The marker`s title will appear as a tooltip.'}
     name={'SOMA'}
     position={{lat: 37.778519, lng: -122.405640}} />
   <Marker
