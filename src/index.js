@@ -1,4 +1,5 @@
-import React, {PropTypes as T} from 'react';
+import React from 'react'
+import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 import { camelize } from './lib/String'
 import {makeCancelable} from './lib/cancelablePromise'
@@ -154,7 +155,7 @@ export class Map extends React.Component {
 
         Object.keys(mapConfig).forEach((key) => {
           // Allow to configure mapConfig with 'false'
-          if (mapConfig[key] == null) {
+          if (mapConfig[key] === null) {
             delete mapConfig[key];
           }
         });
@@ -246,36 +247,36 @@ export class Map extends React.Component {
 };
 
 Map.propTypes = {
-  google: T.object,
-  zoom: T.number,
-  centerAroundCurrentLocation: T.bool,
-  center: T.object,
-  initialCenter: T.object,
-  className: T.string,
-  style: T.object,
-  containerStyle: T.object,
-  visible: T.bool,
-  mapType: T.string,
-  maxZoom: T.number,
-  minZoom: T.number,
-  clickableIcons: T.bool,
-  disableDefaultUI: T.bool,
-  zoomControl: T.bool,
-  mapTypeControl: T.bool,
-  scaleControl: T.bool,
-  streetViewControl: T.bool,
-  panControl: T.bool,
-  rotateControl: T.bool,
-  scrollwheel: T.bool,
-  draggable: T.bool,
-  keyboardShortcuts: T.bool,
-  disableDoubleClickZoom: T.bool,
-  noClear: T.bool,
-  styles: T.array,
-  gestureHandling: T.string
+  google: PropTypes.object,
+  zoom: PropTypes.number,
+  centerAroundCurrentLocation: PropTypes.bool,
+  center: PropTypes.object,
+  initialCenter: PropTypes.object,
+  className: PropTypes.string,
+  style: PropTypes.object,
+  containerStyle: PropTypes.object,
+  visible: PropTypes.bool,
+  mapType: PropTypes.string,
+  maxZoom: PropTypes.number,
+  minZoom: PropTypes.number,
+  clickableIcons: PropTypes.bool,
+  disableDefaultUI: PropTypes.bool,
+  zoomControl: PropTypes.bool,
+  mapTypeControl: PropTypes.bool,
+  scaleControl: PropTypes.bool,
+  streetViewControl: PropTypes.bool,
+  panControl: PropTypes.bool,
+  rotateControl: PropTypes.bool,
+  scrollwheel: PropTypes.bool,
+  draggable: PropTypes.bool,
+  keyboardShortcuts: PropTypes.bool,
+  disableDoubleClickZoom: PropTypes.bool,
+  noClear: PropTypes.bool,
+  styles: PropTypes.array,
+  gestureHandling: PropTypes.string
 }
 
-evtNames.forEach(e => Map.propTypes[camelize(e)] = T.func)
+evtNames.forEach(e => Map.propTypes[camelize(e)] = PropTypes.func)
 
 Map.defaultProps = {
   zoom: 14,

@@ -212,7 +212,7 @@ The `<InfoWindow />` component included in this library is gives us the ability 
 
 ![](http://d.pr/i/16w0V.png)
 
-The visibility of the `<InfoWindow />` component is controlled by a `visible` prop. The `visible` prop is a boolean (`React.PropTypes.bool`) that shows the `<InfoWindow />` when true and hides it when false.
+The visibility of the `<InfoWindow />` component is controlled by a `visible` prop. The `visible` prop is a boolean (`PropTypes.bool`) that shows the `<InfoWindow />` when true and hides it when false.
 
 ```javascript
 const WithMarkers = React.createClass({

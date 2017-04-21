@@ -1,4 +1,4 @@
-import React, {PropTypes as T} from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom'
 
 import {ScriptCache} from './lib/ScriptCache'
