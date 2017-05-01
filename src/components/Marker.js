@@ -42,7 +42,7 @@ export class Marker extends React.Component {
 
   renderMarker() {
     let {
-      map, google, position, mapCenter, icon, label, draggable
+      map, google, position, mapCenter, icon, label, draggable, title
     } = this.props;
     if (!google) {
       return null
@@ -58,6 +58,7 @@ export class Marker extends React.Component {
       position: position,
       icon: icon,
       label: label,
+      title: title,
       draggable: draggable
     };
     this.marker = new google.maps.Marker(pref);
