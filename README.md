@@ -58,7 +58,7 @@ When the `<Map />` instance has been loaded and is ready on the page, it will ca
 ```javascript
 React.createClass({
   fetchPlaces: function(mapProps, map) {
-    const {google} = this.props;
+    const {google} = mapProps;
     const service = new google.maps.places.PlacesService(map);
     // ...
   },
