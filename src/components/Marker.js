@@ -1,4 +1,5 @@
-import React, { PropTypes as T } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 
 import { camelize } from '../lib/String'
 const evtNames = ['click', 'mouseover', 'recenter', 'dragend'];
@@ -87,11 +88,11 @@ export class Marker extends React.Component {
 }
 
 Marker.propTypes = {
-  position: T.object,
-  map: T.object
+  position: PropTypes.object,
+  map: PropTypes.object
 }
 
-evtNames.forEach(e => Marker.propTypes[e] = T.func)
+evtNames.forEach(e => Marker.propTypes[e] = PropTypes.func)
 
 Marker.defaultProps = {
   name: 'Marker'
