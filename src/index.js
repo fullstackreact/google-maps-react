@@ -219,11 +219,11 @@ export class Map extends React.Component {
       if (!children) return;
 
       return React.Children.map(children, c => {
-        return React.cloneElement(c, {
+        return c ? React.cloneElement(c, {
           map: this.map,
           google: this.props.google,
           mapCenter: this.state.currentLocation
-        });
+        }) : null;
       })
     }
 
