@@ -38,7 +38,7 @@ export const wrapper = (options) => (WrappedComponent) => {
 
         onLoad(err, tag) {
             this._gapi = window.google;
-
+            if (!this._reactInternalInstance) return;
             this.setState({loaded: true, google: this._gapi})
         }
 
