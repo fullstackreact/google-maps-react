@@ -58,7 +58,7 @@ When the `<Map />` instance has been loaded and is ready on the page, it will ca
 ```javascript
 React.createClass({
   fetchPlaces: function(mapProps, map) {
-    const {google} = this.props;
+    const {google} = mapProps;
     const service = new google.maps.places.PlacesService(map);
     // ...
   },
@@ -141,6 +141,7 @@ To place a marker on the Map, include it as a child of the `<Map />` component.
     className={'map'}
     zoom={14}>
   <Marker
+    title={'The marker`s title will appear as a tooltip.'}
     name={'SOMA'}
     position={{lat: 37.778519, lng: -122.405640}} />
   <Marker
@@ -212,7 +213,7 @@ The `<InfoWindow />` component included in this library is gives us the ability 
 
 ![](http://d.pr/i/16w0V.png)
 
-The visibility of the `<InfoWindow />` component is controlled by a `visible` prop. The `visible` prop is a boolean (`React.PropTypes.bool`) that shows the `<InfoWindow />` when true and hides it when false.
+The visibility of the `<InfoWindow />` component is controlled by a `visible` prop. The `visible` prop is a boolean (`PropTypes.bool`) that shows the `<InfoWindow />` when true and hides it when false.
 
 ```javascript
 const WithMarkers = React.createClass({

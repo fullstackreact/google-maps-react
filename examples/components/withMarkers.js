@@ -17,6 +17,7 @@ const WithMarkers = React.createClass({
           className={'map'}
           zoom={14}>
         <Marker
+          title={'The marker`s title will appear as a tooltip.'}
           name={'SOMA'}
           position={{lat: 37.778519, lng: -122.405640}} />
         <Marker
