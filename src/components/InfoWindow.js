@@ -1,4 +1,5 @@
-import React, { PropTypes as T } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 import ReactDOMServer from 'react-dom/server'
 
@@ -19,12 +20,17 @@ export class InfoWindow extends React.Component {
       this.renderInfoWindow();
     }
 
+    if (this.props.position !== prevProps.position) {
+      this.updatePosition();
+    }
+
     if (this.props.children !== prevProps.children) {
       this.updateContent();
     }
 
     if ((this.props.visible !== prevProps.visible ||
-        this.props.marker !== prevProps.marker)) {
+        this.props.marker !== prevProps.marker ||
+        this.props.position !== prevProps.position)) {
         this.props.visible ?
           this.openWindow() :
           this.closeWindow();
@@ -64,6 +70,14 @@ export class InfoWindow extends React.Component {
     this.infowindow.open(this.props.map, this.props.marker);
   }
 
+  updatePosition() {
+    let pos = this.props.position;
+    if (!(pos instanceof google.maps.LatLng)) {
+      pos = pos && new google.maps.LatLng(pos.lat, pos.lng);
+    }
+    this.infowindow.setPosition(pos);
+  }
+
   updateContent() {
     const content = this.renderChildren();
     this.infowindow.setContent(content);
@@ -84,14 +98,15 @@ export class InfoWindow extends React.Component {
 }
 
 InfoWindow.propTypes = {
-  children: T.element.isRequired,
-  map: T.object,
-  marker: T.object,
-  visible: T.bool,
+  children: PropTypes.element.isRequired,
+  map: PropTypes.object,
+  marker: PropTypes.object,
+  position: PropTypes.object,
+  visible: PropTypes.bool,
 
   // callbacks
-  onClose: T.func,
-  onOpen: T.func
+  onClose: PropTypes.func,
+  onOpen: PropTypes.func
 }
 
 InfoWindow.defaultProps = {

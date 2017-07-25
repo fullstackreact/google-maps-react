@@ -68,6 +68,12 @@ const WithMarkers = React.createClass({
               <h1>{this.state.selectedPlace.name}</h1>
             </div>
         </InfoWindow>
+
+        <InfoWindow
+          position={{lat: 37.765703, lng: -122.425640}}
+          visible={true}>
+          <small>Click on any of the markers to display an additional info.</small>
+        </InfoWindow>
       </Map>
     )
   }

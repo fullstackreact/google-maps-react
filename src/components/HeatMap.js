@@ -1,4 +1,5 @@
-import React, { PropTypes as T } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 
 import { camelize } from '../lib/String'
 const evtNames = ['click', 'mouseover', 'recenter'];
@@ -91,12 +92,12 @@ export class HeatMap extends React.Component {
 }
 
 HeatMap.propTypes = {
-  position: T.object,
-  map: T.object,
-  icon: T.string
+  position: PropTypes.object,
+  map: PropTypes.object,
+  icon: PropTypes.string
 }
 
-evtNames.forEach(e => HeatMap.propTypes[e] = T.func)
+evtNames.forEach(e => HeatMap.propTypes[e] = PropTypes.func)
 
 HeatMap.defaultProps = {
   name: 'HeatMap'
