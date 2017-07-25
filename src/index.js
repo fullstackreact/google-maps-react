@@ -47,6 +47,7 @@ export {wrapper as GoogleApiWrapper} from './GoogleApiComponent'
 export {Marker} from './components/Marker'
 export {InfoWindow} from './components/InfoWindow'
 export {HeatMap} from './components/HeatMap'
+export {Polygon} from './components/Polygon'
 
 export class Map extends React.Component {
     constructor(props) {

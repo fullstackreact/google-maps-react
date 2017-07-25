@@ -30,6 +30,10 @@ const routeMap = {
   'heatMap': {
     name: 'Heat Map',
     component: require('./components/withHeatMap').default
+  },
+  'polygons': {
+    name: 'Polygon',
+    component: require('./components/withPolygons').default
   }
 }
 
@@ -67,7 +71,7 @@ if (mountNode) {
   const hljs = require('highlight.js');
 
   const codes = document.querySelectorAll('pre code');
-  for (var i = 0; i < codes.length; i++) {
+  for (let i = 0; i < codes.length; i++) {
     const block = codes[i]
     hljs.highlightBlock(block);
   }
