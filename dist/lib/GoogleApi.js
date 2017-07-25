@@ -42,7 +42,7 @@
         var google = window.google || null;
         var loading = false;
         var channel = null;
-        var language = null;
+        var language = opts.language;
         var region = null;
 
         var onLoadEvents = [];

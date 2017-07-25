@@ -1,6 +1,6 @@
 {
   "name": "google-maps-react",
-  "version": "1.0.18",
+  "version": "1.0.19",
   "description": "Google maps container",
   "author": "Fullstack.io <us@fullstack.io>",
   "license": "MIT",
@@ -13,6 +13,7 @@
   },
   "main": "dist/index.js",
   "scripts": {
+    "prepublish": "./scripts/prepublish.sh",
     "preversion": ". ./scripts/prepublish.sh",
     "dev": "NODE_ENV=development ./node_modules/hjs-webpack/bin/hjs-dev-server.js",
     "build": "NODE_ENV=production webpack",

@@ -1,26 +1,24 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', 'react', 'prop-types', '../lib/String'], factory);
+    define(['exports', 'react', '../lib/String'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('react'), require('prop-types'), require('../lib/String'));
+    factory(exports, require('react'), require('../lib/String'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.react, global.propTypes, global.String);
-    global.Marker = mod.exports;
+    factory(mod.exports, global.react, global.String);
+    global.Polygon = mod.exports;
   }
-})(this, function (exports, _react, _propTypes, _String) {
+})(this, function (exports, _react, _String) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  exports.Marker = undefined;
+  exports.Polygon = undefined;
 
   var _react2 = _interopRequireDefault(_react);
-
-  var _propTypes2 = _interopRequireDefault(_propTypes);
 
   function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {
@@ -76,7 +74,7 @@
     if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
   }
 
-  var evtNames = ['click', 'dblclick', 'dragend', 'mousedown', 'mouseout', 'mouseover', 'mouseup', 'recenter'];
+  var evtNames = ['click', 'mouseout', 'mouseover'];
 
   var wrappedPromise = function wrappedPromise() {
     var wrappedPromise = {},
@@ -91,82 +89,80 @@
     return wrappedPromise;
   };
 
-  var Marker = exports.Marker = function (_React$Component) {
-    _inherits(Marker, _React$Component);
+  var Polygon = exports.Polygon = function (_React$Component) {
+    _inherits(Polygon, _React$Component);
 
-    function Marker() {
-      _classCallCheck(this, Marker);
+    function Polygon() {
+      _classCallCheck(this, Polygon);
 
-      return _possibleConstructorReturn(this, (Marker.__proto__ || Object.getPrototypeOf(Marker)).apply(this, arguments));
+      return _possibleConstructorReturn(this, (Polygon.__proto__ || Object.getPrototypeOf(Polygon)).apply(this, arguments));
     }
 
-    _createClass(Marker, [{
+    _createClass(Polygon, [{
       key: 'componentDidMount',
       value: function componentDidMount() {
-        this.markerPromise = wrappedPromise();
-        this.renderMarker();
+        this.polygonPromise = wrappedPromise();
+        this.renderPolygon();
       }
     }, {
       key: 'componentDidUpdate',
       value: function componentDidUpdate(prevProps) {
-        if (this.props.map !== prevProps.map || this.props.position !== prevProps.position || this.props.icon !== prevProps.icon) {
-          if (this.marker) {
-            this.marker.setMap(null);
+        if (this.props.map !== prevProps.map) {
+          if (this.polygon) {
+            this.polygon.setMap(null);
+            this.renderPolygon();
           }
-          this.renderMarker();
         }
       }
     }, {
       key: 'componentWillUnmount',
       value: function componentWillUnmount() {
-        if (this.marker) {
-          this.marker.setMap(null);
+        if (this.polygon) {
+          this.polygon.setMap(null);
         }
       }
     }, {
-      key: 'renderMarker',
-      value: function renderMarker() {
+      key: 'renderPolygon',
+      value: function renderPolygon() {
         var _this2 = this;
 
         var _props = this.props,
             map = _props.map,
             google = _props.google,
-            position = _props.position,
-            mapCenter = _props.mapCenter,
-            icon = _props.icon,
-            label = _props.label,
-            draggable = _props.draggable,
-            title = _props.title;
+            paths = _props.paths,
+            strokeColor = _props.strokeColor,
+            strokeOpacity = _props.strokeOpacity,
+            strokeWeight = _props.strokeWeight,
+            fillColor = _props.fillColor,
+            fillOpacity = _props.fillOpacity;
+
 
         if (!google) {
           return null;
         }
 
-        var pos = position || mapCenter;
-        if (!(pos instanceof google.maps.LatLng)) {
-          position = new google.maps.LatLng(pos.lat, pos.lng);
-        }
-
-        var pref = {
+        var params = {
           map: map,
-          position: position,
-          icon: icon,
-          label: label,
-          title: title,
-          draggable: draggable
+          paths: paths,
+          strokeColor: strokeColor,
+          strokeOpacity: strokeOpacity,
+          strokeWeight: strokeWeight,
+          fillColor: fillColor,
+          fillOpacity: fillOpacity
         };
-        this.marker = new google.maps.Marker(pref);
+
+        this.polygon = new google.maps.Polygon(params);
 
         evtNames.forEach(function (e) {
-          _this2.marker.addListener(e, _this2.handleEvent(e));
+          _this2.polygon.addListener(e, _this2.handleEvent(e));
         });
 
-        this.markerPromise.resolve(this.marker);
+        this.polygonPromise.resolve(this.polygon);
       }
     }, {
-      key: 'getMarker',
-      value: function getMarker() {
-        return this.markerPromise;
+      key: 'getPolygon',
+      value: function getPolygon() {
+        return this.polygonPromise;
       }
     }, {
       key: 'handleEvent',
@@ -176,7 +172,7 @@
         return function (e) {
           var evtName = 'on' + (0, _String.camelize)(evt);
           if (_this3.props[evtName]) {
-            _this3.props[evtName](_this3.props, _this3.marker, e);
+            _this3.props[evtName](_this3.props, _this3.polygon, e);
           }
         };
       }
@@ -187,21 +183,25 @@
       }
     }]);
 
-    return Marker;
+    return Polygon;
   }(_react2.default.Component);
 
-  Marker.propTypes = {
-    position: _propTypes2.default.object,
-    map: _propTypes2.default.object
+  Polygon.propTypes = {
+    paths: _react.PropTypes.array,
+    strokeColor: _react.PropTypes.string,
+    strokeOpacity: _react.PropTypes.number,
+    strokeWeight: _react.PropTypes.number,
+    fillColor: _react.PropTypes.string,
+    fillOpacity: _react.PropTypes.number
   };
 
   evtNames.forEach(function (e) {
-    return Marker.propTypes[e] = _propTypes2.default.func;
+    return Polygon.propTypes[e] = _react.PropTypes.func;
   });
 
-  Marker.defaultProps = {
-    name: 'Marker'
+  Polygon.defaultProps = {
+    name: 'Polygon'
   };
 
-  exports.default = Marker;
+  exports.default = Polygon;
 });

@@ -83,10 +83,16 @@
         options = options || {};
         var apiKey = options.apiKey;
         var libraries = options.libraries || ['places'];
-        var version = options.version || '3';
+        var version = options.version || '3.24';
+        var language = options.language || 'en';
 
         return (0, _ScriptCache.ScriptCache)({
-            google: (0, _GoogleApi2.default)({ apiKey: apiKey, libraries: libraries, version: version })
+            google: (0, _GoogleApi2.default)({
+                apiKey: apiKey,
+                language: language,
+                libraries: libraries,
+                version: version
+            })
         });
     };
 

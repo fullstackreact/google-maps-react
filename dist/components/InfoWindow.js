@@ -110,11 +110,15 @@
           this.renderInfoWindow();
         }
 
+        if (this.props.position !== prevProps.position) {
+          this.updatePosition();
+        }
+
         if (this.props.children !== prevProps.children) {
           this.updateContent();
         }
 
-        if (this.props.visible !== prevProps.visible || this.props.marker !== prevProps.marker) {
+        if (this.props.visible !== prevProps.visible || this.props.marker !== prevProps.marker || this.props.position !== prevProps.position) {
           this.props.visible ? this.openWindow() : this.closeWindow();
         }
       }
@@ -158,6 +162,15 @@
         this.infowindow.open(this.props.map, this.props.marker);
       }
     }, {
+      key: 'updatePosition',
+      value: function updatePosition() {
+        var pos = this.props.position;
+        if (!(pos instanceof google.maps.LatLng)) {
+          pos = pos && new google.maps.LatLng(pos.lat, pos.lng);
+        }
+        this.infowindow.setPosition(pos);
+      }
+    }, {
       key: 'updateContent',
       value: function updateContent() {
         var content = this.renderChildren();
@@ -189,6 +202,7 @@
     children: _propTypes2.default.element.isRequired,
     map: _propTypes2.default.object,
     marker: _propTypes2.default.object,
+    position: _propTypes2.default.object,
     visible: _propTypes2.default.bool,
 
     // callbacks

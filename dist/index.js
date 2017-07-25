@@ -1,22 +1,22 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', './GoogleApiComponent', './components/Marker', './components/InfoWindow', './components/HeatMap', 'react', 'prop-types', 'react-dom', './lib/String', './lib/cancelablePromise', 'invariant'], factory);
+    define(['exports', './GoogleApiComponent', './components/Marker', './components/InfoWindow', './components/HeatMap', './components/Polygon', 'react', 'prop-types', 'react-dom', './lib/String', './lib/cancelablePromise', 'invariant'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('./GoogleApiComponent'), require('./components/Marker'), require('./components/InfoWindow'), require('./components/HeatMap'), require('react'), require('prop-types'), require('react-dom'), require('./lib/String'), require('./lib/cancelablePromise'), require('invariant'));
+    factory(exports, require('./GoogleApiComponent'), require('./components/Marker'), require('./components/InfoWindow'), require('./components/HeatMap'), require('./components/Polygon'), require('react'), require('prop-types'), require('react-dom'), require('./lib/String'), require('./lib/cancelablePromise'), require('invariant'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.GoogleApiComponent, global.Marker, global.InfoWindow, global.HeatMap, global.react, global.propTypes, global.reactDom, global.String, global.cancelablePromise, global.invariant);
+    factory(mod.exports, global.GoogleApiComponent, global.Marker, global.InfoWindow, global.HeatMap, global.Polygon, global.react, global.propTypes, global.reactDom, global.String, global.cancelablePromise, global.invariant);
     global.index = mod.exports;
   }
-})(this, function (exports, _GoogleApiComponent, _Marker, _InfoWindow, _HeatMap, _react, _propTypes, _reactDom, _String, _cancelablePromise, _invariant) {
+})(this, function (exports, _GoogleApiComponent, _Marker, _InfoWindow, _HeatMap, _Polygon, _react, _propTypes, _reactDom, _String, _cancelablePromise, _invariant) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  exports.Map = exports.HeatMap = exports.InfoWindow = exports.Marker = exports.GoogleApiWrapper = undefined;
+  exports.Map = exports.Polygon = exports.HeatMap = exports.InfoWindow = exports.Marker = exports.GoogleApiWrapper = undefined;
   Object.defineProperty(exports, 'GoogleApiWrapper', {
     enumerable: true,
     get: function () {
@@ -39,6 +39,12 @@
     enumerable: true,
     get: function () {
       return _HeatMap.HeatMap;
+    }
+  });
+  Object.defineProperty(exports, 'Polygon', {
+    enumerable: true,
+    get: function () {
+      return _Polygon.Polygon;
     }
   });
 
@@ -320,6 +326,7 @@
         if (!children) return;
 
         return _react2.default.Children.map(children, function (c) {
+          if (!c) return;
           return _react2.default.cloneElement(c, {
             map: _this6.map,
             google: _this6.props.google,
@@ -351,8 +358,6 @@
 
     return Map;
   }(_react2.default.Component);
-
-  ;
 
   Map.propTypes = {
     google: _propTypes2.default.object,

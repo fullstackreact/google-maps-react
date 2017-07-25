@@ -16,36 +16,81 @@ First, install the library:
 ```shell
 npm install --save google-maps-react
 ```
+## Automatically Lazy-loading Google API
 
-Usage:
+The library includes a helper to wrap around the Google maps API. The `GoogleApiWrapper` Higher-Order component accepts a configuration object which *must* include an `apiKey`. See [lib/GoogleApi.js](https://github.com/fullstackreact/google-maps-react/blob/master/src/lib/GoogleApi.js#L4) for all options it accepts.
 
 ```javascript
-import Map from 'google-maps-react'
+import {GoogleApiWrapper} from 'google-maps-react';
 
 // ...
 
-<Map google={this.props.google} zoom={14}>
+export class MapContainer extends React.Component {}
 
-  <Marker onClick={this.onMarkerClick}
-          name={'Current location'} />
-
-  <InfoWindow onClose={this.onInfoWindowClose}>
-      <div>
-        <h1>{this.state.selectedPlace.name}</h1>
-      </div>
-  </InfoWindow>
-</Map>
+export default GoogleApiWrapper({
+  apiKey: (YOUR_GOOGLE_API_KEY_GOES_HERE)
+})(MapContainer)
 ```
+
+## Sample Usage With Lazy-loading Google API:
+
+```javascript
+import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
+
+export class MapContainer extends Component {
+render() {
+    return (
+      <Map google={this.props.google} zoom={14}>
+
+        <Marker onClick={this.onMarkerClick}
+                name={'Current location'} />
+
+        <InfoWindow onClose={this.onInfoWindowClose}>
+            <div>
+              <h1>{this.state.selectedPlace.name}</h1>
+            </div>
+        </InfoWindow>
+      </Map>
+    );
+  }
+}
+
+export default GoogleApiWrapper({
+  apiKey: (YOUR_GOOGLE_API_KEY_GOES_HERE)
+})(MapContainer)
+```
+*Note: [Marker](#marker) and [InfoWindow](#infowindow--sample-event-handler-functions) components are disscussed below.*
 
 ![](http://d.pr/i/C7qr.png)
 
-## Map
+## Additional Map Props 
+The Map component takes a number of optional props. 
 
-The `<Map />` component _requires_ a `google` prop be included to work. Without the `google` prop, it will explode.
+Zoom: (Shown Above) takes a number with the higher value representing a tighter focus on the map's center. 
+
+Style: Takes CSS style object - commonly width and height. 
 
 ```javascript
-<Map google={window.google} />
+const style = {
+  width: '100%',
+  height: '100%'
+}
 ```
+initalCenter: Takes an object containing latitude and longitude coordinates. Sets the maps center upon loading.
+
+```javascript
+    <Map
+          google={this.props.google}
+          style={style}
+          initialCenter={{
+            lat: 40.854885,
+            lng: -88.081807
+          }}
+          zoom={15}
+          onClick={this.onMapClicked}
+        >
+```
+It also takes event handlers described below: 
 
 ### Events
 
@@ -207,6 +252,39 @@ const Container = React.createClass({
 });
 ```
 
+### Polygon
+
+To place a polygon on the Map, set `<Polygon />` as child of Map component.
+
+```javascript
+render: function() {
+  var triangleCoords = [
+    {lat: 25.774, lng: -80.190},
+    {lat: 18.466, lng: -66.118},
+    {lat: 32.321, lng: -64.757},
+    {lat: 25.774, lng: -80.190}
+  ];
+  return(
+    <Map google={this.props.google}
+        style={{width: '100%', height: '100%', position: 'relative'}}
+        className={'map'}
+        zoom={14}>
+        <Polygon
+          paths={triangleCoords}
+          strokeColor="#0000FF"
+          strokeOpacity={0.8}
+          strokeWeight={2}
+          fillColor="#0000FF"
+          fillOpacity={0.35} />
+    </Map>
+  )
+}
+```
+
+#### Events
+
+The `<Polygon />` component listens to `onClick`, `onMouseover` and `onMouseout` events.
+
 ### InfoWindow
 
 The `<InfoWindow />` component included in this library is gives us the ability to pop up a "more info" window on our Google map.
@@ -215,16 +293,25 @@ The `<InfoWindow />` component included in this library is gives us the ability 
 
 The visibility of the `<InfoWindow />` component is controlled by a `visible` prop. The `visible` prop is a boolean (`PropTypes.bool`) that shows the `<InfoWindow />` when true and hides it when false.
 
+There are two ways how to control a position of the `<InfoWindow />` component.
+You can use a `position` prop or connect the `<InfoWindow />` component directly to an existing `<Marker />` component by using a `marker` prop.
+
 ```javascript
-const WithMarkers = React.createClass({
-  getInitialState: function() {
-    return {
+//note: code formatted for ES6 here
+export class MapContainer extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
       showingInfoWindow: false,
       activeMarker: {},
       selectedPlace: {},
     }
-  },
-
+    
+    // binding this to event-handler functions
+    this.onMarkerClick = this.onMarkerClick.bind(this);
+    this.onMapClicked = this.onMapClicked.bind(this);
+  }
+  
   onMarkerClick: function(props, marker, e) {
     this.setState({
       selectedPlace: props,
@@ -285,27 +372,16 @@ The `onClose` event is fired when the `<InfoWindow />` has been closed. It's use
 
 The `onOpen` event is fired when the window has been mounted in the Google map instance. It's useful for keeping track of the state of the `<InfoWindow />` from within the parent component.
 
-## Automatically Lazy-loading Google API
-
-The library includes a helper to wrap around the Google maps API. The `GoogleApiWrapper` Higher-Order component accepts a configuration object which *must* include an `apiKey`. See [lib/GoogleApi.js](https://github.com/fullstackreact/google-maps-react/blob/master/src/lib/GoogleApi.js#L4) for all options it accepts.
-
-```javascript
-import {GoogleApiWrapper} from 'GoogleMapsReactComponent'
-
-// ...
-
-export class Container extends React.Component {}
-
-export default GoogleApiWrapper({
-  apiKey: __GAPI_KEY__
-})(Container)
-```
 
 The `GoogleApiWrapper` automatically passes the `google` instance loaded when the component mounts (and will only load it once).
 
 ## Manually loading the Google API
 
 If you prefer not to use the automatic loading option, you can also pass the `window.google` instance as a `prop` to your `<Map />` component.
+
+```javascript
+<Map google={window.google} />
+```
 
 ## Contributing
 

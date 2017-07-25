@@ -1,24 +1,23 @@
 (function (global, factory) {
     if (typeof define === "function" && define.amd) {
-        define(['exports'], factory);
+        define(['exports', './windowOrGlobal'], factory);
     } else if (typeof exports !== "undefined") {
-        factory(exports);
+        factory(exports, require('./windowOrGlobal'));
     } else {
         var mod = {
             exports: {}
         };
-        factory(mod.exports);
+        factory(mod.exports, global.windowOrGlobal);
         global.ScriptCache = mod.exports;
     }
-})(this, function (exports) {
+})(this, function (exports, window) {
     'use strict';
 
     Object.defineProperty(exports, "__esModule", {
         value: true
     });
     var counter = 0;
-    var scriptMap = window._scriptMap || new Map();
-
+    var scriptMap = typeof window !== 'undefined' && window._scriptMap || new Map();
     var ScriptCache = exports.ScriptCache = function (global) {
         global._scriptMap = global._scriptMap || scriptMap;
         return function ScriptCache(scripts) {
