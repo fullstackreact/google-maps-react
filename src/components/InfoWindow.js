@@ -1,4 +1,5 @@
-import React, { PropTypes as T } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 import ReactDOMServer from 'react-dom/server'
 
@@ -97,15 +98,15 @@ export class InfoWindow extends React.Component {
 }
 
 InfoWindow.propTypes = {
-  children: T.element.isRequired,
-  map: T.object,
-  marker: T.object,
-  position: T.object,
-  visible: T.bool,
+  children: PropTypes.element.isRequired,
+  map: PropTypes.object,
+  marker: PropTypes.object,
+  position: PropTypes.object,
+  visible: PropTypes.bool,
 
   // callbacks
-  onClose: T.func,
-  onOpen: T.func
+  onClose: PropTypes.func,
+  onOpen: PropTypes.func
 }
 
 InfoWindow.defaultProps = {
