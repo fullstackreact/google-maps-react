@@ -191,9 +191,9 @@ export class Map extends React.Component {
         const map = this.map;
 
         const {google} = this.props;
-        const maps = google.maps;
 
         if (!google) return;
+        const maps = google.maps;
 
         if (map) {
           let center = this.state.currentLocation;
