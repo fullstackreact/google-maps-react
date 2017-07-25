@@ -47,6 +47,7 @@ export {wrapper as GoogleApiWrapper} from './GoogleApiComponent'
 export {Marker} from './components/Marker'
 export {InfoWindow} from './components/InfoWindow'
 export {HeatMap} from './components/HeatMap'
+export {Polygon} from './components/Polygon'
 
 export class Map extends React.Component {
     constructor(props) {
@@ -191,9 +192,9 @@ export class Map extends React.Component {
         const map = this.map;
 
         const {google} = this.props;
-        const maps = google.maps;
 
         if (!google) return;
+        const maps = google.maps;
 
         if (map) {
           let center = this.state.currentLocation;
@@ -219,7 +220,8 @@ export class Map extends React.Component {
       if (!children) return;
 
       return React.Children.map(children, c => {
-        return c ? React.cloneElement(c, {
+		if (!c) return;
+        return React.cloneElement(c, {
           map: this.map,
           google: this.props.google,
           mapCenter: this.state.currentLocation

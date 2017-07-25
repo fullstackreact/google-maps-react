@@ -17,7 +17,7 @@ export const GoogleApi = function(opts) {
     let google = window.google || null;
     let loading = false;
     let channel = null;
-    let language = null;
+    let language = opts.language;
     let region = null;
 
     let onLoadEvents = [];
