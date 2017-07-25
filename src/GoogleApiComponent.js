@@ -1,4 +1,4 @@
-import React, {PropTypes as T} from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom'
 
 import {ScriptCache} from './lib/ScriptCache'
@@ -25,7 +25,7 @@ const defaultCreateCache = (options) => {
 export const wrapper = (options) => (WrappedComponent) => {
     const apiKey = options.apiKey;
     const libraries = options.libraries || ['places'];
-    const version = options.version || '3.24';
+    const version = options.version || '3';
     const createCache = options.createCache || defaultCreateCache;
 
     class Wrapper extends React.Component {

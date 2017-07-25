@@ -1,7 +1,8 @@
-import React, { PropTypes as T } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 
 import { camelize } from '../lib/String'
-const evtNames = ['click', 'mouseover', 'recenter'];
+const evtNames = ['click', 'mouseover', 'recenter', 'dragend'];
 
 const wrappedPromise = function() {
     var wrappedPromise = {},
@@ -26,7 +27,9 @@ export class Marker extends React.Component {
   componentDidUpdate(prevProps) {
     if ((this.props.map !== prevProps.map) ||
       (this.props.position !== prevProps.position)) {
-        this.marker.setMap(null);
+        if (this.marker) {
+            this.marker.setMap(null);
+        }
         this.renderMarker();
     }
   }
@@ -39,7 +42,7 @@ export class Marker extends React.Component {
 
   renderMarker() {
     let {
-      map, google, position, mapCenter, icon
+      map, google, position, mapCenter, icon, label, draggable, title
     } = this.props;
     if (!google) {
       return null
@@ -53,7 +56,10 @@ export class Marker extends React.Component {
     const pref = {
       map: map,
       position: position,
-      icon: icon
+      icon: icon,
+      label: label,
+      title: title,
+      draggable: draggable
     };
     this.marker = new google.maps.Marker(pref);
 
@@ -83,12 +89,11 @@ export class Marker extends React.Component {
 }
 
 Marker.propTypes = {
-  position: T.object,
-  map: T.object,
-  icon: T.string
+  position: PropTypes.object,
+  map: PropTypes.object
 }
 
-evtNames.forEach(e => Marker.propTypes[e] = T.func)
+evtNames.forEach(e => Marker.propTypes[e] = PropTypes.func)
 
 Marker.defaultProps = {
   name: 'Marker'

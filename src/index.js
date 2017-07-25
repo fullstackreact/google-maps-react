@@ -1,4 +1,5 @@
-import React, {PropTypes as T} from 'react';
+import React from 'react'
+import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 import { camelize } from './lib/String'
 import {makeCancelable} from './lib/cancelablePromise'
@@ -19,11 +20,33 @@ const mapStyles = {
   }
 }
 
-const evtNames = ['ready', 'click', 'dragend', 'recenter'];
+const evtNames = [
+  'ready',
+  'click',
+  'dragend',
+  'recenter',
+  'bounds_changed',
+  'center_changed',
+  'dblclick',
+  'dragstart',
+  'heading_change',
+  'idle',
+  'maptypeid_changed',
+  'mousemove',
+  'mouseout',
+  'mouseover',
+  'projection_changed',
+  'resize',
+  'rightclick',
+  'tilesloaded',
+  'tilt_changed',
+  'zoom_changed'
+];
 
 export {wrapper as GoogleApiWrapper} from './GoogleApiComponent'
 export {Marker} from './components/Marker'
 export {InfoWindow} from './components/InfoWindow'
+export {HeatMap} from './components/HeatMap'
 
 export class Map extends React.Component {
     constructor(props) {
@@ -126,11 +149,13 @@ export class Map extends React.Component {
           keyboardShortcuts: this.props.keyboardShortcuts,
           disableDoubleClickZoom: this.props.disableDoubleClickZoom,
           noClear: this.props.noClear,
-          styles: this.props.styles
+          styles: this.props.styles,
+          gestureHandling: this.props.gestureHandling
         });
 
         Object.keys(mapConfig).forEach((key) => {
-          if (!mapConfig[key]) {
+          // Allow to configure mapConfig with 'false'
+          if (mapConfig[key] === null) {
             delete mapConfig[key];
           }
         });
@@ -166,9 +191,9 @@ export class Map extends React.Component {
         const map = this.map;
 
         const {google} = this.props;
-        const maps = google.maps;
 
         if (!google) return;
+        const maps = google.maps;
 
         if (map) {
           let center = this.state.currentLocation;
@@ -194,6 +219,7 @@ export class Map extends React.Component {
       if (!children) return;
 
       return React.Children.map(children, c => {
+		if (!c) return;
         return React.cloneElement(c, {
           map: this.map,
           google: this.props.google,
@@ -222,35 +248,36 @@ export class Map extends React.Component {
 };
 
 Map.propTypes = {
-  google: T.object,
-  zoom: T.number,
-  centerAroundCurrentLocation: T.bool,
-  center: T.object,
-  initialCenter: T.object,
-  className: T.string,
-  style: T.object,
-  containerStyle: T.object,
-  visible: T.bool,
-  mapType: T.string,
-  maxZoom: T.number,
-  minZoom: T.number,
-  clickableIcons: T.bool,
-  disableDefaultUI: T.bool,
-  zoomControl: T.bool,
-  mapTypeControl: T.bool,
-  scaleControl: T.bool,
-  streetViewControl: T.bool,
-  panControl: T.bool,
-  rotateControl: T.bool,
-  scrollwheel: T.bool,
-  draggable: T.bool,
-  keyboardShortcuts: T.bool,
-  disableDoubleClickZoom: T.bool,
-  noClear: T.bool,
-  styles: T.array
+  google: PropTypes.object,
+  zoom: PropTypes.number,
+  centerAroundCurrentLocation: PropTypes.bool,
+  center: PropTypes.object,
+  initialCenter: PropTypes.object,
+  className: PropTypes.string,
+  style: PropTypes.object,
+  containerStyle: PropTypes.object,
+  visible: PropTypes.bool,
+  mapType: PropTypes.string,
+  maxZoom: PropTypes.number,
+  minZoom: PropTypes.number,
+  clickableIcons: PropTypes.bool,
+  disableDefaultUI: PropTypes.bool,
+  zoomControl: PropTypes.bool,
+  mapTypeControl: PropTypes.bool,
+  scaleControl: PropTypes.bool,
+  streetViewControl: PropTypes.bool,
+  panControl: PropTypes.bool,
+  rotateControl: PropTypes.bool,
+  scrollwheel: PropTypes.bool,
+  draggable: PropTypes.bool,
+  keyboardShortcuts: PropTypes.bool,
+  disableDoubleClickZoom: PropTypes.bool,
+  noClear: PropTypes.bool,
+  styles: PropTypes.array,
+  gestureHandling: PropTypes.string
 }
 
-evtNames.forEach(e => Map.propTypes[camelize(e)] = T.func)
+evtNames.forEach(e => Map.propTypes[camelize(e)] = PropTypes.func)
 
 Map.defaultProps = {
   zoom: 14,

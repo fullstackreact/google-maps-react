@@ -20,6 +20,10 @@ npm install --save google-maps-react
 Usage:
 
 ```javascript
+import Map from 'google-maps-react'
+
+// ...
+
 <Map google={this.props.google} zoom={14}>
 
   <Marker onClick={this.onMarkerClick}
@@ -54,7 +58,7 @@ When the `<Map />` instance has been loaded and is ready on the page, it will ca
 ```javascript
 React.createClass({
   fetchPlaces: function(mapProps, map) {
-    const {google} = this.props;
+    const {google} = mapProps;
     const service = new google.maps.places.PlacesService(map);
     // ...
   },
@@ -137,12 +141,21 @@ To place a marker on the Map, include it as a child of the `<Map />` component.
     className={'map'}
     zoom={14}>
   <Marker
+    title={'The marker`s title will appear as a tooltip.'}
     name={'SOMA'}
     position={{lat: 37.778519, lng: -122.405640}} />
   <Marker
     name={'Dolores park'}
     position={{lat: 37.759703, lng: -122.428093}} />
   <Marker />
+  <Marker
+    name={'Your position'}
+    position={{lat: 37.762391, lng: -122.439192}}
+    icon={{
+      url: "/path/to/custom_icon.png",
+      anchor: new google.maps.Point(32,32),
+      scaledSize: new google.maps.Size(64,64)
+    }}
 </Map>
 ```
 
@@ -200,7 +213,7 @@ The `<InfoWindow />` component included in this library is gives us the ability 
 
 ![](http://d.pr/i/16w0V.png)
 
-The visibility of the `<InfoWindow />` component is controlled by a `visible` prop. The `visible` prop is a boolean (`React.PropTypes.bool`) that shows the `<InfoWindow />` when true and hides it when false.
+The visibility of the `<InfoWindow />` component is controlled by a `visible` prop. The `visible` prop is a boolean (`PropTypes.bool`) that shows the `<InfoWindow />` when true and hides it when false.
 
 ```javascript
 const WithMarkers = React.createClass({
@@ -303,7 +316,7 @@ npm install
 make dev
 ```
 
-The Google Map React component library uses React and the Google API to give easy access to the Google Maps library. 
+The Google Map React component library uses React and the Google API to give easy access to the Google Maps library.
 
 ___
 
@@ -323,4 +336,3 @@ This app is only one of several apps we have in the book. If you're looking to l
 
 ## License
  [MIT](/LICENSE)
-

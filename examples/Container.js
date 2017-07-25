@@ -1,4 +1,5 @@
-import React, {PropTypes as T} from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 import {Link} from 'react-router'
 import GitHubForkRibbon from 'react-github-fork-ribbon'
@@ -15,11 +16,11 @@ import styles from './styles.module.css'
 export const Container = React.createClass({
 
   propTypes: {
-    children: T.element.isRequired
+    children: PropTypes.element.isRequired
   },
 
   contextTypes: {
-    router: T.object
+    router: PropTypes.object
   },
 
   renderChildren: function() {
@@ -77,5 +78,6 @@ export const Container = React.createClass({
 })
 
 export default GoogleApiWrapper({
-  apiKey: __GAPI_KEY__
+  apiKey: __GAPI_KEY__,
+  libraries: ['places','visualization']
 })(Container)
