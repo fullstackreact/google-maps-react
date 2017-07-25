@@ -225,7 +225,7 @@ export class Map extends React.Component {
           map: this.map,
           google: this.props.google,
           mapCenter: this.state.currentLocation
-        });
+        }) : null;
       })
     }
 
