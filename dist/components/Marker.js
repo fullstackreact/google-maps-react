@@ -136,7 +136,8 @@
             icon = _props.icon,
             label = _props.label,
             draggable = _props.draggable,
-            title = _props.title;
+            title = _props.title,
+            animation = _props.animation;
 
         if (!google) {
           return null;
@@ -153,7 +154,8 @@
           icon: icon,
           label: label,
           title: title,
-          draggable: draggable
+          draggable: draggable,
+          animation: animation
         };
         this.marker = new google.maps.Marker(pref);
 
