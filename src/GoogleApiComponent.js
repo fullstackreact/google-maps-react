@@ -9,7 +9,7 @@ const defaultCreateCache = (options) => {
     options = options || {};
     const apiKey = options.apiKey;
     const libraries = options.libraries || ['places'];
-    const version = options.version || '3.24';
+    const version = options.version || '3.29';
     const language = options.language || 'en';
 
     return ScriptCache({
