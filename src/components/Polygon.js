@@ -1,4 +1,5 @@
-import React, { PropTypes as T } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 
 import { camelize } from '../lib/String'
 const evtNames = ['click', 'mouseout', 'mouseover'];
@@ -91,15 +92,15 @@ export class Polygon extends React.Component {
 }
 
 Polygon.propTypes = {
-  paths: T.array,
-  strokeColor: T.string,
-  strokeOpacity: T.number,
-  strokeWeight: T.number,
-  fillColor: T.string,
-  fillOpacity: T.number
+  paths: PropTypes.array,
+  strokeColor: PropTypes.string,
+  strokeOpacity: PropTypes.number,
+  strokeWeight: PropTypes.number,
+  fillColor: PropTypes.string,
+  fillOpacity: PropTypes.number
 }
 
-evtNames.forEach(e => Polygon.propTypes[e] = T.func)
+evtNames.forEach(e => Polygon.propTypes[e] = PropTypes.func)
 
 Polygon.defaultProps = {
   name: 'Polygon'
