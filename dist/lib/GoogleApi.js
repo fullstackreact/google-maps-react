@@ -39,7 +39,7 @@
         var googleVersion = opts.version || '3';
 
         var script = null;
-        var google = typeof window !== 'undefined' && window.google || null;
+        var google = window.google || null;
         var loading = false;
         var channel = null;
         var language = opts.language;
