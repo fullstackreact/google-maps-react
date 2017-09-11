@@ -83,7 +83,7 @@
         options = options || {};
         var apiKey = options.apiKey;
         var libraries = options.libraries || ['places'];
-        var version = options.version || '3.24';
+        var version = options.version || '3.29';
         var language = options.language || 'en';
 
         return (0, _ScriptCache.ScriptCache)({

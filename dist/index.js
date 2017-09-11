@@ -232,7 +232,7 @@
             zoom: this.props.zoom,
             maxZoom: this.props.maxZoom,
             minZoom: this.props.maxZoom,
-            clickableIcons: this.props.clickableIcons,
+            clickableIcons: this.props.clickableIcons || false,
             disableDefaultUI: this.props.disableDefaultUI,
             zoomControl: this.props.zoomControl,
             mapTypeControl: this.props.mapTypeControl,
