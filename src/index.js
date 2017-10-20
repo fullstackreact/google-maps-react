@@ -143,7 +143,7 @@ export class Map extends React.Component {
           zoom: this.props.zoom,
           maxZoom: this.props.maxZoom,
           minZoom: this.props.maxZoom,
-          clickableIcons: this.props.clickableIcons || false,
+          clickableIcons: !!this.props.clickableIcons,
           disableDefaultUI: this.props.disableDefaultUI,
           zoomControl: this.props.zoomControl,
           mapTypeControl: this.props.mapTypeControl,
