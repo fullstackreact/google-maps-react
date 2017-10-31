@@ -57,7 +57,7 @@
     "npm-font-open-sans": "0.0.3",
     "postcss-loader": "^0.9.1",
     "precss": "^1.4.0",
-    "prop-types": "^15.5.8",
+    "prop-types": "^15.5.10",
     "react": "^15.0.0",
     "react-addons-test-utils": "^15.0.0",
     "react-dom": "^15.0.0",
