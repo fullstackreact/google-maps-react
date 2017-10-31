@@ -231,7 +231,7 @@
             center: center,
             zoom: this.props.zoom,
             maxZoom: this.props.maxZoom,
-            minZoom: this.props.maxZoom,
+            minZoom: this.props.minZoom,
             clickableIcons: this.props.clickableIcons,
             disableDefaultUI: this.props.disableDefaultUI,
             zoomControl: this.props.zoomControl,

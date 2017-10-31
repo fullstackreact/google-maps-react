@@ -200,7 +200,7 @@ To place a marker on the Map, include it as a child of the `<Map />` component.
       url: "/path/to/custom_icon.png",
       anchor: new google.maps.Point(32,32),
       scaledSize: new google.maps.Size(64,64)
-    }}
+    }} />
 </Map>
 ```
 
