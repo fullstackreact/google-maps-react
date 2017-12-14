@@ -25,10 +25,10 @@ export class Polygon extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.map !== prevProps.map) {
-        if (this.polygon) {
-          this.polygon.setMap(null);
-          this.renderPolygon();
-        }
+      if (this.polygon) {
+        this.polygon.setMap(null);
+      }
+      this.renderPolygon();
     }
   }
 
