@@ -112,8 +112,8 @@
         if (this.props.map !== prevProps.map) {
           if (this.polygon) {
             this.polygon.setMap(null);
-            this.renderPolygon();
           }
+          this.renderPolygon();
         }
       }
     }, {
