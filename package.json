@@ -51,7 +51,7 @@
     "highlight.js": "^9.3.0",
     "hjs-webpack": "^8.1.0",
     "jsdom": "^9.2.1",
-    "marked": "^0.3.5",
+    "marked": "^0.3.17",
     "mocha": "^2.4.5",
     "nodemon": "^1.9.1",
     "npm-font-open-sans": "0.0.3",
