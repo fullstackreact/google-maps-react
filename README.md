@@ -63,12 +63,12 @@ export default GoogleApiWrapper({
 
 ![](http://d.pr/i/C7qr.png)
 
-## Additional Map Props 
-The Map component takes a number of optional props. 
+## Additional Map Props
+The Map component takes a number of optional props.
 
-Zoom: (Shown Above) takes a number with the higher value representing a tighter focus on the map's center. 
+Zoom: (Shown Above) takes a number with the higher value representing a tighter focus on the map's center.
 
-Style: Takes CSS style object - commonly width and height. 
+Style: Takes CSS style object - commonly width and height.
 
 ```javascript
 const style = {
@@ -90,7 +90,7 @@ initalCenter: Takes an object containing latitude and longitude coordinates. Set
           onClick={this.onMapClicked}
         >
 ```
-It also takes event handlers described below: 
+It also takes event handlers described below:
 
 ### Events
 
@@ -285,6 +285,37 @@ render: function() {
 
 The `<Polygon />` component listens to `onClick`, `onMouseover` and `onMouseout` events.
 
+### Polyline
+
+To place a polyline on the Map, set `<Polyline />` as child of Map component.
+
+```javascript
+render: function() {
+  var triangleCoords = [
+    {lat: 25.774, lng: -80.190},
+    {lat: 18.466, lng: -66.118},
+    {lat: 32.321, lng: -64.757},
+    {lat: 25.774, lng: -80.190}
+  ];
+  return(
+    <Map google={this.props.google}
+        style={{width: '100%', height: '100%', position: 'relative'}}
+        className={'map'}
+        zoom={14}>
+        <Polyline
+          paths={triangleCoords}
+          strokeColor="#0000FF"
+          strokeOpacity={0.8}
+          strokeWeight={2} />
+    </Map>
+  )
+}
+```
+
+#### Events
+
+The `<Polyline />` component listens to `onClick`, `onMouseover` and `onMouseout` events.
+
 ### InfoWindow
 
 The `<InfoWindow />` component included in this library is gives us the ability to pop up a "more info" window on our Google map.
@@ -306,12 +337,12 @@ export class MapContainer extends Component {
       activeMarker: {},
       selectedPlace: {},
     }
-    
+
     // binding this to event-handler functions
     this.onMarkerClick = this.onMarkerClick.bind(this);
     this.onMapClicked = this.onMapClicked.bind(this);
   }
-  
+
   onMarkerClick: function(props, marker, e) {
     this.setState({
       selectedPlace: props,

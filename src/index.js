@@ -48,6 +48,7 @@ export {Marker} from './components/Marker';
 export {InfoWindow} from './components/InfoWindow';
 export {HeatMap} from './components/HeatMap';
 export {Polygon} from './components/Polygon';
+export {Polyline} from './components/Polyline';
 
 export class Map extends React.Component {
   constructor(props) {
