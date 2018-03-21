@@ -90,6 +90,20 @@ initalCenter: Takes an object containing latitude and longitude coordinates. Set
           onClick={this.onMapClicked}
         >
 ```
+center: Takes an object containing latitude and longitude coordinates. Use this if you want to re-render the map after the initial render. 
+
+```javascript
+    <Map
+          google={this.props.google}
+          style={style}
+          center={{
+            lat: 40.854885,
+            lng: -88.081807
+          }}
+          zoom={15}
+          onClick={this.onMapClicked}
+        >
+```
 It also takes event handlers described below: 
 
 ### Events
