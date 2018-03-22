@@ -41,26 +41,36 @@ export class HeatMap extends React.Component {
   }
 
   renderHeatMap() {
-    let {
-      map, google, positions, mapCenter, icon, gradient, radius, opacity
+    const {
+      map,
+      google,
+      positions,
+      mapCenter,
+      icon,
+      gradient,
+      radius = 20,
+      opacity = 0.2,
+      ...props
     } = this.props;
 
     if (!google) {
         return null;
     }
 
-    positions = positions.map((pos) => {
+    const data = positions.map((pos) => {
         return new google.maps.LatLng(pos.lat, pos.lng);
     });
 
     const pref = {
-      map: map,
-      data: positions,
+      map,
+      gradient,
+      radius,
+      opacity,
+      data,
+      ...props
     };
 
     this.heatMap = new google.maps.visualization.HeatmapLayer(pref);
-
-    this.heatMap.set('gradient', gradient);
 
     this.heatMap.set('radius', radius === undefined ? 20 : radius);
 

@@ -28,6 +28,32 @@
     };
   }
 
+  var _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  function _objectWithoutProperties(obj, keys) {
+    var target = {};
+
+    for (var i in obj) {
+      if (keys.indexOf(i) >= 0) continue;
+      if (!Object.prototype.hasOwnProperty.call(obj, i)) continue;
+      target[i] = obj[i];
+    }
+
+    return target;
+  }
+
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
@@ -135,26 +161,29 @@
             mapCenter = _props.mapCenter,
             icon = _props.icon,
             gradient = _props.gradient,
-            radius = _props.radius,
-            opacity = _props.opacity;
-
+            _props$radius = _props.radius,
+            radius = _props$radius === undefined ? 20 : _props$radius,
+            _props$opacity = _props.opacity,
+            opacity = _props$opacity === undefined ? 0.2 : _props$opacity,
+            props = _objectWithoutProperties(_props, ['map', 'google', 'positions', 'mapCenter', 'icon', 'gradient', 'radius', 'opacity']);
 
         if (!google) {
           return null;
         }
 
-        positions = positions.map(function (pos) {
+        var data = positions.map(function (pos) {
           return new google.maps.LatLng(pos.lat, pos.lng);
         });
 
-        var pref = {
+        var pref = _extends({
           map: map,
-          data: positions
-        };
+          gradient: gradient,
+          radius: radius,
+          opacity: opacity,
+          data: data
+        }, props);
 
         this.heatMap = new google.maps.visualization.HeatmapLayer(pref);
-
-        this.heatMap.set('gradient', gradient);
 
         this.heatMap.set('radius', radius === undefined ? 20 : radius);
 

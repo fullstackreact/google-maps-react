@@ -28,6 +28,32 @@
     };
   }
 
+  var _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  function _objectWithoutProperties(obj, keys) {
+    var target = {};
+
+    for (var i in obj) {
+      if (keys.indexOf(i) >= 0) continue;
+      if (!Object.prototype.hasOwnProperty.call(obj, i)) continue;
+      target[i] = obj[i];
+    }
+
+    return target;
+  }
+
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
@@ -136,7 +162,8 @@
             icon = _props.icon,
             label = _props.label,
             draggable = _props.draggable,
-            title = _props.title;
+            title = _props.title,
+            props = _objectWithoutProperties(_props, ['map', 'google', 'position', 'mapCenter', 'icon', 'label', 'draggable', 'title']);
 
         if (!google) {
           return null;
@@ -144,17 +171,17 @@
 
         var pos = position || mapCenter;
         if (!(pos instanceof google.maps.LatLng)) {
-          position = new google.maps.LatLng(pos.lat, pos.lng);
+          pos = new google.maps.LatLng(pos.lat, pos.lng);
         }
 
-        var pref = {
+        var pref = _extends({
           map: map,
-          position: position,
+          position: pos,
           icon: icon,
           label: label,
           title: title,
           draggable: draggable
-        };
+        }, props);
         this.marker = new google.maps.Marker(pref);
 
         evtNames.forEach(function (e) {
