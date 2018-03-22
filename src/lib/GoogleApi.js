@@ -9,7 +9,7 @@ export const GoogleApi = function(opts) {
     const apiKey = opts.apiKey;
     const libraries = opts.libraries || ['places'];
     const client = opts.client;
-    const URL = 'https://maps.googleapis.com/maps/api/js';
+    const URL = opts.url || 'https://maps.googleapis.com/maps/api/js';
 
     const googleVersion = opts.version || '3';
 
