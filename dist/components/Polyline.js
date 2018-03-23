@@ -157,11 +157,11 @@
         var _props = this.props,
             map = _props.map,
             google = _props.google,
-            paths = _props.paths,
+            path = _props.path,
             strokeColor = _props.strokeColor,
             strokeOpacity = _props.strokeOpacity,
             strokeWeight = _props.strokeWeight,
-            props = _objectWithoutProperties(_props, ['map', 'google', 'paths', 'strokeColor', 'strokeOpacity', 'strokeWeight']);
+            props = _objectWithoutProperties(_props, ['map', 'google', 'path', 'strokeColor', 'strokeOpacity', 'strokeWeight']);
 
         if (!google) {
           return null;
@@ -169,7 +169,7 @@
 
         var params = _extends({
           map: map,
-          paths: paths,
+          path: path,
           strokeColor: strokeColor,
           strokeOpacity: strokeOpacity,
           strokeWeight: strokeWeight
@@ -211,7 +211,7 @@
   }(_react2.default.Component);
 
   Polyline.propTypes = {
-    paths: _propTypes2.default.array,
+    path: _propTypes2.default.array,
     strokeColor: _propTypes2.default.string,
     strokeOpacity: _propTypes2.default.number,
     strokeWeight: _propTypes2.default.number
