@@ -34,6 +34,10 @@ const routeMap = {
   'polygons': {
     name: 'Polygon',
     component: require('./components/withPolygons').default
+  },
+  'polyline': {
+    name: 'Polyline',
+    component: require('./components/withPolylines').default
   }
 }
 

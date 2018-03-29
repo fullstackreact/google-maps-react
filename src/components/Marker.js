@@ -52,8 +52,16 @@ export class Marker extends React.Component {
   }
 
   renderMarker() {
-    let {
-      map, google, position, mapCenter, icon, label, draggable, title
+    const {
+      map,
+      google,
+      position,
+      mapCenter,
+      icon,
+      label,
+      draggable,
+      title,
+      ...props
     } = this.props;
     if (!google) {
       return null
@@ -61,16 +69,17 @@ export class Marker extends React.Component {
 
     let pos = position || mapCenter;
     if (!(pos instanceof google.maps.LatLng)) {
-      position = new google.maps.LatLng(pos.lat, pos.lng);
+      pos = new google.maps.LatLng(pos.lat, pos.lng);
     }
 
     const pref = {
-      map: map,
-      position: position,
-      icon: icon,
-      label: label,
-      title: title,
-      draggable: draggable
+      map,
+      position: pos,
+      icon,
+      label,
+      title,
+      draggable,
+      ...props
     };
     this.marker = new google.maps.Marker(pref);
 
