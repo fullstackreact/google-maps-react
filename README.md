@@ -440,6 +440,12 @@ If you prefer not to use the automatic loading option, you can also pass the `wi
 <Map google={window.google} />
 ```
 
+## Issues?
+
+If you have some issues, please make an issue on the issues tab and try to include an example. We've had success with https://codesandbox.io
+
+An example template might look like: [https://codesandbox.io/s/x3xxjr7r04](https://codesandbox.io/s/x3xxjr7r04)
+
 ## Contributing
 
 ```shell
