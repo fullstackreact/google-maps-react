@@ -34,7 +34,7 @@
         var apiKey = opts.apiKey;
         var libraries = opts.libraries || ['places'];
         var client = opts.client;
-        var URL = 'https://maps.googleapis.com/maps/api/js';
+        var URL = opts.url || 'https://maps.googleapis.com/maps/api/js';
 
         var googleVersion = opts.version || '3';
 

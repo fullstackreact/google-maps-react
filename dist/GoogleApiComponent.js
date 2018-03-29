@@ -85,13 +85,15 @@
         var libraries = options.libraries || ['places'];
         var version = options.version || '3.29';
         var language = options.language || 'en';
+        var url = options.url;
 
         return (0, _ScriptCache.ScriptCache)({
             google: (0, _GoogleApi2.default)({
                 apiKey: apiKey,
                 language: language,
                 libraries: libraries,
-                version: version
+                version: version,
+                url: url
             })
         });
     };
