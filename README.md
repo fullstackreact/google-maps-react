@@ -32,6 +32,18 @@ export default GoogleApiWrapper({
 })(MapContainer)
 ```
 
+If you want to add a loading container _other than the default_ loading container, simply pass it in the HOC, like so:
+
+```javascript
+const LoadingContainer = (props) => (
+  <div>Fancy loading container!</div>
+)
+export default GoogleApiWrapper({
+  apiKey: (YOUR_GOOGLE_API_KEY_GOES_HERE),
+  LoadingContainer: LoadingContainer
+})(MapContainer)
+```
+
 ## Sample Usage With Lazy-loading Google API:
 
 ```javascript
@@ -90,7 +102,7 @@ initalCenter: Takes an object containing latitude and longitude coordinates. Set
           onClick={this.onMapClicked}
         >
 ```
-center: Takes an object containing latitude and longitude coordinates. Use this if you want to re-render the map after the initial render. 
+center: Takes an object containing latitude and longitude coordinates. Use this if you want to re-render the map after the initial render.
 
 ```javascript
     <Map
@@ -104,7 +116,7 @@ center: Takes an object containing latitude and longitude coordinates. Use this 
           onClick={this.onMapClicked}
         >
 ```
-It also takes event handlers described below: 
+It also takes event handlers described below:
 
 ### Events
 
