@@ -22,12 +22,14 @@ const defaultCreateCache = (options) => {
     });
 };
 
-export const wrapper = (options) => (WrappedComponent) => {
-    const createCache = options.createCache || defaultCreateCache;
+export const wrapper = (input) => (WrappedComponent) => {
 
     class Wrapper extends React.Component {
         constructor(props, context) {
             super(props, context);
+
+            const options = typeof input === 'function' ? input(props) : input;
+            const createCache = options.createCache || defaultCreateCache;
 
             this.scriptCache = createCache(options);
             this.scriptCache.google.onLoad(this.onLoad.bind(this))
