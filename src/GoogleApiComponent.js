@@ -11,13 +11,15 @@ const defaultCreateCache = (options) => {
     const libraries = options.libraries || ['places'];
     const version = options.version || '3.29';
     const language = options.language || 'en';
+    const url = options.url;
 
     return ScriptCache({
         google: GoogleApi({
             apiKey: apiKey,
             language: language,
             libraries: libraries,
-            version: version
+            version: version,
+            url: url
         })
     });
 };
