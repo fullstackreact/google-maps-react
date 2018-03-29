@@ -32,6 +32,17 @@ export default GoogleApiWrapper({
 })(MapContainer)
 ```
 
+Alternatively, the `GoogleApiWrapper` Higher-Order component can be configured by passing a function that will be called with whe wrapped component's `props` and should returned the configuration object.
+
+```javascript
+export default GoogleApiWrapper(
+  (props) => ({
+    apiKey: props.apiKey,
+    language: props.language,
+  }
+))(MapContainer)
+```
+
 ## Sample Usage With Lazy-loading Google API:
 
 ```javascript
@@ -90,7 +101,7 @@ initalCenter: Takes an object containing latitude and longitude coordinates. Set
           onClick={this.onMapClicked}
         >
 ```
-center: Takes an object containing latitude and longitude coordinates. Use this if you want to re-render the map after the initial render. 
+center: Takes an object containing latitude and longitude coordinates. Use this if you want to re-render the map after the initial render.
 
 ```javascript
     <Map
@@ -104,7 +115,7 @@ center: Takes an object containing latitude and longitude coordinates. Use this 
           onClick={this.onMapClicked}
         >
 ```
-It also takes event handlers described below: 
+It also takes event handlers described below:
 
 ### Events
 
