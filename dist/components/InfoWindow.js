@@ -32,6 +32,32 @@
     };
   }
 
+  var _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  function _objectWithoutProperties(obj, keys) {
+    var target = {};
+
+    for (var i in obj) {
+      if (keys.indexOf(i) >= 0) continue;
+      if (!Object.prototype.hasOwnProperty.call(obj, i)) continue;
+      target[i] = obj[i];
+    }
+
+    return target;
+  }
+
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
@@ -128,16 +154,16 @@
         var _props2 = this.props,
             map = _props2.map,
             google = _props2.google,
-            mapCenter = _props2.mapCenter;
-
+            mapCenter = _props2.mapCenter,
+            props = _objectWithoutProperties(_props2, ['map', 'google', 'mapCenter']);
 
         if (!google || !google.maps) {
           return;
         }
 
-        var iw = this.infowindow = new google.maps.InfoWindow({
+        var iw = this.infowindow = new google.maps.InfoWindow(_extends({
           content: ''
-        });
+        }, props));
 
         google.maps.event.addListener(iw, 'closeclick', this.onClose.bind(this));
         google.maps.event.addListener(iw, 'domready', this.onOpen.bind(this));

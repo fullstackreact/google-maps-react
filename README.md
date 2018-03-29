@@ -43,6 +43,18 @@ export default GoogleApiWrapper(
 ))(MapContainer)
 ```
 
+If you want to add a loading container _other than the default_ loading container, simply pass it in the HOC, like so:
+
+```javascript
+const LoadingContainer = (props) => (
+  <div>Fancy loading container!</div>
+)
+export default GoogleApiWrapper({
+  apiKey: (YOUR_GOOGLE_API_KEY_GOES_HERE),
+  LoadingContainer: LoadingContainer
+})(MapContainer)
+```
+
 ## Sample Usage With Lazy-loading Google API:
 
 ```javascript
@@ -438,6 +450,12 @@ If you prefer not to use the automatic loading option, you can also pass the `wi
 ```javascript
 <Map google={window.google} />
 ```
+
+## Issues?
+
+If you have some issues, please make an issue on the issues tab and try to include an example. We've had success with https://codesandbox.io
+
+An example template might look like: [https://codesandbox.io/s/x3xxjr7r04](https://codesandbox.io/s/x3xxjr7r04)
 
 ## Contributing
 

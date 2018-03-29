@@ -47,7 +47,8 @@ export class Polygon extends React.Component {
       strokeOpacity,
       strokeWeight,
       fillColor,
-      fillOpacity
+      fillOpacity,
+      ...props
     } = this.props;
 
     if (!google) {
@@ -61,7 +62,8 @@ export class Polygon extends React.Component {
       strokeOpacity,
       strokeWeight,
       fillColor,
-      fillOpacity
+      fillOpacity,
+      ...props
     };
 
     this.polygon = new google.maps.Polygon(params);

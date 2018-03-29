@@ -28,6 +28,32 @@
     };
   }
 
+  var _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  function _objectWithoutProperties(obj, keys) {
+    var target = {};
+
+    for (var i in obj) {
+      if (keys.indexOf(i) >= 0) continue;
+      if (!Object.prototype.hasOwnProperty.call(obj, i)) continue;
+      target[i] = obj[i];
+    }
+
+    return target;
+  }
+
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
       throw new TypeError("Cannot call a class as a function");
@@ -131,23 +157,23 @@
         var _props = this.props,
             map = _props.map,
             google = _props.google,
-            paths = _props.paths,
+            path = _props.path,
             strokeColor = _props.strokeColor,
             strokeOpacity = _props.strokeOpacity,
-            strokeWeight = _props.strokeWeight;
-
+            strokeWeight = _props.strokeWeight,
+            props = _objectWithoutProperties(_props, ['map', 'google', 'path', 'strokeColor', 'strokeOpacity', 'strokeWeight']);
 
         if (!google) {
           return null;
         }
 
-        var params = {
+        var params = _extends({
           map: map,
-          paths: paths,
+          path: path,
           strokeColor: strokeColor,
           strokeOpacity: strokeOpacity,
           strokeWeight: strokeWeight
-        };
+        }, props);
 
         this.polyline = new google.maps.Polyline(params);
 
@@ -185,7 +211,7 @@
   }(_react2.default.Component);
 
   Polyline.propTypes = {
-    paths: _propTypes2.default.array,
+    path: _propTypes2.default.array,
     strokeColor: _propTypes2.default.string,
     strokeOpacity: _propTypes2.default.number,
     strokeWeight: _propTypes2.default.number

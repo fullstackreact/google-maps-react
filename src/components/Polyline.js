@@ -42,10 +42,11 @@ export class Polyline extends React.Component {
     const {
       map,
       google,
-      paths,
+      path,
       strokeColor,
       strokeOpacity,
-      strokeWeight
+      strokeWeight,
+      ...props
     } = this.props;
 
     if (!google) {
@@ -54,10 +55,11 @@ export class Polyline extends React.Component {
 
     const params = {
       map,
-      paths,
+      path,
       strokeColor,
       strokeOpacity,
-      strokeWeight
+      strokeWeight,
+      ...props
     };
 
     this.polyline = new google.maps.Polyline(params);
@@ -88,7 +90,7 @@ export class Polyline extends React.Component {
 }
 
 Polyline.propTypes = {
-  paths: PropTypes.array,
+  path: PropTypes.array,
   strokeColor: PropTypes.string,
   strokeOpacity: PropTypes.number,
   strokeWeight: PropTypes.number
