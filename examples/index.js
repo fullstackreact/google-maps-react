@@ -45,6 +45,10 @@ const routeMap = {
   polyline: {
     name: 'Polyline',
     component: require('./components/withPolylines').default
+  },
+  onResizeEvent: {
+    name: 'Custom events',
+    component: require('./components/resizeEvent').default
   }
 };
 
