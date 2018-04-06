@@ -159,8 +159,13 @@
             // Initialize with new options
             this.initialize(options);
 
-            // Save new options in component state
-            this.setState({ options: options });
+            // Save new options in component state,
+            // and remove information about previous API handlers
+            this.setState({
+              options: options,
+              loaded: false,
+              google: null
+            });
           }
         }, {
           key: 'initialize',
@@ -180,9 +185,6 @@
 
             // Store information about loading container
             this.LoadingContainer = options.LoadingContainer || DefaultLoadingContainer;
-
-            // Remove information about previous API handlers
-            this.setState({ loaded: false, google: null });
           }
         }, {
           key: 'onLoad',
