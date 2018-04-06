@@ -73,7 +73,6 @@
     "react-dom": "~0.14.8 || ^15.0.0 || ^16.0.0"
   },
   "dependencies": {
-    "history": "^3.0.0",
     "invariant": "^2.2.1"
   }
 }
