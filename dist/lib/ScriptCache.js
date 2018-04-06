@@ -25,15 +25,27 @@
 
             Cache._onLoad = function (key) {
                 return function (cb) {
+                    var registered = true;
+
+                    function unregister() {
+                        registered = false;
+                    }
+
                     var stored = scriptMap.get(key);
+
                     if (stored) {
                         stored.promise.then(function () {
-                            stored.error ? cb(stored.error) : cb(null, stored);
+                            if (registered) {
+                                stored.error ? cb(stored.error) : cb(null, stored);
+                            }
+
                             return stored;
                         });
                     } else {
                         // TODO:
                     }
+
+                    return unregister;
                 };
             };
 
