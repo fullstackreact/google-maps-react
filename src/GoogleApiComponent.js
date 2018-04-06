@@ -72,12 +72,19 @@ export const wrapper = input => WrappedComponent => {
     }
 
     initialize(options) {
+      // Avoid race condition: remove previous 'load' listener
+      if (this.unregisterLoadHandler) {
+        this.unregisterLoadHandler();
+        this.unregisterLoadHandler = null;
+      }
+
       // Load cache factory
       const createCache = options.createCache || defaultCreateCache;
 
       // Build script
       this.scriptCache = createCache(options);
-      this.scriptCache.google.onLoad(this.onLoad.bind(this));
+      this.unregisterLoadHandler =
+        this.scriptCache.google.onLoad(this.onLoad.bind(this));
 
       // Store information about loading container
       this.LoadingContainer =
