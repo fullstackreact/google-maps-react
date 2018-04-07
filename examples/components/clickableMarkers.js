@@ -1,85 +1,79 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React, { Component } from 'react';
 
-import Map, {GoogleApiWrapper} from '../../src/index'
-import Marker from '../../src/components/Marker'
-import InfoWindow from '../../src/components/InfoWindow'
+import Map from '../../src/index';
 
-const WithMarkers = React.createClass({
-  getInitialState: function() {
-    return {
-      showingInfoWindow: false,
-      activeMarker: {},
-      selectedPlace: {},
-    }
-  },
+import InfoWindow from '../../src/components/InfoWindow';
+import Marker from '../../src/components/Marker';
 
-  onMarkerClick: function(props, marker, e) {
+class WithMarkers extends Component {
+  state = {
+    activeMarker: {},
+    selectedPlace: {},
+    showingInfoWindow: false
+  };
+
+  onMarkerClick = (props, marker) =>
     this.setState({
-      selectedPlace: props,
       activeMarker: marker,
+      selectedPlace: props,
       showingInfoWindow: true
     });
-  },
 
-  onInfoWindowClose: function() {
+  onInfoWindowClose = () =>
     this.setState({
-      showingInfoWindow: false,
-      activeMarker: null
-    })
-  },
+      activeMarker: null,
+      showingInfoWindow: false
+    });
 
-  onMapClicked: function(props) {
-    if (this.state.showingInfoWindow) {
+  onMapClicked = () => {
+    if (this.state.showingInfoWindow)
       this.setState({
-        showingInfoWindow: false,
-        activeMarker: null
-      })
-    }
-  },
+        activeMarker: null,
+        showingInfoWindow: false
+      });
+  };
 
-  render: function() {
-    if (!this.props.loaded) {
-      return <div>Loading...</div>
-    }
+  render() {
+    if (!this.props.loaded) return <div>Loading...</div>;
 
     return (
-      <Map google={this.props.google}
-          style={{width: '100%', height: '100%', position: 'relative'}}
-          className={'map'}
-          zoom={14}
-          onClick={this.onMapClicked}>
+      <Map
+        className="map"
+        google={this.props.google}
+        onClick={this.onMapClicked}
+        style={{ height: '100%', position: 'relative', width: '100%' }}
+        zoom={14}>
         <Marker
+          name="SOMA"
           onClick={this.onMarkerClick}
-          name={'SOMA'}
-          position={{lat: 37.778519, lng: -122.405640}} />
+          position={{ lat: 37.778519, lng: -122.40564 }}
+        />
+
         <Marker
+          name="Dolores park"
           onClick={this.onMarkerClick}
-          name={'Dolores park'}
-          position={{lat: 37.759703, lng: -122.428093}} />
-        <Marker onClick={this.onMarkerClick}
-                name={'Current location'} />
+          position={{ lat: 37.759703, lng: -122.428093 }}
+        />
+
+        <Marker name="Current location" onClick={this.onMarkerClick} />
 
         <InfoWindow
           marker={this.state.activeMarker}
-          visible={this.state.showingInfoWindow}
-          onClose={this.onInfoWindowClose}>
-            <div>
-              <h1>{this.state.selectedPlace.name}</h1>
-            </div>
+          onClose={this.onInfoWindowClose}
+          visible={this.state.showingInfoWindow}>
+          <div>
+            <h1>{this.state.selectedPlace.name}</h1>
+          </div>
         </InfoWindow>
 
-        <InfoWindow
-          position={{lat: 37.765703, lng: -122.425640}}
-          visible={true}>
-          <small>Click on any of the markers to display an additional info.</small>
+        <InfoWindow position={{ lat: 37.765703, lng: -122.42564 }} visible>
+          <small>
+            Click on any of the markers to display an additional info.
+          </small>
         </InfoWindow>
       </Map>
-    )
+    );
   }
-});
+}
 
-export default WithMarkers
-
-// const mountNode = document.querySelector('#root')
-// ReactDOM.render(<Wrapped />, mountNode)
+export default WithMarkers;

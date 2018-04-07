@@ -1,36 +1,34 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React from 'react';
 
-import Map, {GoogleApiWrapper} from '../../src/index'
-import Polyline from '../../src/components/Polyline'
+import Map from '../../src/index';
 
-const WithPolylines = React.createClass({
-  render: function() {
-    if (!this.props.loaded) {
-      return <div>Loading...</div>
-    }
+import Polyline from '../../src/components/Polyline';
 
-    const polyline = [
-      { lat: 37.789411, lng: -122.422116 },
-      { lat: 37.785757, lng: -122.421333 },
-      { lat: 37.789352, lng: -122.415346 }
-    ]
+const WithPolylines = props => {
+  if (!props.loaded) return <div>Loading...</div>;
 
-    return (
-      <Map google={this.props.google}
-          style={{width: '100%', height: '100%', position: 'relative'}}
-          className={'map'}
-          zoom={14}>
-          <Polyline
-            path={polyline}
-            strokeColor="#0000FF"
-            strokeOpacity={0.8}
-            strokeWeight={2}
-            fillColor="#0000FF"
-            fillOpacity={0.35} />
-      </Map>
-    )
-  }
-});
+  const polyline = [
+    { lat: 37.789411, lng: -122.422116 },
+    { lat: 37.785757, lng: -122.421333 },
+    { lat: 37.789352, lng: -122.415346 }
+  ];
 
-export default WithPolylines
+  return (
+    <Map
+      className="map"
+      google={props.google}
+      style={{ height: '100%', position: 'relative', width: '100%' }}
+      zoom={14}>
+      <Polyline
+        fillColor="#0000FF"
+        fillOpacity={0.35}
+        path={polyline}
+        strokeColor="#0000FF"
+        strokeOpacity={0.8}
+        strokeWeight={2}
+      />
+    </Map>
+  );
+};
+
+export default WithPolylines;

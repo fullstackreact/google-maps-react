@@ -1,4 +1,3 @@
-
 <p align="center">
   <img src="resources/readme/fullstackreact-google-maps-tutorial.png" alt="Fullstack React Google Maps Tutorial" />
 </p>
@@ -49,6 +48,7 @@ If you want to add a loading container _other than the default_ loading containe
 const LoadingContainer = (props) => (
   <div>Fancy loading container!</div>
 )
+
 export default GoogleApiWrapper({
   apiKey: (YOUR_GOOGLE_API_KEY_GOES_HERE),
   LoadingContainer: LoadingContainer
@@ -61,7 +61,7 @@ export default GoogleApiWrapper({
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 
 export class MapContainer extends Component {
-render() {
+  render() {
     return (
       <Map google={this.props.google} zoom={14}>
 
@@ -138,22 +138,21 @@ The `<Map />` component handles events out of the box. All event handlers are op
 When the `<Map />` instance has been loaded and is ready on the page, it will call the `onReady` prop, if given. The `onReady` prop is useful for fetching places or using the autocomplete API for places.
 
 ```javascript
-React.createClass({
-  fetchPlaces: function(mapProps, map) {
-    const {google} = mapProps;
-    const service = new google.maps.places.PlacesService(map);
-    // ...
-  },
-  render: function() {
-    return (
-      <Map google={this.props.google}
-        onReady={this.fetchPlaces}
-        visible={false}>
-          <Listing places={this.state.places} />
-      </Map>
-    )
-  }
-});
+fetchPlaces(mapProps, map) {
+  const {google} = mapProps;
+  const service = new google.maps.places.PlacesService(map);
+  // ...
+}
+
+render() {
+  return (
+    <Map google={this.props.google}
+      onReady={this.fetchPlaces}
+      visible={false}>
+        <Listing places={this.state.places} />
+    </Map>
+  )
+}
 ```
 
 #### onClick
@@ -161,17 +160,16 @@ React.createClass({
 To listen for clicks on the `<Map />` component, pass the `onClick` prop:
 
 ```javascript
-React.createClass({
-  mapClicked: function(mapProps, map, clickEvent) {
-    // ...
-  },
-  render: function() {
-    return (
-      <Map google={this.props.google}
-        onClick={this.mapClicked} />
-    )
-  }
-});
+mapClicked(mapProps, map, clickEvent) {
+  // ...
+}
+
+render() {
+  return (
+    <Map google={this.props.google}
+      onClick={this.mapClicked} />
+  )
+}
 ```
 
 #### onDragend
@@ -179,17 +177,16 @@ React.createClass({
 When our user changes the map center by dragging the Map around, we can get a callback after the event is fired with the `onDragend` prop:
 
 ```javascript
-React.createClass({
-  centerMoved: function(mapProps, map) {
-    // ...
-  },
-  render: function() {
-    return (
-      <Map google={this.props.google}
-        onDragend={this.centerMoved} />
-    )
-  }
-});
+centerMoved(mapProps, map) {
+  // ...
+}
+
+render() {
+  return (
+    <Map google={this.props.google}
+      onDragend={this.centerMoved} />
+  )
+}
 ```
 
 ### Visibility
@@ -256,18 +253,18 @@ The `<Marker />` component listens for events, similar to the `<Map />` componen
 You can listen for an `onClick` event with the (appropriately named) `onClick` prop.
 
 ```javascript
-const WithMarkers = React.createClass({
-  onMarkerClick: function(props, marker, e) {
-  },
-  render: function() [
-    return (
-      <Map google={this.props.google}>
-        <Marker onClick={this.onMarkerClick}
-            name={'Current location'} />
-      </Map>
-    )
-  ]
-});
+onMarkerClick(props, marker, e) {
+  // ..
+}
+
+render() {
+  return (
+    <Map google={this.props.google}>
+      <Marker onClick={this.onMarkerClick}
+          name={'Current location'} />
+    </Map>
+  )
+}
 ```
 
 #### mouseover
@@ -275,18 +272,18 @@ const WithMarkers = React.createClass({
 You can also pass a callback when the user mouses over a `<Marker />` instance by passing the `onMouseover` callback:
 
 ```javascript
-const Container = React.createClass({
-  onMouseoverMarker: function(props, marker, e) {
-  },
-  render: function() [
-    return (
-      <Map google={this.props.google}>
-        <Marker onMouseover={this.onMouseoverMarker}
-            name={'Current location'} />
-      </Map>
-    )
-  ]
-});
+onMouseoverMarker(props, marker, e) {
+  // ..
+}
+
+render() {
+  return (
+    <Map google={this.props.google}>
+      <Marker onMouseover={this.onMouseoverMarker}
+          name={'Current location'} />
+    </Map>
+  )
+}
 ```
 
 ### Polygon
@@ -294,13 +291,14 @@ const Container = React.createClass({
 To place a polygon on the Map, set `<Polygon />` as child of Map component.
 
 ```javascript
-render: function() {
-  var triangleCoords = [
+render() {
+  const triangleCoords = [
     {lat: 25.774, lng: -80.190},
     {lat: 18.466, lng: -66.118},
     {lat: 32.321, lng: -64.757},
     {lat: 25.774, lng: -80.190}
   ];
+
   return(
     <Map google={this.props.google}
         style={{width: '100%', height: '100%', position: 'relative'}}
@@ -327,13 +325,14 @@ The `<Polygon />` component listens to `onClick`, `onMouseover` and `onMouseout`
 To place a polyline on the Map, set `<Polyline />` as child of Map component.
 
 ```javascript
-render: function() {
-  var triangleCoords = [
+render() {
+  const triangleCoords = [
     {lat: 25.774, lng: -80.190},
     {lat: 18.466, lng: -66.118},
     {lat: 32.321, lng: -64.757},
     {lat: 25.774, lng: -80.190}
   ];
+
   return(
     <Map google={this.props.google}
         style={{width: '100%', height: '100%', position: 'relative'}}
@@ -367,37 +366,29 @@ You can use a `position` prop or connect the `<InfoWindow />` component directly
 ```javascript
 //note: code formatted for ES6 here
 export class MapContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showingInfoWindow: false,
-      activeMarker: {},
-      selectedPlace: {},
-    }
+  state = {
+    showingInfoWindow: false,
+    activeMarker: {},
+    selectedPlace: {},
+  };
 
-    // binding this to event-handler functions
-    this.onMarkerClick = this.onMarkerClick.bind(this);
-    this.onMapClicked = this.onMapClicked.bind(this);
-  }
-
-  onMarkerClick: function(props, marker, e) {
+  onMarkerClick = (props, marker, e) =>
     this.setState({
       selectedPlace: props,
       activeMarker: marker,
       showingInfoWindow: true
     });
-  },
 
-  onMapClicked: function(props) {
+  onMapClicked = (props) => {
     if (this.state.showingInfoWindow) {
       this.setState({
         showingInfoWindow: false,
         activeMarker: null
       })
     }
-  },
+  };
 
-  render: function() {
+  render() {
     return (
       <Map google={this.props.google}
           onClick={this.onMapClicked}>
@@ -414,7 +405,7 @@ export class MapContainer extends Component {
       </Map>
     )
   }
-});
+}
 ```
 
 ### Events

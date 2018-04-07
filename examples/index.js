@@ -1,65 +1,76 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
 import {
-  Router,
   hashHistory,
+  IndexRoute,
+  Link,
   Redirect,
   Route,
-  IndexRoute,
-  Link
+  Router
 } from 'react-router';
 
-import styles from './global.styles.css';
-
 import Container from './Container';
+
+import Simple from './components/basic';
+import Marker from './components/withMarkers';
+import ClickableMarkers from './components/clickableMarkers';
+import GooglePlaces from './components/places';
+import Autocomplete from './components/autocomplete';
+import HeatMap from './components/withHeatMap';
+import Polygon from './components/withPolygons';
+import Polyline from './components/withPolylines';
+import CustomEvents from './components/resizeEvent';
 
 const routeMap = {
   basic: {
     name: 'Simple',
-    component: require('./components/basic').default
+    component: Simple
   },
   markers: {
     name: 'Marker',
-    component: require('./components/withMarkers').default
+    component: Marker
   },
   clickable_markers: {
     name: 'Clickable markers',
-    component: require('./components/clickableMarkers').default
+    component: ClickableMarkers
   },
   places: {
     name: 'Google places',
-    component: require('./components/places').default
+    component: GooglePlaces
   },
   autocomplete: {
     name: 'Autocomplete',
-    component: require('./components/autocomplete').default
+    component: Autocomplete
   },
   heatMap: {
     name: 'Heat Map',
-    component: require('./components/withHeatMap').default
+    component: HeatMap
   },
   polygons: {
     name: 'Polygon',
-    component: require('./components/withPolygons').default
+    component: Polygon
   },
   polyline: {
     name: 'Polyline',
-    component: require('./components/withPolylines').default
+    component: Polyline
   },
   onResizeEvent: {
     name: 'Custom events',
-    component: require('./components/resizeEvent').default
+    component: CustomEvents
   }
 };
 
 const createElement = (Component, props) => {
   const pathname = props.location.pathname.replace('/', '');
   const routeDef = routeMap[pathname];
+
   const newProps = {
     routeMap,
     pathname,
     routeDef
   };
+
   return <Component {...newProps} {...props} />;
 };
 
@@ -68,23 +79,26 @@ const routes = (
     <Route component={Container} path="/">
       {Object.keys(routeMap).map(key => {
         const r = routeMap[key];
+
         return (
           <Route key={key} path={key} name={r.name} component={r.component} />
         );
       })}
-      <IndexRoute component={routeMap['basic'].component} />
+
+      <IndexRoute component={routeMap.basic.component} />
     </Route>
   </Router>
 );
 
 const mountNode = document.querySelector('#root');
-if (mountNode) {
-  ReactDOM.render(routes, mountNode);
-} else {
+
+if (mountNode) ReactDOM.render(routes, mountNode);
+else {
   const hljs = require('highlight.js');
 
   const codes = document.querySelectorAll('pre code');
-  for (let i = 0; i < codes.length; i++) {
+
+  for (let i = 0; i < codes.length; i += 1) {
     const block = codes[i];
     hljs.highlightBlock(block);
   }

@@ -1,74 +1,46 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, { Component } from 'react';
 
-import Map, {GoogleApiWrapper} from '../../src/index';
+import Map from '../../src/index';
 
-const Container = React.createClass({
-  getInitialState: function() {
-    return {
-      showingInfoWindow: false,
-      activeMarker: {},
-      selectedPlace: {}
-    };
-  },
+class Container extends Component {
+  state = {
+    showingInfoWindow: false
+  };
 
-  onMapReady: function(mapProps, map) {
+  onMapReady = (mapProps, map) => {
     this.map = map;
 
-    window.onresize = function() {
-      var currCenter = map.getCenter();
-      google.maps.event.trigger(map, 'resize');
+    window.onresize = () => {
+      const currCenter = map.getCenter();
+      this.props.google.maps.event.trigger(map, 'resize');
       map.setCenter(currCenter);
     };
-  },
+  };
 
-  onMapMoved: function(props, map) {
-    const center = map.center;
-  },
+  onMarkerClick = () => this.setState({ showingInfoWindow: true });
 
-  onMarkerClick: function(props, marker, e) {
-    this.setState({
-      selectedPlace: props,
-      activeMarker: marker,
-      showingInfoWindow: true
-    });
-  },
+  onInfoWindowClose = () => this.setState({ showingInfoWindow: false });
 
-  onInfoWindowClose: function() {
-    this.setState({
-      showingInfoWindow: false,
-      activeMarker: null
-    });
-  },
+  onMapClicked = () => {
+    if (this.state.showingInfoWindow)
+      this.setState({ showingInfoWindow: false });
+  };
 
-  onMapClicked: function(props) {
-    if (this.state.showingInfoWindow) {
-      this.setState({
-        showingInfoWindow: false,
-        activeMarker: null
-      });
-    }
-  },
-
-  render: function() {
-    if (!this.props.loaded) {
-      return <div>Loading...</div>;
-    }
+  render() {
+    if (!this.props.loaded) return <div>Loading...</div>;
 
     return (
       <Map
+        centerAroundCurrentLocation
+        className="map"
         google={this.props.google}
-        style={{width: '100%', height: '100%', position: 'relative'}}
-        className={'map'}
-        onReady={this.onMapReady}
-        zoom={14}
-        containerStyle={{}}
-        centerAroundCurrentLocation={true}
         onClick={this.onMapClicked}
-        onDragend={this.onMapMoved}
+        onReady={this.onMapReady}
+        style={{ height: '100%', position: 'relative', width: '100%' }}
+        zoom={14}
       />
     );
   }
-});
+}
 
 export default Container;
