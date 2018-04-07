@@ -79,6 +79,14 @@
   }
 
   var defaultMapConfig = {};
+
+  var serialize = function serialize(obj) {
+    return JSON.stringify(obj);
+  };
+  var isSame = function isSame(obj1, obj2) {
+    return obj1 === obj2 || serialize(obj1) === serialize(obj2);
+  };
+
   var defaultCreateCache = function defaultCreateCache(options) {
     options = options || {};
     var apiKey = options.apiKey;
@@ -106,31 +114,79 @@
     );
   };
 
-  var wrapper = exports.wrapper = function wrapper(options) {
+  var wrapper = exports.wrapper = function wrapper(input) {
     return function (WrappedComponent) {
-      var createCache = options.createCache || defaultCreateCache;
-
       var Wrapper = function (_React$Component) {
         _inherits(Wrapper, _React$Component);
 
         function Wrapper(props, context) {
           _classCallCheck(this, Wrapper);
 
+          // Build options from input
           var _this = _possibleConstructorReturn(this, (Wrapper.__proto__ || Object.getPrototypeOf(Wrapper)).call(this, props, context));
 
-          _this.scriptCache = createCache(options);
-          _this.scriptCache.google.onLoad(_this.onLoad.bind(_this));
-          _this.LoadingContainer = options.LoadingContainer || DefaultLoadingContainer;
+          var options = typeof input === 'function' ? input(props) : input;
+
+          // Initialize required Google scripts and other configured options
+          _this.initialize(options);
 
           _this.state = {
             loaded: false,
             map: null,
-            google: null
+            google: null,
+            options: options
           };
           return _this;
         }
 
         _createClass(Wrapper, [{
+          key: 'componentWillReceiveProps',
+          value: function componentWillReceiveProps(props) {
+            // Do not update input if it's not dynamic
+            if (typeof input !== 'function') {
+              return;
+            }
+
+            // Get options to compare
+            var prevOptions = this.state.options;
+            var options = typeof input === 'function' ? input(props) : input;
+
+            // Ignore when options are not changed
+            if (isSame(options, prevOptions)) {
+              return;
+            }
+
+            // Initialize with new options
+            this.initialize(options);
+
+            // Save new options in component state,
+            // and remove information about previous API handlers
+            this.setState({
+              options: options,
+              loaded: false,
+              google: null
+            });
+          }
+        }, {
+          key: 'initialize',
+          value: function initialize(options) {
+            // Avoid race condition: remove previous 'load' listener
+            if (this.unregisterLoadHandler) {
+              this.unregisterLoadHandler();
+              this.unregisterLoadHandler = null;
+            }
+
+            // Load cache factory
+            var createCache = options.createCache || defaultCreateCache;
+
+            // Build script
+            this.scriptCache = createCache(options);
+            this.unregisterLoadHandler = this.scriptCache.google.onLoad(this.onLoad.bind(this));
+
+            // Store information about loading container
+            this.LoadingContainer = options.LoadingContainer || DefaultLoadingContainer;
+          }
+        }, {
           key: 'onLoad',
           value: function onLoad(err, tag) {
             this._gapi = window.google;

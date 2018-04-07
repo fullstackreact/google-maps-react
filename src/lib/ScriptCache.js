@@ -9,15 +9,27 @@ export const ScriptCache = (function(global) {
 
         Cache._onLoad = function(key) {
             return (cb) => {
+                let registered = true;
+
+                function unregister() {
+                    registered = false;
+                }
+
                 let stored = scriptMap.get(key);
+
                 if (stored) {
                     stored.promise.then(() => {
-                        stored.error ? cb(stored.error) : cb(null, stored)
+                        if (registered) {
+                          stored.error ? cb(stored.error) : cb(null, stored)
+                        }
+
                         return stored;
                     });
                 } else {
                     // TODO:
                 }
+
+                return unregister;
             }
         }
 

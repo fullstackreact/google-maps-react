@@ -32,6 +32,17 @@ export default GoogleApiWrapper({
 })(MapContainer)
 ```
 
+Alternatively, the `GoogleApiWrapper` Higher-Order component can be configured by passing a function that will be called with whe wrapped component's `props` and should returned the configuration object.
+
+```javascript
+export default GoogleApiWrapper(
+  (props) => ({
+    apiKey: props.apiKey,
+    language: props.language,
+  }
+))(MapContainer)
+```
+
 If you want to add a loading container _other than the default_ loading container, simply pass it in the HOC, like so:
 
 ```javascript
