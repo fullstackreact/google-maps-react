@@ -177,6 +177,7 @@
             });
           }
         }
+        console.log('test changes');
         this.loadMap();
       }
     }, {

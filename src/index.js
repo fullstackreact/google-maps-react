@@ -90,6 +90,7 @@ export class Map extends React.Component {
           .catch(e => e);
       }
     }
+    console.log('test changes');
     this.loadMap();
   }
 
