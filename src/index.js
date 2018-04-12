@@ -49,6 +49,7 @@ export {InfoWindow} from './components/InfoWindow';
 export {HeatMap} from './components/HeatMap';
 export {Polygon} from './components/Polygon';
 export {Polyline} from './components/Polyline';
+export {ChoroplethMap} from './components/ChoroplethMap';
 
 export class Map extends React.Component {
   constructor(props) {
@@ -90,7 +91,6 @@ export class Map extends React.Component {
           .catch(e => e);
       }
     }
-    console.log('test changes');
     this.loadMap();
   }
 

@@ -1,22 +1,22 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', './GoogleApiComponent', './components/Marker', './components/InfoWindow', './components/HeatMap', './components/Polygon', './components/Polyline', 'react', 'prop-types', 'react-dom', './lib/String', './lib/cancelablePromise', 'invariant'], factory);
+    define(['exports', './GoogleApiComponent', './components/Marker', './components/InfoWindow', './components/HeatMap', './components/Polygon', './components/Polyline', './components/ChoroplethMap', 'react', 'prop-types', 'react-dom', './lib/String', './lib/cancelablePromise', 'invariant'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('./GoogleApiComponent'), require('./components/Marker'), require('./components/InfoWindow'), require('./components/HeatMap'), require('./components/Polygon'), require('./components/Polyline'), require('react'), require('prop-types'), require('react-dom'), require('./lib/String'), require('./lib/cancelablePromise'), require('invariant'));
+    factory(exports, require('./GoogleApiComponent'), require('./components/Marker'), require('./components/InfoWindow'), require('./components/HeatMap'), require('./components/Polygon'), require('./components/Polyline'), require('./components/ChoroplethMap'), require('react'), require('prop-types'), require('react-dom'), require('./lib/String'), require('./lib/cancelablePromise'), require('invariant'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.GoogleApiComponent, global.Marker, global.InfoWindow, global.HeatMap, global.Polygon, global.Polyline, global.react, global.propTypes, global.reactDom, global.String, global.cancelablePromise, global.invariant);
+    factory(mod.exports, global.GoogleApiComponent, global.Marker, global.InfoWindow, global.HeatMap, global.Polygon, global.Polyline, global.ChoroplethMap, global.react, global.propTypes, global.reactDom, global.String, global.cancelablePromise, global.invariant);
     global.index = mod.exports;
   }
-})(this, function (exports, _GoogleApiComponent, _Marker, _InfoWindow, _HeatMap, _Polygon, _Polyline, _react, _propTypes, _reactDom, _String, _cancelablePromise, _invariant) {
+})(this, function (exports, _GoogleApiComponent, _Marker, _InfoWindow, _HeatMap, _Polygon, _Polyline, _ChoroplethMap, _react, _propTypes, _reactDom, _String, _cancelablePromise, _invariant) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  exports.Map = exports.Polyline = exports.Polygon = exports.HeatMap = exports.InfoWindow = exports.Marker = exports.GoogleApiWrapper = undefined;
+  exports.Map = exports.ChoroplethMap = exports.Polyline = exports.Polygon = exports.HeatMap = exports.InfoWindow = exports.Marker = exports.GoogleApiWrapper = undefined;
   Object.defineProperty(exports, 'GoogleApiWrapper', {
     enumerable: true,
     get: function () {
@@ -51,6 +51,12 @@
     enumerable: true,
     get: function () {
       return _Polyline.Polyline;
+    }
+  });
+  Object.defineProperty(exports, 'ChoroplethMap', {
+    enumerable: true,
+    get: function () {
+      return _ChoroplethMap.ChoroplethMap;
     }
   });
 
@@ -177,7 +183,6 @@
             });
           }
         }
-        console.log('test changes');
         this.loadMap();
       }
     }, {
