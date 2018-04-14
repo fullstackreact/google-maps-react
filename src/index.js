@@ -288,7 +288,8 @@ Map.propTypes = {
   disableDoubleClickZoom: PropTypes.bool,
   noClear: PropTypes.bool,
   styles: PropTypes.array,
-  gestureHandling: PropTypes.string
+  gestureHandling: PropTypes.string,
+  mapTypeId: PropTypes.string
 };
 
 evtNames.forEach(e => (Map.propTypes[camelize(e)] = PropTypes.func));
@@ -303,6 +304,7 @@ Map.defaultProps = {
   centerAroundCurrentLocation: false,
   style: {},
   containerStyle: {},
+  mapTypeId: roadmap,
   visible: true
 };
 
