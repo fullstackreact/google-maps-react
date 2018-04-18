@@ -16,6 +16,7 @@ export class ChoroplethMap extends Component {
   componentDidMount() {
     if (this.props.geoJsonData) {
       this.renderFeatures();
+      console.log('new');
     }
   }
 
