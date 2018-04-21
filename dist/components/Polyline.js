@@ -1,16 +1,16 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', 'react', 'prop-types', '../lib/String'], factory);
+    define(['exports', 'react', 'prop-types', '../lib/arePathsEqual', '../lib/String'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('react'), require('prop-types'), require('../lib/String'));
+    factory(exports, require('react'), require('prop-types'), require('../lib/arePathsEqual'), require('../lib/String'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.react, global.propTypes, global.String);
+    factory(mod.exports, global.react, global.propTypes, global.arePathsEqual, global.String);
     global.Polyline = mod.exports;
   }
-})(this, function (exports, _react, _propTypes, _String) {
+})(this, function (exports, _react, _propTypes, _arePathsEqual, _String) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
@@ -135,7 +135,7 @@
     }, {
       key: 'componentDidUpdate',
       value: function componentDidUpdate(prevProps) {
-        if (this.props.map !== prevProps.map) {
+        if (this.props.map !== prevProps.map || !(0, _arePathsEqual.arePathsEqual)(this.props.path, prevProps.path)) {
           if (this.polyline) {
             this.polyline.setMap(null);
           }
