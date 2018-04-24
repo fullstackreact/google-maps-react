@@ -7,7 +7,8 @@ const evtNames = ['click', 'mouseout', 'mouseover'];
 
 const wrappedPromise = function() {
     var wrappedPromise = {},
-        promise = new Promise(function (resolve, reject) {
+        promise = new Promise(function
+           (resolve, reject) {
             wrappedPromise.resolve = resolve;
             wrappedPromise.reject = reject;
         });
