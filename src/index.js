@@ -111,6 +111,9 @@ export class Map extends React.Component {
     if (prevState.currentLocation !== this.state.currentLocation) {
       this.recenterMap();
     }
+    if (this.props.bounds !== prevProps.bounds) {
+      this.map.fitBounds(this.props.bounds);
+    }
   }
 
   componentWillUnmount() {
@@ -288,7 +291,8 @@ Map.propTypes = {
   disableDoubleClickZoom: PropTypes.bool,
   noClear: PropTypes.bool,
   styles: PropTypes.array,
-  gestureHandling: PropTypes.string
+  gestureHandling: PropTypes.string,
+  bounds: PropTypes.object
 };
 
 evtNames.forEach(e => (Map.propTypes[camelize(e)] = PropTypes.func));

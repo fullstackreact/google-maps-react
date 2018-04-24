@@ -199,6 +199,9 @@
         if (prevState.currentLocation !== this.state.currentLocation) {
           this.recenterMap();
         }
+        if (this.props.bounds !== prevProps.bounds) {
+          this.map.fitBounds(this.props.bounds);
+        }
       }
     }, {
       key: 'componentWillUnmount',
@@ -394,7 +397,8 @@
     disableDoubleClickZoom: _propTypes2.default.bool,
     noClear: _propTypes2.default.bool,
     styles: _propTypes2.default.array,
-    gestureHandling: _propTypes2.default.string
+    gestureHandling: _propTypes2.default.string,
+    bounds: _propTypes2.default.object
   };
 
   evtNames.forEach(function (e) {
