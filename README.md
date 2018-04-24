@@ -127,6 +127,31 @@ center: Takes an object containing latitude and longitude coordinates. Use this 
           onClick={this.onMapClicked}
         >
 ```
+bounds:  Takes a [google.maps.LatLngBounds()](https://developers.google.com/maps/documentation/javascript/reference/3/#LatLngBounds) object to adjust the center and zoom of the map.
+```javascript
+var points = [
+    { lat: 42.02, lng: -77.01 },
+    { lat: 42.03, lng: -77.02 },
+    { lat: 41.03, lng: -77.04 },
+    { lat: 42.05, lng: -77.02 }
+]
+var bounds = new this.props.google.maps.LatLngBounds();
+for (var i = 0; i < points.length; i++) {
+  bounds.extend(points[i]);
+}
+return (
+    <Map
+        google={this.props.google}
+        initialCenter={{
+            lat: 42.39,
+            lng: -72.52
+        }}
+        bounds={bounds}>
+    </Map>
+);
+
+```
+
 It also takes event handlers described below:
 
 ### Events

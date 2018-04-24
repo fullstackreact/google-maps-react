@@ -43,7 +43,7 @@
     var loading = false;
     var channel = null;
     var language = opts.language;
-    var region = null;
+    var region = opts.region || null;
 
     var onLoadEvents = [];
 
