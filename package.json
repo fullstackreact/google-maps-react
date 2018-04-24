@@ -73,7 +73,5 @@
     "react": "~0.14.8 || ^15.0.0 || ^16.0.0",
     "react-dom": "~0.14.8 || ^15.0.0 || ^16.0.0"
   },
-  "dependencies": {
-    "invariant": "^2.2.1"
-  }
+  "dependencies": {}
 }
