@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 import GitHubForkRibbon from 'react-github-fork-ribbon';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router';
+import {withRouter, Switch, Link, Redirect, Route} from 'react-router-dom';
 
 import styles from './styles.module.css';
 
@@ -11,47 +11,31 @@ const GoogleApiWrapper = __IS_DEV__
   : require('../dist').GoogleApiWrapper;
 
 class Container extends Component {
-  static propTypes = {
-    children: PropTypes.element.isRequired
-  };
+  static propTypes = {};
 
   static contextTypes = {
     router: PropTypes.object
   };
 
-  renderChildren = () => {
-    const { children } = this.props;
-
-    if (!children) return;
-
-    const sharedProps = {
-      google: this.props.google,
-      loaded: this.props.loaded
-    };
-
-    return React.Children.map(children, child =>
-      React.cloneElement(child, sharedProps, {})
-    );
-  };
-
   render() {
-    const { routeMap, routeDef } = this.props;
+    const {children, routes, routeDef} = this.props;
 
     return (
       <div className={styles.container}>
         <GitHubForkRibbon
           href="//github.com/fullstackreact/google-maps-react"
           position="right"
-          target="_blank">
+          target="_blank"
+        >
           Fork me on GitHub
         </GitHubForkRibbon>
 
         <div className={styles.wrapper}>
           <div className={styles.list}>
             <ul>
-              {Object.keys(routeMap).map(key => (
-                <Link activeClassName={styles.active} key={key} to={key}>
-                  <li>{routeMap[key].name}</li>
+              {routes.map(route => (
+                <Link key={route.path} to={route.path}>
+                  <li>{route.name}</li>
                 </Link>
               ))}
             </ul>
@@ -68,7 +52,26 @@ class Container extends Component {
               </h2>
             </div>
 
-            {this.renderChildren()}
+            <Switch>
+              {routes.map(route => (
+                <Route
+                  key={route.name}
+                  path={route.path}
+                  routeDef={route}
+                  routes={routes}
+                  render={routingProps => (
+                    <div>
+                      <route.component
+                        {...routingProps}
+                        google={this.props.google}
+                        loaded={this.props.loaded}
+                      />
+                    </div>
+                  )}
+                />
+              ))}
+              <Redirect path="*" to={'/basic'} />
+            </Switch>
           </div>
         </div>
       </div>
@@ -78,8 +81,10 @@ class Container extends Component {
 
 const Loading = () => <div>Fancy loading container</div>;
 
-export default GoogleApiWrapper({
-  apiKey: __GAPI_KEY__,
-  libraries: ['places', 'visualization'],
-  LoadingContainer: Loading
-})(Container);
+export default withRouter(
+  GoogleApiWrapper({
+    apiKey: __GAPI_KEY__,
+    libraries: ['places', 'visualization'],
+    LoadingContainer: Loading
+  })(Container)
+);

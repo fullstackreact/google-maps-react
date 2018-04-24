@@ -2,13 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import {
-  hashHistory,
-  IndexRoute,
-  Link,
   Redirect,
+  Switch,
+  Link,
   Route,
-  Router
-} from 'react-router';
+  BrowserRouter as Router
+} from 'react-router-dom';
 
 import Container from './Container';
 
@@ -22,77 +21,84 @@ import Polygon from './components/withPolygons';
 import Polyline from './components/withPolylines';
 import CustomEvents from './components/resizeEvent';
 
-const routeMap = {
-  basic: {
+const routes = [
+  {
+    path: '/basic',
     name: 'Simple',
     component: Simple
   },
-  markers: {
+  {
+    path: '/markers',
     name: 'Marker',
     component: Marker
   },
-  clickable_markers: {
+  {
+    path: '/clickable_markers',
     name: 'Clickable markers',
     component: ClickableMarkers
   },
-  places: {
+  {
+    path: '/places',
     name: 'Google places',
     component: GooglePlaces
   },
-  autocomplete: {
+  {
+    path: '/autocomplete',
     name: 'Autocomplete',
     component: Autocomplete
   },
-  heatMap: {
+  {
+    path: '/heatMap',
     name: 'Heat Map',
     component: HeatMap
   },
-  polygons: {
+  {
+    path: '/polygons',
     name: 'Polygon',
     component: Polygon
   },
-  polyline: {
+  {
+    path: '/polyline',
     name: 'Polyline',
     component: Polyline
   },
-  onResizeEvent: {
+  {
+    path: '/onResizeEvent',
     name: 'Custom events',
     component: CustomEvents
   }
-};
+];
 
-const createElement = (Component, props) => {
-  const pathname = props.location.pathname.replace('/', '');
-  const routeDef = routeMap[pathname];
+const createElement = (Component, route) => {
+  // const pathname = props.location.pathname.replace('/', '');
+  // const routeDef = routes[pathname];
 
   const newProps = {
-    routeMap,
-    pathname,
-    routeDef
+    key: route.name,
+    route,
+    routes,
+    // pathname,
+    routeDef: route
+    // routeDef
   };
 
-  return <Component {...newProps} {...props} />;
+  return <Component {...newProps} />;
 };
 
-const routes = (
-  <Router createElement={createElement} history={hashHistory}>
-    <Route component={Container} path="/">
-      {Object.keys(routeMap).map(key => {
-        const r = routeMap[key];
-
-        return (
-          <Route key={key} path={key} name={r.name} component={r.component} />
-        );
-      })}
-
-      <IndexRoute component={routeMap.basic.component} />
-    </Route>
+const Routing = (
+  <Router>
+    <Container routes={routes} />
   </Router>
 );
 
+// <Route render={routeProps => createElement(Container, routeProps)} path="/">
+//     {Object.keys(routes).map(key => {
+//       const r = routes[key];
+//     })}
+//     </Route>
 const mountNode = document.querySelector('#root');
 
-if (mountNode) ReactDOM.render(routes, mountNode);
+if (mountNode) ReactDOM.render(Routing, mountNode);
 else {
   const hljs = require('highlight.js');
 
