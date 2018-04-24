@@ -16,7 +16,7 @@ test:
 testwatch:
 	npm run test-watch
 
-example:
+example: build
 	npm run build
 
 publish_pages: example

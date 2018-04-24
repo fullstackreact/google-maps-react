@@ -48,6 +48,7 @@
     "eslint-plugin-babel": "^3.1.0",
     "eslint-plugin-react": "^5.1.1",
     "file-loader": "^0.8.5",
+    "gh-pages": "^1.1.0",
     "highlight.js": "^9.3.0",
     "history": "^3.0.0",
     "hjs-webpack": "^8.1.0",
