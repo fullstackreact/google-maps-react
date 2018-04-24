@@ -16,6 +16,7 @@ const defaultCreateCache = options => {
   const version = options.version || '3';
   const language = options.language || 'en';
   const url = options.url;
+  const client = options.client;
 
   return ScriptCache({
     google: GoogleApi({
@@ -23,7 +24,8 @@ const defaultCreateCache = options => {
       language: language,
       libraries: libraries,
       version: version,
-      url: url
+      url: url,
+      client: client
     })
   });
 };
