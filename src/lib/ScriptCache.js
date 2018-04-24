@@ -35,6 +35,10 @@ export const ScriptCache = (function(global) {
 
         Cache._scriptTag = (key, src) => {
             if (!scriptMap.has(key)) {
+                // Server side rendering environments don't always have access to the `document` global.
+                // In these cases, we're not going to be able to return a script tag, so just return null.
+                if (typeof document === 'undefined') return null;
+
                 let tag = document.createElement('script');
                 let promise = new Promise((resolve, reject) => {
                     let resolved = false,
