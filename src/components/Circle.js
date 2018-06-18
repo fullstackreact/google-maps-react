@@ -135,7 +135,7 @@
     }, {
       key: 'componentDidUpdate',
       value: function componentDidUpdate(prevProps) {
-        if (this.props.map !== prevProps.map || this.props.center !== prevProps.center) {
+        if (this.props.map !== prevProps.map || this.props.center !== prevProps.center || this.props.visible !== prevProps.visible || this.props.radius !== prevProps.radius) {
           if (this.circle) {
             this.circle.setMap(null);
           }
@@ -165,7 +165,8 @@
             fillColor = _props.fillColor,
             fillOpacity = _props.fillOpacity,
             draggable = _props.draggable,
-            props = _objectWithoutProperties(_props, ['map', 'google', 'center', 'radius', 'strokeColor', 'strokeOpacity', 'strokeWeight', 'fillColor', 'fillOpacity', 'draggable']);
+            visible = _props.visible,
+            props = _objectWithoutProperties(_props, ['map', 'google', 'center', 'radius', 'strokeColor', 'strokeOpacity', 'strokeWeight', 'fillColor', 'fillOpacity', 'draggable', 'visible']);
 
         if (!google) {
           return null;
@@ -180,7 +181,8 @@
           strokeWeight: strokeWeight,
           fillColor: fillColor,
           fillOpacity: fillOpacity,
-          draggable: draggable
+          draggable: draggable,
+          visible: visible,
         }, props);
 
         this.circle = new google.maps.Circle(params);
