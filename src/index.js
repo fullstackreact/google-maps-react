@@ -136,11 +136,26 @@ export class Map extends React.Component {
 
       const mapTypeIds = this.props.google.maps.MapTypeId || {};
       const mapTypeFromProps = String(this.props.mapType).toUpperCase();
+      const mapTypeId = mapTypeIds[mapTypeFromProps]
+      const mapTypeControlOptions = {
+        mapTypeIds: Object.keys(mapTypeIds).map(function (key) {
+          return mapTypeIds[key];
+        })
+      }
+
+      const styledMap = this.props.mapStyles.style || [];
+      const styleName = this.props.mapStyles.name || 'Styled';
+      if (styledMap.length) {
+        mapTypeControlOptions.mapTypeIds.push(styleName);
+        if (mapTypeFromProps === styleName.toUpperCase()) {
+          mapTypeId = styleName
+        }
+      }
 
       const mapConfig = Object.assign(
         {},
         {
-          mapTypeId: mapTypeIds[mapTypeFromProps],
+          mapTypeId: mapTypeId,
           center: center,
           zoom: this.props.zoom,
           maxZoom: this.props.maxZoom,
@@ -160,7 +175,8 @@ export class Map extends React.Component {
           disableDoubleClickZoom: this.props.disableDoubleClickZoom,
           noClear: this.props.noClear,
           styles: this.props.styles,
-          gestureHandling: this.props.gestureHandling
+          gestureHandling: this.props.gestureHandling,
+          mapTypeControlOptions: mapTypeControlOptions
         }
       );
 
@@ -172,6 +188,11 @@ export class Map extends React.Component {
       });
 
       this.map = new maps.Map(node, mapConfig);
+
+      if (styledMap.length) {
+        var styledMapType = new google.maps.StyledMapType(styledMap, {name: styleName});
+        this.map.mapTypes.set(styleName, styledMapType);
+      }
 
       evtNames.forEach(e => {
         this.listeners[e] = this.map.addListener(e, this.handleEvent(e));
