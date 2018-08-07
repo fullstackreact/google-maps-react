@@ -58,7 +58,7 @@ export class HeatMap extends React.Component {
     }
 
     const data = positions.map((pos) => {
-        return new google.maps.LatLng(pos.lat, pos.lng);
+        return {location: new google.maps.LatLng(pos.lat, pos.lng), weight:pos.weight}
     });
 
     const pref = {
