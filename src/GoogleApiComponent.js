@@ -17,7 +17,7 @@ const defaultCreateCache = options => {
   const language = options.language || 'en';
   const url = options.url;
   const client = options.client;
-  const region = options.region || null;
+  const region = options.region;
 
   return ScriptCache({
     google: GoogleApi({
