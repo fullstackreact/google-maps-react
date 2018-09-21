@@ -68,7 +68,7 @@
     "sinon": "^1.17.3",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
-    "webpack": "^1.13.0"
+    "webpack": "^4.19.1"
   },
   "peerDependencies": {
     "react": "~0.14.8 || ^15.0.0 || ^16.0.0",
