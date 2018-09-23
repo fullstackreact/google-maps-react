@@ -462,6 +462,8 @@ The `onOpen` event is fired when the window has been mounted in the Google map i
 
 ### Circle
 
+![A red slightly transparent circle on a Google Map.  The map is centered around an area in Sao Paulo, Brazil and there is a peculiar lake on the map that is shaped like a man.](examples/screenshots/circle.png "Circle")
+
 To place a circle on the Map, set `<Circle />` as child of Map component.
 
 ```javascript
