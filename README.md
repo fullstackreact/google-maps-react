@@ -368,7 +368,7 @@ render() {
         className={'map'}
         zoom={14}>
         <Polyline
-          paths={triangleCoords}
+          path={triangleCoords}
           strokeColor="#0000FF"
           strokeOpacity={0.8}
           strokeWeight={2} />
