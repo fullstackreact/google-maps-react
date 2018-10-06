@@ -472,7 +472,7 @@ render() {
 
   return (
     <Map
-      center={coords}
+      initialCenter={coords}
       google={this.props.google}
       style={{width: 500, height: 500, position: 'relative'}}
       zoom={14}
@@ -483,12 +483,11 @@ render() {
         onMouseover={() => console.log('mouseover')}
         onClick={() => console.log('click')}
         onMouseout={() => console.log('mouseout')}
-        options={{
-          strokeColor: 'transparent',
-          strokeOpacity: 0,
-          fillColor: '#FF0000',
-          fillOpacity: 0.2,
-        }}
+        strokeColor='transparent'
+        strokeOpacity={0}
+        strokeWeight={5}
+        fillColor='#FF0000'
+        fillOpacity={0.2}
       />
     </Map>
   );

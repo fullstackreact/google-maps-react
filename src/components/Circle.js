@@ -26,18 +26,36 @@ export class Circle extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    const { path, map } = this.props;
+
     if (
-      this.props.map !== prevProps.map ||
-      !arePathsEqual(this.props.path, prevProps.path)
+      this.propsChanged(prevProps) ||
+      map !== prevProps.map ||
+      !arePathsEqual(path, prevProps.path)
     ) {
-      if (this.circle) {
-        this.circle.setMap(null);
-      }
+      this.destroyCircle();
       this.renderCircle();
     }
   }
 
+  centerChanged = (newCenter) => {
+    const { lat, lng } = this.props.center;
+    return lat !== newCenter.lat || lng !== newCenter.lng;
+  };
+
+  propsChanged = (newProps) => {
+    if (this.centerChanged(newProps.center)) return true;
+
+    return Object.keys(Circle.propTypes).some(key => (
+      this.props[key] !== newProps[key]
+    ));
+  };
+
   componentWillUnmount() {
+    this.destroyCircle();
+  }
+
+  destroyCircle = () => {
     if (this.circle) {
       this.circle.setMap(null);
     }
@@ -64,17 +82,19 @@ export class Circle extends React.Component {
     }
 
     const params = {
+      ...props,
       map,
       center,
       radius,
-      strokeColor,
-      strokeOpacity,
-      strokeWeight,
-      fillColor,
-      fillOpacity,
       draggable,
       visible,
-      ...props
+      options: {
+        strokeColor,
+        strokeOpacity,
+        strokeWeight,
+        fillColor,
+        fillOpacity,
+      },
     };
 
     this.circle = new google.maps.Circle(params);
@@ -112,6 +132,8 @@ Circle.propTypes = {
   strokeWeight: PropTypes.number,
   fillColor: PropTypes.string,
   fillOpacity: PropTypes.number,
+  draggable: PropTypes.bool,
+  visible: PropTypes.bool,
 }
 
 evtNames.forEach(e => Circle.propTypes[e] = PropTypes.func)
