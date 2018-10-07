@@ -460,6 +460,43 @@ The `onClose` event is fired when the `<InfoWindow />` has been closed. It's use
 
 The `onOpen` event is fired when the window has been mounted in the Google map instance. It's useful for keeping track of the state of the `<InfoWindow />` from within the parent component.
 
+### Circle
+
+![A red slightly transparent circle on a Google Map.  The map is centered around an area in Sao Paulo, Brazil and there is a peculiar lake on the map that is shaped like a man.](examples/screenshots/circle.png "Circle")
+
+To place a circle on the Map, set `<Circle />` as child of Map component.
+
+```javascript
+render() {
+  const coords = { lat: -21.805149, lng: -49.0921657 };
+
+  return (
+    <Map
+      initialCenter={coords}
+      google={this.props.google}
+      style={{width: 500, height: 500, position: 'relative'}}
+      zoom={14}
+    >
+      <Circle
+        radius={1200}
+        center={coords}
+        onMouseover={() => console.log('mouseover')}
+        onClick={() => console.log('click')}
+        onMouseout={() => console.log('mouseout')}
+        strokeColor='transparent'
+        strokeOpacity={0}
+        strokeWeight={5}
+        fillColor='#FF0000'
+        fillOpacity={0.2}
+      />
+    </Map>
+  );
+}
+```
+
+#### Events
+
+The `<Circle />` component listens to `onClick`, `onMouseover` and `onMouseout` events.
 
 The `GoogleApiWrapper` automatically passes the `google` instance loaded when the component mounts (and will only load it once).
 
