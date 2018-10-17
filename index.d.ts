@@ -83,6 +83,10 @@ export class Polyline extends React.Component<any, any> {
 
 }
 
+export class Circle extends React.Component<any, any> {
+
+}
+
 export interface IInfoWindowProps extends Partial<google.maps.InfoWindowOptions> {
   google: typeof google
   map: google.maps.Map
