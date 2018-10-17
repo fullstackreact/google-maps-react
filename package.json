@@ -15,6 +15,7 @@
   "files": [
     "dist"
   ],
+  "types": "index.d.ts",
   "scripts": {
     "prepublish": "./scripts/prepublish.sh",
     "preversion": ". ./scripts/prepublish.sh",
