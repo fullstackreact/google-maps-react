@@ -95,6 +95,7 @@
     var language = options.language || 'en';
     var url = options.url;
     var client = options.client;
+    var region = options.region;
 
     return (0, _ScriptCache.ScriptCache)({
       google: (0, _GoogleApi2.default)({
@@ -103,7 +104,8 @@
         libraries: libraries,
         version: version,
         url: url,
-        client: client
+        client: client,
+        region: region
       })
     });
   };

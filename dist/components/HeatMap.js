@@ -172,7 +172,7 @@
         }
 
         var data = positions.map(function (pos) {
-          return new google.maps.LatLng(pos.lat, pos.lng);
+          return { location: new google.maps.LatLng(pos.lat, pos.lng), weight: pos.weight };
         });
 
         var pref = _extends({
