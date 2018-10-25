@@ -32,7 +32,7 @@ export const GoogleApi = function(opts) {
       channel: channel,
       language: language,
       region: region,
-      onError: 'ERROR_FUNCTION'
+      onerror: 'ERROR_FUNCTION'
     };
 
     let paramStr = Object.keys(params)
