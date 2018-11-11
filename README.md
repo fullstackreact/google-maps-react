@@ -273,6 +273,27 @@ If no `position` is passed in the `props`, the marker will default to the curren
 
 You can also pass any other `props` you want with the `<Marker />`. It will be passed back through marker events.
 
+The marker component can also accept a child InfoMarker component for situations where there is only 1 marker and 1 infowindow.
+
+```javascript
+<Marker
+  title="Location"
+  id={1}
+  position={markerCenter}
+  draggable={true}
+  onDragend={this.moveMarker.bind(this)}
+  >
+  <InfoWindow
+    visible={showInfoWindow}
+    style={styles.infoWindow}
+    >
+      <div className={classes.infoWindow}>
+        <p>Click on the map or drag the marker to select location where the incident occurred</p>
+      </div>
+  </InfoWindow>
+</Marker>
+```
+
 ### Events
 
 The `<Marker />` component listens for events, similar to the `<Map />` component.
