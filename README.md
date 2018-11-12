@@ -156,6 +156,17 @@ return (
 
 ```
 
+The following props are boolean values for map behavior:
+`scrollwheel`, `draggable`, `keyboardShortcuts`, `disableDoubleClickZoom`
+
+The following props are boolean values for presence of controls on the map:
+`zoomControl`, `mapTypeControl`, `scaleControl`, `streetViewControl`, `panControl`, `rotateControl`, `fullscreenControl`
+
+The following props are object values for control options such as placement of controls on the map:
+`zoomControlOptions`, `mapTypeControlOptions`, `streetViewControlOptions`
+See Google Maps [Controls](https://developers.google.com/maps/documentation/javascript/controls) for more information.
+
+
 It also takes event handlers described below:
 
 ### Events
@@ -217,6 +228,8 @@ render() {
   )
 }
 ```
+
+The `<Map />` component also listens to `onRecenter`, `onBoundsChanged`, `onCenterChanged`, `onDblclick`, `onDragstart`, `onHeadingChange`, `onIdle`, `onMaptypeidChanged`, `onMousemove`, `onMouseout`, `onMouseover`, `onProjectionChanged`, `onResize`, `onRightclick`, `onTilesloaded`, `onTiltChanged`, and `onZoomChanged` events. See Google Maps [Events](https://developers.google.com/maps/documentation/javascript/events) for more information.
 
 ### Visibility
 
