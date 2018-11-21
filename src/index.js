@@ -6,12 +6,12 @@ import {makeCancelable} from './lib/cancelablePromise';
 
 const mapStyles = {
   container: {
-    position: 'absolute',
-    width: '100%',
-    height: '100%'
+    // position: 'absolute',
+    // width: '100%',
+    // height: '100%'
   },
   map: {
-    position: 'absolute',
+    // position: 'absolute',
     left: 0,
     right: 0,
     bottom: 0,
