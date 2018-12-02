@@ -31,7 +31,8 @@ export const GoogleApi = function(opts) {
       v: googleVersion,
       channel: channel,
       language: language,
-      region: region
+      region: region,
+      onerror: 'ERROR_FUNCTION'
     };
 
     let paramStr = Object.keys(params)
