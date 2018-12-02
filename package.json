@@ -15,6 +15,7 @@
   "files": [
     "dist"
   ],
+  "types": "index.d.ts",
   "scripts": {
     "prepublish": "./scripts/prepublish.sh",
     "preversion": ". ./scripts/prepublish.sh",
@@ -28,6 +29,8 @@
     "test-watch": "npm run testonly -- --watch --watch-extensions js"
   },
   "devDependencies": {
+    "@types/googlemaps": "^3",
+    "@types/react": "^15.0.0",
     "autoprefixer": "^6.3.6",
     "babel-cli": "^6.7.7",
     "babel-core": "^6.7.4",
