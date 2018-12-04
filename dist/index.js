@@ -397,7 +397,7 @@
     zoomControl: _propTypes2.default.bool,
     zoomControlOptions: _propTypes2.default.object,
     mapTypeControl: _propTypes2.default.bool,
-    mapTypeControlOptions: _propTypes2.default.object,
+    mapTypeControlOptions: _propTypes2.default.bool,
     scaleControl: _propTypes2.default.bool,
     streetViewControl: _propTypes2.default.bool,
     streetViewControlOptions: _propTypes2.default.object,

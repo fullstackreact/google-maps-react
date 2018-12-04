@@ -1,10 +1,7 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, { Fragment } from 'react';
 
 import {ScriptCache} from './lib/ScriptCache';
 import GoogleApi from './lib/GoogleApi';
-
-const defaultMapConfig = {};
 
 const serialize = obj => JSON.stringify(obj);
 const isSame = (obj1, obj2) => obj1 === obj2 || serialize(obj1) === serialize(obj2);
@@ -118,10 +115,10 @@ export const wrapper = input => WrappedComponent => {
       });
 
       return (
-        <div>
+        <Fragment>
           <WrappedComponent {...props} />
           <div ref="map" />
-        </div>
+        </Fragment>
       );
     }
   }
