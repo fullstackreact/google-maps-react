@@ -1,16 +1,16 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', 'react', 'react-dom', './lib/ScriptCache', './lib/GoogleApi'], factory);
+    define(['exports', 'react', './lib/ScriptCache', './lib/GoogleApi'], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('react'), require('react-dom'), require('./lib/ScriptCache'), require('./lib/GoogleApi'));
+    factory(exports, require('react'), require('./lib/ScriptCache'), require('./lib/GoogleApi'));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.react, global.reactDom, global.ScriptCache, global.GoogleApi);
+    factory(mod.exports, global.react, global.ScriptCache, global.GoogleApi);
     global.GoogleApiComponent = mod.exports;
   }
-})(this, function (exports, _react, _reactDom, _ScriptCache, _GoogleApi) {
+})(this, function (exports, _react, _ScriptCache, _GoogleApi) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
@@ -19,8 +19,6 @@
   exports.wrapper = undefined;
 
   var _react2 = _interopRequireDefault(_react);
-
-  var _reactDom2 = _interopRequireDefault(_reactDom);
 
   var _GoogleApi2 = _interopRequireDefault(_GoogleApi);
 
@@ -77,8 +75,6 @@
     });
     if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
   }
-
-  var defaultMapConfig = {};
 
   var serialize = function serialize(obj) {
     return JSON.stringify(obj);
@@ -212,7 +208,7 @@
             });
 
             return _react2.default.createElement(
-              'div',
+              _react.Fragment,
               null,
               _react2.default.createElement(WrappedComponent, props),
               _react2.default.createElement('div', { ref: 'map' })
