@@ -31,7 +31,7 @@ export default GoogleApiWrapper({
 })(MapContainer)
 ```
 
-Alternatively, the `GoogleApiWrapper` Higher-Order component can be configured by passing a function that will be called with whe wrapped component's `props` and should returned the configuration object.
+Alternatively, the `GoogleApiWrapper` Higher-Order component can be configured by passing a function that will be called with the wrapped component's `props` and should returned the configuration object.
 
 ```javascript
 export default GoogleApiWrapper(
@@ -82,13 +82,13 @@ export default GoogleApiWrapper({
   apiKey: (YOUR_GOOGLE_API_KEY_GOES_HERE)
 })(MapContainer)
 ```
-*Note: [Marker](#marker) and [InfoWindow](#infowindow--sample-event-handler-functions) components are disscussed below.*
+*Note: [Marker](#marker) and [InfoWindow](#infowindow--sample-event-handler-functions) components are discussed below.*
 
 ![](http://d.pr/i/C7qr.png)
 
 ## Examples
 
-Check out the example site at: [http://fullstackreact.github.io/google-maps-react](http://fullstackreact.github.io/basic)
+Check out the example site at: [http://fullstackreact.github.io/google-maps-react](http://fullstackreact.github.io/google-maps-react)
 
 ## Additional Map Props
 The Map component takes a number of optional props.
@@ -103,7 +103,7 @@ const style = {
   height: '100%'
 }
 ```
-initalCenter: Takes an object containing latitude and longitude coordinates. Sets the maps center upon loading.
+initialCenter: Takes an object containing latitude and longitude coordinates. Sets the maps center upon loading.
 
 ```javascript
     <Map
