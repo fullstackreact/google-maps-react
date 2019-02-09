@@ -26,13 +26,19 @@ export interface IProvidedProps {
 
 type mapEventHandler = (mapProps?: IMapProps, map?: google.maps.Map, event?) => any
 
+type Style = Object<string, string | number | boolean>
+
 export interface IMapProps extends google.maps.MapOptions {
   google: GoogleAPI
   loaded?: boolean
 
+  style?: Style
+  containerStyle?: Style
+
   bounds?: google.maps.LatLngBounds | google.maps.LatLngBoundsLiteral
   centerAroundCurrentLocation?: boolean
   initialCenter?: google.maps.LatLngLiteral
+  center?: google.maps.LatLngLiteral
 
   visible?: boolean
 
