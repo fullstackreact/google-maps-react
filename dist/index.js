@@ -267,7 +267,7 @@
               noClear: this.props.noClear,
               styles: this.props.styles,
               gestureHandling: this.props.gestureHandling,
-              draggableCursor: this.props.draggableCursor,
+              backgroundColor: this.props.backgroundColor,
               draggingCursor: this.props.draggingCursor
             });
   
@@ -317,7 +317,7 @@
   
           if (!google) return;
           var maps = google.maps;
-  
+
           if (map) {
             var center = this.state.currentLocation;
             if (!(center instanceof google.maps.LatLng)) {
@@ -415,7 +415,6 @@
       styles: _propTypes2.default.array,
       gestureHandling: _propTypes2.default.string,
       bounds: _propTypes2.default.object,
-      draggableCursor: _propTypes2.default.string,
       draggingCursor: _propTypes2.default.string
     };
   
@@ -438,4 +437,3 @@
   
     exports.default = Map;
   });
-  

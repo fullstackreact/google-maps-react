@@ -49,7 +49,8 @@
         v: googleVersion,
         channel: channel,
         language: language,
-        region: region
+        region: region,
+        onerror: 'ERROR_FUNCTION'
       };
 
       var paramStr = Object.keys(params).filter(function (k) {
