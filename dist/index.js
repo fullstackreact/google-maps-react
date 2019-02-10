@@ -244,6 +244,7 @@
             var mapConfig = Object.assign({}, {
               mapTypeId: mapTypeIds[mapTypeFromProps],
               center: center,
+              tilt: this.props.tilt,
               zoom: this.props.zoom,
               maxZoom: this.props.maxZoom,
               minZoom: this.props.minZoom,
@@ -254,11 +255,16 @@
               mapTypeControl: this.props.mapTypeControl,
               mapTypeControlOptions: this.props.mapTypeControlOptions,
               scaleControl: this.props.scaleControl,
+              scaleControlOptions: this.props.scaleControlOptions,
+              streetView: this.props.streetView,
               streetViewControl: this.props.streetViewControl,
               streetViewControlOptions: this.props.streetViewControlOptions,
               panControl: this.props.panControl,
+              panControlOptions: this.props.panControlOptions
               rotateControl: this.props.rotateControl,
+              rotateControlOptions: this.props.rotateControlOptions
               fullscreenControl: this.props.fullscreenControl,
+              fullscreenControlOptions: this.props.fullscreenControlOptions,
               scrollwheel: this.props.scrollwheel,
               draggable: this.props.draggable,
               draggableCursor: this.props.draggableCursor,
@@ -268,7 +274,11 @@
               styles: this.props.styles,
               gestureHandling: this.props.gestureHandling,
               backgroundColor: this.props.backgroundColor,
-              draggingCursor: this.props.draggingCursor
+              draggingCursor: this.props.draggingCursor,
+              heading: this.props.heading,
+              overviewMapControl: this.props.overviewMapControl,
+              overviewMapControlOptions: this.props.overviewMapControlOptions,
+              signInControl: this.props.signInControl
             });
   
             Object.keys(mapConfig).forEach(function (key) {
@@ -383,6 +393,7 @@
   
     Map.propTypes = {
       google: _propTypes2.default.object,
+      tilt: _propTypes2.default.number,
       zoom: _propTypes2.default.number,
       centerAroundCurrentLocation: _propTypes2.default.bool,
       center: _propTypes2.default.object,
@@ -401,21 +412,33 @@
       mapTypeControl: _propTypes2.default.bool,
       mapTypeControlOptions: _propTypes2.default.object,
       scaleControl: _propTypes2.default.bool,
+      scaleControlOptions: _propTypes2.default.object,
+      streetView: _propTypes2.default.object,
       streetViewControl: _propTypes2.default.bool,
       streetViewControlOptions: _propTypes2.default.object,
       panControl: _propTypes2.default.bool,
+      panControlOptions: _propTypes2.default.object,
       rotateControl: _propTypes2.default.bool,
+      rotateControlOptions: _propTypes2.default.object,
       fullscreenControl: _propTypes2.default.bool,
+      fullscreenControlOptions: _propTypes2.default.object,
       scrollwheel: _propTypes2.default.bool,
       draggable: _propTypes2.default.bool,
       draggableCursor: _propTypes2.default.string,
+      draggingCursor: _propTypes2.default.string,
       keyboardShortcuts: _propTypes2.default.bool,
       disableDoubleClickZoom: _propTypes2.default.bool,
       noClear: _propTypes2.default.bool,
       styles: _propTypes2.default.array,
       gestureHandling: _propTypes2.default.string,
       bounds: _propTypes2.default.object,
-      draggingCursor: _propTypes2.default.string
+      draggingCursor: _propTypes2.default.string,
+      backgroundColor: _propTypes2.default.string,
+      heading: _propTypes2.default.number,
+      mapTypeId: _propTypes2.default.string,
+      overviewMapControl: _propTypes2.default.bool,
+      overviewMapControlOptions: _propTypes2.default.object,
+      signInControl: _propTypes2.default.bool
     };
   
     evtNames.forEach(function (e) {
