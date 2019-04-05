@@ -200,6 +200,8 @@
         }, {
           key: 'render',
           value: function render() {
+            var _this2 = this;
+
             var LoadingContainer = this.LoadingContainer;
 
             if (!this.state.loaded) {
@@ -215,7 +217,9 @@
               'div',
               null,
               _react2.default.createElement(WrappedComponent, props),
-              _react2.default.createElement('div', { ref: 'map' })
+              _react2.default.createElement('div', { ref: function ref(_ref) {
+                  return _this2._mapRef = _ref;
+                } })
             );
           }
         }]);
