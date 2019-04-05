@@ -130,8 +130,7 @@ export class Map extends React.Component {
       const {google} = this.props;
       const maps = google.maps;
 
-      const mapRef = this.refs.map;
-      const node = ReactDOM.findDOMNode(mapRef);
+      const node = ReactDOM.findDOMNode(this._mapRef);
       const curr = this.state.currentLocation;
       const center = new maps.LatLng(curr.lat, curr.lng);
 
@@ -257,7 +256,7 @@ export class Map extends React.Component {
 
     return (
       <div style={containerStyles} className={this.props.className}>
-        <div style={style} ref="map">
+        <div style={style} ref={ref => this._mapRef = ref}>
           Loading map...
         </div>
         {this.renderChildren()}
