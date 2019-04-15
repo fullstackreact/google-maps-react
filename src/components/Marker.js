@@ -1,31 +1,32 @@
-import React, {Fragment} from 'react'
-import PropTypes from 'prop-types'
+import React, { Fragment } from "react";
+import PropTypes from "prop-types";
+import { isEqual } from "lodash";
 
-import { camelize } from '../lib/String'
+import { camelize } from "../lib/String";
 
 const evtNames = [
-  'click',
-  'dblclick',
-  'dragend',
-  'mousedown',
-  'mouseout',
-  'mouseover',
-  'mouseup',
-  'recenter',
+  "click",
+  "dblclick",
+  "dragend",
+  "mousedown",
+  "mouseout",
+  "mouseover",
+  "mouseup",
+  "recenter"
 ];
 
 const wrappedPromise = function() {
-    var wrappedPromise = {},
-        promise = new Promise(function (resolve, reject) {
-            wrappedPromise.resolve = resolve;
-            wrappedPromise.reject = reject;
-        });
-    wrappedPromise.then = promise.then.bind(promise);
-    wrappedPromise.catch = promise.catch.bind(promise);
-    wrappedPromise.promise = promise;
+  var wrappedPromise = {},
+    promise = new Promise(function(resolve, reject) {
+      wrappedPromise.resolve = resolve;
+      wrappedPromise.reject = reject;
+    });
+  wrappedPromise.then = promise.then.bind(promise);
+  wrappedPromise.catch = promise.catch.bind(promise);
+  wrappedPromise.promise = promise;
 
-    return wrappedPromise;
-}
+  return wrappedPromise;
+};
 
 export class Marker extends React.Component {
 
@@ -36,12 +37,12 @@ export class Marker extends React.Component {
 
   componentDidUpdate(prevProps) {
     if ((this.props.map !== prevProps.map) ||
-      (this.props.position !== prevProps.position) ||
-      (this.props.icon !== prevProps.icon)) {
-        if (this.marker) {
-            this.marker.setMap(null);
-        }
-        this.renderMarker();
+      !isEqual(this.props.position, prevProps.position) ||
+      !isEqual(this.props.icon, prevProps.icon)) {
+      if (this.marker) {
+        this.marker.setMap(null);
+      }
+      this.renderMarker();
     }
   }
 
@@ -64,7 +65,7 @@ export class Marker extends React.Component {
       ...props
     } = this.props;
     if (!google) {
-      return null
+      return null;
     }
 
     let pos = position || mapCenter;
@@ -96,11 +97,11 @@ export class Marker extends React.Component {
 
   handleEvent(evt) {
     return (e) => {
-      const evtName = `on${camelize(evt)}`
+      const evtName = `on${camelize(evt)}`;
       if (this.props[evtName]) {
         this.props[evtName](this.props, this.marker, e);
       }
-    }
+    };
   }
 
   render() {
@@ -109,27 +110,29 @@ export class Marker extends React.Component {
         {this.props.children && this.marker ?
           React.Children.only(
             React.cloneElement(
-              this.props.children, 
-              { marker: this.marker,
+              this.props.children,
+              {
+                marker: this.marker,
                 google: this.props.google,
-                map: this.props.map}
+                map: this.props.map
+              }
             )
           ) : null
         }
       </Fragment>
-    )
+    );
   }
 }
 
 Marker.propTypes = {
   position: PropTypes.object,
   map: PropTypes.object
-}
+};
 
-evtNames.forEach(e => Marker.propTypes[e] = PropTypes.func)
+evtNames.forEach(e => Marker.propTypes[e] = PropTypes.func);
 
 Marker.defaultProps = {
-  name: 'Marker'
-}
+  name: "Marker"
+};
 
-export default Marker
+export default Marker;

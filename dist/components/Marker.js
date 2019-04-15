@@ -1,17 +1,17 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', 'react', 'prop-types', '../lib/String'], factory);
+    define(["exports", "react", "prop-types", "lodash", "../lib/String"], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('react'), require('prop-types'), require('../lib/String'));
+    factory(exports, require("react"), require("prop-types"), require("lodash"), require("../lib/String"));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.react, global.propTypes, global.String);
+    factory(mod.exports, global.react, global.propTypes, global.lodash, global.String);
     global.Marker = mod.exports;
   }
-})(this, function (exports, _react, _propTypes, _String) {
-  'use strict';
+})(this, function (exports, _react, _propTypes, _lodash, _String) {
+  "use strict";
 
   Object.defineProperty(exports, "__esModule", {
     value: true
@@ -102,7 +102,7 @@
     if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
   }
 
-  var evtNames = ['click', 'dblclick', 'dragend', 'mousedown', 'mouseout', 'mouseover', 'mouseup', 'recenter'];
+  var evtNames = ["click", "dblclick", "dragend", "mousedown", "mouseout", "mouseover", "mouseup", "recenter"];
 
   var wrappedPromise = function wrappedPromise() {
     var wrappedPromise = {},
@@ -127,15 +127,15 @@
     }
 
     _createClass(Marker, [{
-      key: 'componentDidMount',
+      key: "componentDidMount",
       value: function componentDidMount() {
         this.markerPromise = wrappedPromise();
         this.renderMarker();
       }
     }, {
-      key: 'componentDidUpdate',
+      key: "componentDidUpdate",
       value: function componentDidUpdate(prevProps) {
-        if (this.props.map !== prevProps.map || this.props.position !== prevProps.position || this.props.icon !== prevProps.icon) {
+        if (this.props.map !== prevProps.map || !(0, _lodash.isEqual)(this.props.position, prevProps.position) || !(0, _lodash.isEqual)(this.props.icon, prevProps.icon)) {
           if (this.marker) {
             this.marker.setMap(null);
           }
@@ -143,14 +143,14 @@
         }
       }
     }, {
-      key: 'componentWillUnmount',
+      key: "componentWillUnmount",
       value: function componentWillUnmount() {
         if (this.marker) {
           this.marker.setMap(null);
         }
       }
     }, {
-      key: 'renderMarker',
+      key: "renderMarker",
       value: function renderMarker() {
         var _this2 = this;
 
@@ -163,7 +163,7 @@
             label = _props.label,
             draggable = _props.draggable,
             title = _props.title,
-            props = _objectWithoutProperties(_props, ['map', 'google', 'position', 'mapCenter', 'icon', 'label', 'draggable', 'title']);
+            props = _objectWithoutProperties(_props, ["map", "google", "position", "mapCenter", "icon", "label", "draggable", "title"]);
 
         if (!google) {
           return null;
@@ -191,26 +191,34 @@
         this.markerPromise.resolve(this.marker);
       }
     }, {
-      key: 'getMarker',
+      key: "getMarker",
       value: function getMarker() {
         return this.markerPromise;
       }
     }, {
-      key: 'handleEvent',
+      key: "handleEvent",
       value: function handleEvent(evt) {
         var _this3 = this;
 
         return function (e) {
-          var evtName = 'on' + (0, _String.camelize)(evt);
+          var evtName = "on" + (0, _String.camelize)(evt);
           if (_this3.props[evtName]) {
             _this3.props[evtName](_this3.props, _this3.marker, e);
           }
         };
       }
     }, {
-      key: 'render',
+      key: "render",
       value: function render() {
-        return null;
+        return _react2.default.createElement(
+          _react.Fragment,
+          null,
+          this.props.children && this.marker ? _react2.default.Children.only(_react2.default.cloneElement(this.props.children, {
+            marker: this.marker,
+            google: this.props.google,
+            map: this.props.map
+          })) : null
+        );
       }
     }]);
 
@@ -227,7 +235,7 @@
   });
 
   Marker.defaultProps = {
-    name: 'Marker'
+    name: "Marker"
   };
 
   exports.default = Marker;
