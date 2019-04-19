@@ -165,7 +165,8 @@ export class Map extends React.Component {
           disableDoubleClickZoom: this.props.disableDoubleClickZoom,
           noClear: this.props.noClear,
           styles: this.props.styles,
-          gestureHandling: this.props.gestureHandling
+          gestureHandling: this.props.gestureHandling,
+          controlSize: this.props.controlSize
         }
       );
 
@@ -299,7 +300,8 @@ Map.propTypes = {
   noClear: PropTypes.bool,
   styles: PropTypes.array,
   gestureHandling: PropTypes.string,
-  bounds: PropTypes.object
+  bounds: PropTypes.object,
+  controlSize: PropTypes.number
 };
 
 evtNames.forEach(e => (Map.propTypes[camelize(e)] = PropTypes.func));
