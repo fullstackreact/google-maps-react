@@ -26,6 +26,7 @@ export class Polygon extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (
+      this.propsChanged(prevProps) ||
       this.props.map !== prevProps.map ||
       !arePathsEqual(this.props.paths, prevProps.paths)
     ) {
@@ -41,6 +42,12 @@ export class Polygon extends React.Component {
       this.polygon.setMap(null);
     }
   }
+
+  propsChanged(newProps) {
+    return Object.keys(Polygon.propTypes).some(key => (
+      this.props[key] !== newProps[key]
+    ));
+  };
 
   renderPolygon() {
     const {
