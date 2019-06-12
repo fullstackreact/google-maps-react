@@ -267,7 +267,6 @@
               noClear: this.props.noClear,
               styles: this.props.styles,
               gestureHandling: this.props.gestureHandling,
-              draggableCursor: this.props.draggableCursor,
               draggingCursor: this.props.draggingCursor
             });
   
