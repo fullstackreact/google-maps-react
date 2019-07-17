@@ -27,7 +27,8 @@
     "lintfix": "eslint ./src --fix",
     "testonly": "NODE_ENV=test mocha $npm_package_options_mocha",
     "test": "npm run lint && npm run testonly",
-    "test-watch": "npm run testonly -- --watch --watch-extensions js"
+    "test-watch": "npm run testonly -- --watch --watch-extensions js",
+    "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
     "@types/googlemaps": "^3",
@@ -74,6 +75,7 @@
     "react-router-dom": "^4.2.2",
     "sinon": "^1.17.3",
     "style-loader": "^0.13.1",
+    "typescript": "^3.5.3",
     "url-loader": "^0.5.7",
     "webpack": "^1.13.0"
   },
