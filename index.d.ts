@@ -39,6 +39,7 @@ export interface IMapProps extends google.maps.MapOptions {
   centerAroundCurrentLocation?: boolean
   initialCenter?: google.maps.LatLngLiteral
   center?: google.maps.LatLngLiteral
+  zoom?: number
 
   visible?: boolean
 
