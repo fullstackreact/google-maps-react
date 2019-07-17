@@ -24,9 +24,9 @@ export interface IProvidedProps {
   loaded?: boolean
 }
 
-type mapEventHandler = (mapProps?: IMapProps, map?: google.maps.Map, event?) => any
+type mapEventHandler = (mapProps?: IMapProps, map?: google.maps.Map, event?: google.maps.MouseEvent) => void
 
-type Style = Object<string, string | number | boolean>
+type Style = Record<string, string | number | boolean>
 
 export interface IMapProps extends google.maps.MapOptions {
   google: GoogleAPI
@@ -64,7 +64,7 @@ export interface IMapProps extends google.maps.MapOptions {
   onZoomChanged?: mapEventHandler
 }
 
-type markerEventHandler = (props?: IMarkerProps, marker?: google.maps.Marker, event?) => any
+type markerEventHandler = (props?: IMarkerProps, marker?: google.maps.Marker, event?: google.maps.MouseEvent) => any
 
 export interface IMarkerProps extends Partial<google.maps.MarkerOptions> {
   mapCenter?: google.maps.LatLng | google.maps.LatLngLiteral
