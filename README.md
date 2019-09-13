@@ -229,7 +229,7 @@ render() {
 }
 ```
 
-The `<Map />` component also listens to `onRecenter`, `onBoundsChanged`, `onCenterChanged`, `onDblclick`, `onDragstart`, `onHeadingChange`, `onIdle`, `onMaptypeidChanged`, `onMousemove`, `onMouseout`, `onMouseover`, `onProjectionChanged`, `onResize`, `onRightclick`, `onTilesloaded`, `onTiltChanged`, and `onZoomChanged` events. See Google Maps [Events](https://developers.google.com/maps/documentation/javascript/events) for more information.
+The `<Map />` component also listens to `onRecenter`, `onBounds_changed`, `onCenter_changed`, `onDblclick`, `onDragstart`, `onHeading_change`, `onIdle`, `onMaptypeid_changed`, `onMousemove`, `onMouseout`, `onMouseover`, `onProjection_changed`, `onResize`, `onRightclick`, `onTilesloaded`, `onTilt_changed`, and `onZoom_changed` events. See Google Maps [Events](https://developers.google.com/maps/documentation/javascript/events) for more information.
 
 ### Visibility
 
