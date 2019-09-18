@@ -53,7 +53,7 @@ export const wrapper = input => WrappedComponent => {
       };
     }
 
-    componentWillReceiveProps(props) {
+    UNSAFE_componentWillReceiveProps(props) {
       // Do not update input if it's not dynamic
       if (typeof input !== 'function') {
         return;
