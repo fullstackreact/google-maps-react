@@ -103,6 +103,21 @@ const style = {
   height: '100%'
 }
 ```
+Container Style: Takes CSS style object - optional, commonly when you want to change from the default of position "absolute".
+
+```javascript
+const containerStyle = {
+  position: 'relative',  
+  width: '100%',
+  height: '100%'
+}
+```
+
+```javascript
+    <Map
+          containerStyle={containerStyle}
+```         
+
 initalCenter: Takes an object containing latitude and longitude coordinates. Sets the maps center upon loading.
 
 ```javascript
