@@ -210,7 +210,13 @@
     }, {
       key: 'render',
       value: function render() {
-        return null;
+        return _react2.default.createElement(
+          _react.Fragment,
+          null,
+          this.props.children && this.marker ? _react2.default.Children.only(_react2.default.cloneElement(this.props.children, { marker: this.marker,
+            google: this.props.google,
+            map: this.props.map })) : null
+        );
       }
     }]);
 
