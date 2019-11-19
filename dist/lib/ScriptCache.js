@@ -73,13 +73,11 @@
                                 if (state === 'loaded') {
                                     stored.resolved = true;
                                     resolve(src);
-                                    // stored.handlers.forEach(h => h.call(null, stored))
-                                    // stored.handlers = []
+                                    return;
                                 } else if (state === 'error') {
                                     stored.errored = true;
-                                    // stored.handlers.forEach(h => h.call(null, stored))
-                                    // stored.handlers = [];
                                     reject(evt);
+                                    return;
                                 }
                                 stored.loaded = true;
 
@@ -103,7 +101,7 @@
                         // Pick off callback, if there is one
                         if (src.match(/callback=CALLBACK_NAME/)) {
                             src = src.replace(/(callback=)[^\&]+/, '$1' + cbName);
-                            cb = window[cbName] = tag.onload;
+                            cb = window[cbName] = handleResult('google-load');
                         } else {
                             tag.addEventListener('load', tag.onload);
                         }
