@@ -1,23 +1,23 @@
 .PHONY: publish dev test example
 
 dev:
-	npm run dev
+	yarn dev
 
 build:
-	npm run prepublish
+	yarn prepublish
 
 publish:
 	npm version patch
 	npm publish .
 
 test:
-	npm run test
+	yarn test
 
 testwatch:
-	npm run test-watch
+	yarn test-watch
 
 example: build
-	npm run build
+	yarn build
 
 publish_pages: example
 	gh-pages -d ./public
