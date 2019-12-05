@@ -172,6 +172,13 @@
             });
           }
         }, {
+          key: 'componentWillUnmount',
+          value: function componentWillUnmount() {
+            if (this.unregisterLoadHandler) {
+              this.unregisterLoadHandler();
+            }
+          }
+        }, {
           key: 'initialize',
           value: function initialize(options) {
             // Avoid race condition: remove previous 'load' listener
