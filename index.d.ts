@@ -1,5 +1,6 @@
 import 'googlemaps'
 import * as React from 'react'
+import { CSSProperties } from 'csstype';
 
 interface IGoogleApiOptions {
   apiKey: string,
@@ -26,7 +27,7 @@ export interface IProvidedProps {
 
 type mapEventHandler = (mapProps?: IMapProps, map?: google.maps.Map, event?) => any
 
-type Style = Object<string, string | number | boolean>
+type Style = CSSProperties;
 
 export interface IMapProps extends google.maps.MapOptions {
   google: GoogleAPI
@@ -70,7 +71,13 @@ export interface IMarkerProps extends Partial<google.maps.MarkerOptions> {
   mapCenter?: google.maps.LatLng | google.maps.LatLngLiteral
 
   onClick?: markerEventHandler
+  onDblclick?: markerEventHandler
+  onDragend?: markerEventHandler
+  onMousedown?: markerEventHandler
+  onMouseout?: markerEventHandler
   onMouseover?: markerEventHandler
+  onMouseup?: markerEventHandler
+  onRecenter?: markerEventHandler
 }
 
 export class Map extends React.Component<IMapProps, any> {
