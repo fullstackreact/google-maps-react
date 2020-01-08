@@ -49,6 +49,7 @@ export {HeatMap} from './components/HeatMap';
 export {Polygon} from './components/Polygon';
 export {Polyline} from './components/Polyline';
 export {Circle} from './components/Circle';
+export {Rectangle} from './components/Rectangle';
 
 export class Map extends React.Component {
   constructor(props) {
