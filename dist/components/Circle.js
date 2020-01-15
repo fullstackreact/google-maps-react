@@ -199,7 +199,8 @@
 
         var params = _extends({}, props, {
           map: map,
-          center: center,
+          // the center has to be a latlng
+          center: new google.maps.LatLng(center.lat, center.lng),
           radius: radius,
           draggable: draggable,
           visible: visible,
