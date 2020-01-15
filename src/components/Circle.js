@@ -84,7 +84,8 @@ export class Circle extends React.Component {
     const params = {
       ...props,
       map,
-      center,
+      // the center has to be a latlng
+      center: new google.maps.LatLng(center.lat, center.lng),
       radius,
       draggable,
       visible,
