@@ -102,7 +102,7 @@
     if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
   }
 
-  var evtNames = ['click', 'mouseout', 'mouseover'];
+  var evtNames = ['click', 'mouseout', 'mouseover', 'radius_changed', 'center_changed'];
 
   var wrappedPromise = function wrappedPromise() {
     var wrappedPromise = {},
@@ -190,8 +190,9 @@
             fillColor = _props2.fillColor,
             fillOpacity = _props2.fillOpacity,
             draggable = _props2.draggable,
+            editable = _props2.editable,
             visible = _props2.visible,
-            props = _objectWithoutProperties(_props2, ['map', 'google', 'center', 'radius', 'strokeColor', 'strokeOpacity', 'strokeWeight', 'fillColor', 'fillOpacity', 'draggable', 'visible']);
+            props = _objectWithoutProperties(_props2, ['map', 'google', 'center', 'radius', 'strokeColor', 'strokeOpacity', 'strokeWeight', 'fillColor', 'fillOpacity', 'draggable', 'editable', 'visible']);
 
         if (!google) {
           return null;
@@ -199,10 +200,11 @@
 
         var params = _extends({}, props, {
           map: map,
-          // the center has to be a latlng
+          // the center has to be a latlng (or so I thought, it actually doesn't have to)
           center: new google.maps.LatLng(center.lat, center.lng),
           radius: radius,
           draggable: draggable,
+          editable: editable,
           visible: visible,
           options: {
             strokeColor: strokeColor,
@@ -257,6 +259,7 @@
     fillColor: _propTypes2.default.string,
     fillOpacity: _propTypes2.default.number,
     draggable: _propTypes2.default.bool,
+    editable: _propTypes2.default.bool,
     visible: _propTypes2.default.bool
   };
 

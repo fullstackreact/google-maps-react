@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { arePathsEqual } from '../lib/arePathsEqual';
 import { camelize } from '../lib/String';
-const evtNames = ['click', 'mouseout', 'mouseover'];
+const evtNames = ['click', 'mouseout', 'mouseover', 'radius_changed', 'center_changed'];
 
 const wrappedPromise = function() {
     var wrappedPromise = {},
@@ -73,6 +73,7 @@ export class Circle extends React.Component {
       fillColor,
       fillOpacity,
       draggable,
+      editable,
       visible,
       ...props
     } = this.props;
@@ -84,10 +85,11 @@ export class Circle extends React.Component {
     const params = {
       ...props,
       map,
-      // the center has to be a latlng
+      // the center has to be a latlng (or so I thought, it actually doesn't have to)
       center: new google.maps.LatLng(center.lat, center.lng),
       radius,
       draggable,
+      editable,
       visible,
       options: {
         strokeColor,
@@ -134,6 +136,7 @@ Circle.propTypes = {
   fillColor: PropTypes.string,
   fillOpacity: PropTypes.number,
   draggable: PropTypes.bool,
+  editable: PropTypes.bool,
   visible: PropTypes.bool,
 }
 
