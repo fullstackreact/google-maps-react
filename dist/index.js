@@ -1,8 +1,8 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(['exports', './GoogleApiComponent', './components/Marker', './components/InfoWindow', './components/HeatMap', './components/Polygon', './components/Polyline', './components/Circle', 'react', 'prop-types', 'react-dom', './lib/String', './lib/cancelablePromise'], factory);
+    define(["exports", "./GoogleApiComponent", "./components/Marker", "./components/InfoWindow", "./components/HeatMap", "./components/Polygon", "./components/Polyline", "./components/Circle", "react", "prop-types", "react-dom", "./lib/String", "./lib/cancelablePromise"], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require('./GoogleApiComponent'), require('./components/Marker'), require('./components/InfoWindow'), require('./components/HeatMap'), require('./components/Polygon'), require('./components/Polyline'), require('./components/Circle'), require('react'), require('prop-types'), require('react-dom'), require('./lib/String'), require('./lib/cancelablePromise'));
+    factory(exports, require("./GoogleApiComponent"), require("./components/Marker"), require("./components/InfoWindow"), require("./components/HeatMap"), require("./components/Polygon"), require("./components/Polyline"), require("./components/Circle"), require("react"), require("prop-types"), require("react-dom"), require("./lib/String"), require("./lib/cancelablePromise"));
   } else {
     var mod = {
       exports: {}
@@ -11,49 +11,49 @@
     global.index = mod.exports;
   }
 })(this, function (exports, _GoogleApiComponent, _Marker, _InfoWindow, _HeatMap, _Polygon, _Polyline, _Circle, _react, _propTypes, _reactDom, _String, _cancelablePromise) {
-  'use strict';
+  "use strict";
 
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
   exports.Map = exports.Circle = exports.Polyline = exports.Polygon = exports.HeatMap = exports.InfoWindow = exports.Marker = exports.GoogleApiWrapper = undefined;
-  Object.defineProperty(exports, 'GoogleApiWrapper', {
+  Object.defineProperty(exports, "GoogleApiWrapper", {
     enumerable: true,
     get: function () {
       return _GoogleApiComponent.wrapper;
     }
   });
-  Object.defineProperty(exports, 'Marker', {
+  Object.defineProperty(exports, "Marker", {
     enumerable: true,
     get: function () {
       return _Marker.Marker;
     }
   });
-  Object.defineProperty(exports, 'InfoWindow', {
+  Object.defineProperty(exports, "InfoWindow", {
     enumerable: true,
     get: function () {
       return _InfoWindow.InfoWindow;
     }
   });
-  Object.defineProperty(exports, 'HeatMap', {
+  Object.defineProperty(exports, "HeatMap", {
     enumerable: true,
     get: function () {
       return _HeatMap.HeatMap;
     }
   });
-  Object.defineProperty(exports, 'Polygon', {
+  Object.defineProperty(exports, "Polygon", {
     enumerable: true,
     get: function () {
       return _Polygon.Polygon;
     }
   });
-  Object.defineProperty(exports, 'Polyline', {
+  Object.defineProperty(exports, "Polyline", {
     enumerable: true,
     get: function () {
       return _Polyline.Polyline;
     }
   });
-  Object.defineProperty(exports, 'Circle', {
+  Object.defineProperty(exports, "Circle", {
     enumerable: true,
     get: function () {
       return _Circle.Circle;
@@ -122,12 +122,12 @@
 
   var mapStyles = {
     container: {
-      position: 'absolute',
-      width: '100%',
-      height: '100%'
+      position: "absolute",
+      width: "100%",
+      height: "100%"
     },
     map: {
-      position: 'absolute',
+      position: "absolute",
       left: 0,
       right: 0,
       bottom: 0,
@@ -135,7 +135,7 @@
     }
   };
 
-  var evtNames = ['ready', 'click', 'dragend', 'recenter', 'bounds_changed', 'center_changed', 'dblclick', 'dragstart', 'heading_change', 'idle', 'maptypeid_changed', 'mousemove', 'mouseout', 'mouseover', 'projection_changed', 'resize', 'rightclick', 'tilesloaded', 'tilt_changed', 'zoom_changed'];
+  var evtNames = ["ready", "click", "dragend", "recenter", "bounds_changed", "center_changed", "dblclick", "dragstart", "heading_change", "idle", "maptypeid_changed", "mousemove", "mouseout", "mouseover", "projection_changed", "resize", "rightclick", "tilesloaded", "tilt_changed", "zoom_changed"];
 
   var Map = exports.Map = function (_React$Component) {
     _inherits(Map, _React$Component);
@@ -145,8 +145,8 @@
 
       var _this = _possibleConstructorReturn(this, (Map.__proto__ || Object.getPrototypeOf(Map)).call(this, props));
 
-      if (!props.hasOwnProperty('google')) {
-        throw new Error('You must include a `google` prop');
+      if (!props.hasOwnProperty("google")) {
+        throw new Error("You must include a `google` prop");
       }
 
       _this.listeners = {};
@@ -160,7 +160,7 @@
     }
 
     _createClass(Map, [{
-      key: 'componentDidMount',
+      key: "componentDidMount",
       value: function componentDidMount() {
         var _this2 = this;
 
@@ -186,7 +186,7 @@
         this.loadMap();
       }
     }, {
-      key: 'componentDidUpdate',
+      key: "componentDidUpdate",
       value: function componentDidUpdate(prevProps, prevState) {
         if (prevProps.google !== this.props.google) {
           this.loadMap();
@@ -206,11 +206,13 @@
           this.recenterMap();
         }
         if (this.props.bounds && this.props.bounds !== prevProps.bounds) {
-          this.map.fitBounds(this.props.bounds);
+          // The second 0 tells google maps to not apply any padding. Without this I
+          // found that the map was zoomed out completly.
+          this.map.fitBounds(this.props.bounds, 0);
         }
       }
     }, {
-      key: 'componentWillUnmount',
+      key: "componentWillUnmount",
       value: function componentWillUnmount() {
         var _this3 = this;
 
@@ -224,7 +226,7 @@
         });
       }
     }, {
-      key: 'loadMap',
+      key: "loadMap",
       value: function loadMap() {
         var _this4 = this;
 
@@ -281,17 +283,17 @@
           evtNames.forEach(function (e) {
             _this4.listeners[e] = _this4.map.addListener(e, _this4.handleEvent(e));
           });
-          maps.event.trigger(this.map, 'ready');
+          maps.event.trigger(this.map, "ready");
           this.forceUpdate();
         }
       }
     }, {
-      key: 'handleEvent',
+      key: "handleEvent",
       value: function handleEvent(evtName) {
         var _this5 = this;
 
         var timeout = void 0;
-        var handlerName = 'on' + (0, _String.camelize)(evtName);
+        var handlerName = "on" + (0, _String.camelize)(evtName);
 
         return function (e) {
           if (timeout) {
@@ -306,7 +308,7 @@
         };
       }
     }, {
-      key: 'recenterMap',
+      key: "recenterMap",
       value: function recenterMap() {
         var map = this.map;
 
@@ -323,20 +325,20 @@
           }
           // map.panTo(center)
           map.setCenter(center);
-          maps.event.trigger(map, 'recenter');
+          maps.event.trigger(map, "recenter");
         }
       }
     }, {
-      key: 'restyleMap',
+      key: "restyleMap",
       value: function restyleMap() {
         if (this.map) {
           var google = this.props.google;
 
-          google.maps.event.trigger(this.map, 'resize');
+          google.maps.event.trigger(this.map, "resize");
         }
       }
     }, {
-      key: 'renderChildren',
+      key: "renderChildren",
       value: function renderChildren() {
         var _this6 = this;
 
@@ -355,21 +357,21 @@
         });
       }
     }, {
-      key: 'render',
+      key: "render",
       value: function render() {
         var style = Object.assign({}, mapStyles.map, this.props.style, {
-          display: this.props.visible ? 'inherit' : 'none'
+          display: this.props.visible ? "inherit" : "none"
         });
 
         var containerStyles = Object.assign({}, mapStyles.container, this.props.containerStyle);
 
         return _react2.default.createElement(
-          'div',
+          "div",
           { style: containerStyles, className: this.props.className },
           _react2.default.createElement(
-            'div',
-            { style: style, ref: 'map' },
-            'Loading map...'
+            "div",
+            { style: style, ref: "map" },
+            "Loading map..."
           ),
           this.renderChildren()
         );
