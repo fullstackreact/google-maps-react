@@ -219,7 +219,7 @@
             });
 
             return _react2.default.createElement(
-              'div',
+              _react2.default.Fragment,
               null,
               _react2.default.createElement(WrappedComponent, props),
               _react2.default.createElement('div', { ref: 'map' })

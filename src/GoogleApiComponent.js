@@ -124,10 +124,10 @@ export const wrapper = input => WrappedComponent => {
       });
 
       return (
-        <div>
+        <React.Fragment>
           <WrappedComponent {...props} />
           <div ref="map" />
-        </div>
+        </React.Fragment>
       );
     }
   }
