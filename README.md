@@ -550,6 +550,45 @@ The `<Circle />` component listens to `onClick`, `onMouseover` and `onMouseout` 
 
 The `GoogleApiWrapper` automatically passes the `google` instance loaded when the component mounts (and will only load it once).
 
+#### Custom Map Style
+
+To set your own custom map style, import your custom map style in JSON format.
+
+```javascript
+const mapStyle = [
+  {
+    featureType: 'landscape.man_made',
+    elementType: 'geometry.fill',
+    stylers: [
+      {
+        color: '#dceafa'
+      }
+    ]
+  },
+  ]
+
+ _mapLoaded(mapProps, map) {
+    map.setOptions({
+       styles: mapStyle
+    })
+ }
+
+render() {
+  return (
+    <Map
+      style={style}
+      google={this.props.google}
+      zoom={this.state.zoom}
+      initialCenter={this.state.center}
+      onReady={(mapProps, map) => this._mapLoaded(mapProps, map)}
+    >
+      ...
+    </Map>
+   );
+ }
+      
+```
+
 ## Manually loading the Google API
 
 If you prefer not to use the automatic loading option, you can also pass the `window.google` instance as a `prop` to your `<Map />` component.
