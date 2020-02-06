@@ -267,7 +267,6 @@
               noClear: this.props.noClear,
               styles: this.props.styles,
               gestureHandling: this.props.gestureHandling,
-              draggableCursor: this.props.draggableCursor,
               draggingCursor: this.props.draggingCursor
             });
   
@@ -411,7 +410,6 @@
       fullscreenControl: _propTypes2.default.bool,
       scrollwheel: _propTypes2.default.bool,
       draggable: _propTypes2.default.bool,
-      draggableCursor: _propTypes2.default.string,
       keyboardShortcuts: _propTypes2.default.bool,
       disableDoubleClickZoom: _propTypes2.default.bool,
       noClear: _propTypes2.default.bool,
