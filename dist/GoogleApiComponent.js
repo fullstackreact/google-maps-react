@@ -140,12 +140,14 @@
             google: null,
             options: options
           };
+
+          _this.mapRef = _react2.default.createRef();
           return _this;
         }
 
         _createClass(Wrapper, [{
-          key: 'componentWillReceiveProps',
-          value: function componentWillReceiveProps(props) {
+          key: 'UNSAFE_componentWillReceiveProps',
+          value: function UNSAFE_componentWillReceiveProps(props) {
             // Do not update input if it's not dynamic
             if (typeof input !== 'function') {
               return;
@@ -215,7 +217,7 @@
               'div',
               null,
               _react2.default.createElement(WrappedComponent, props),
-              _react2.default.createElement('div', { ref: 'map' })
+              _react2.default.createElement('div', { ref: this.mapRef })
             );
           }
         }]);
