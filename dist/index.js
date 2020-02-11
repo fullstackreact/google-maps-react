@@ -235,7 +235,7 @@
   
             var maps = google.maps;
   
-            var mapRef = this.mapRef;
+            var mapRef = this.mapRef.current;
             var node = _reactDom2.default.findDOMNode(mapRef);
             var curr = this.state.currentLocation;
             var center = new maps.LatLng(curr.lat, curr.lng);
