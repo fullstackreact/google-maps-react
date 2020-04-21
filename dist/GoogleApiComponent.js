@@ -140,6 +140,8 @@
             google: null,
             options: options
           };
+
+          _this.mapRef = _react2.default.createRef();
           return _this;
         }
 
@@ -215,7 +217,7 @@
               'div',
               null,
               _react2.default.createElement(WrappedComponent, props),
-              _react2.default.createElement('div', { ref: 'map' })
+              _react2.default.createElement('div', { ref: this.mapRef })
             );
           }
         }]);

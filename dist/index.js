@@ -156,6 +156,8 @@
             lng: _this.props.initialCenter.lng
           }
         };
+
+        _this.mapRef = _react2.default.createRef();
         return _this;
       }
   
@@ -233,7 +235,7 @@
   
             var maps = google.maps;
   
-            var mapRef = this.refs.map;
+            var mapRef = this.mapRef.current;
             var node = _reactDom2.default.findDOMNode(mapRef);
             var curr = this.state.currentLocation;
             var center = new maps.LatLng(curr.lat, curr.lng);
@@ -373,7 +375,7 @@
             { style: containerStyles, className: this.props.className },
             _react2.default.createElement(
               'div',
-              { style: style, ref: (element) => (this.ref.map = element) },
+              { style: style, ref: this.mapRef },
               'Loading map...'
             ),
             this.renderChildren()
