@@ -17,6 +17,7 @@
     "index.d.ts"
   ],
   "types": "index.d.ts",
+  "sideEffects": false,
   "scripts": {
     "prepublish": "./scripts/prepublish.sh",
     "preversion": ". ./scripts/prepublish.sh",
