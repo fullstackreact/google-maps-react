@@ -81,6 +81,12 @@ export const wrapper = input => WrappedComponent => {
         google: null
       });
     }
+    
+    componentWillUnmount() {
+      if (this.unregisterLoadHandler) {
+        this.unregisterLoadHandler();
+      }  
+    }
 
     initialize(options) {
       // Avoid race condition: remove previous 'load' listener
