@@ -33,7 +33,7 @@
     "@types/googlemaps": "^3",
     "@types/react": "^15.0.0",
     "autoprefixer": "^6.3.6",
-    "babel-cli": "^6.7.7",
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.7.4",
     "babel-eslint": "^6.0.2",
     "babel-loader": "^6.2.4",
