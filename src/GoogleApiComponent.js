@@ -51,9 +51,11 @@ export const wrapper = input => WrappedComponent => {
         google: null,
         options: options
       };
+
+      this.mapRef=React.createRef();
     }
 
-    componentWillReceiveProps(props) {
+    UNSAFE_componentWillReceiveProps(props) {
       // Do not update input if it's not dynamic
       if (typeof input !== 'function') {
         return;
@@ -78,6 +80,12 @@ export const wrapper = input => WrappedComponent => {
         loaded: false,
         google: null
       });
+    }
+    
+    componentWillUnmount() {
+      if (this.unregisterLoadHandler) {
+        this.unregisterLoadHandler();
+      }  
     }
 
     initialize(options) {
@@ -120,7 +128,7 @@ export const wrapper = input => WrappedComponent => {
       return (
         <div>
           <WrappedComponent {...props} />
-          <div ref="map" />
+          <div ref={this.mapRef} />
         </div>
       );
     }

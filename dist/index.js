@@ -155,28 +155,40 @@
           lat: _this.props.initialCenter.lat,
           lng: _this.props.initialCenter.lng
         }
-      };
-      return _this;
-    }
 
-    _createClass(Map, [{
-      key: 'componentDidMount',
-      value: function componentDidMount() {
-        var _this2 = this;
+        _this.listeners = {};
+        _this.state = {
+          currentLocation: {
+            lat: _this.props.initialCenter.lat,
+            lng: _this.props.initialCenter.lng
+          }
+        };
 
-        if (this.props.centerAroundCurrentLocation) {
-          if (navigator && navigator.geolocation) {
-            this.geoPromise = (0, _cancelablePromise.makeCancelable)(new Promise(function (resolve, reject) {
-              navigator.geolocation.getCurrentPosition(resolve, reject);
-            }));
-
-            this.geoPromise.promise.then(function (pos) {
-              var coords = pos.coords;
-              _this2.setState({
-                currentLocation: {
-                  lat: coords.latitude,
-                  lng: coords.longitude
-                }
+        _this.mapRef = _react2.default.createRef();
+        return _this;
+      }
+  
+      _createClass(Map, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+          var _this2 = this;
+  
+          if (this.props.centerAroundCurrentLocation) {
+            if (navigator && navigator.geolocation) {
+              this.geoPromise = (0, _cancelablePromise.makeCancelable)(new Promise(function (resolve, reject) {
+                navigator.geolocation.getCurrentPosition(resolve, reject);
+              }));
+  
+              this.geoPromise.promise.then(function (pos) {
+                var coords = pos.coords;
+                _this2.setState({
+                  currentLocation: {
+                    lat: coords.latitude,
+                    lng: coords.longitude
+                  }
+                });
+              }).catch(function (e) {
+                return e;
               });
             }).catch(function (e) {
               return e;
@@ -204,6 +216,7 @@
         }
         if (prevState.currentLocation !== this.state.currentLocation) {
           this.recenterMap();
+
         }
         if (this.props.bounds && this.props.bounds !== prevProps.bounds) {
           this.map.fitBounds(this.props.bounds);

@@ -49,6 +49,7 @@ export {HeatMap} from './components/HeatMap';
 export {Polygon} from './components/Polygon';
 export {Polyline} from './components/Polyline';
 export {Circle} from './components/Circle';
+export {Rectangle} from './components/Rectangle';
 
 export class Map extends React.Component {
   constructor(props) {
@@ -65,6 +66,8 @@ export class Map extends React.Component {
         lng: this.props.initialCenter.lng
       }
     };
+
+    this.mapRef=React.createRef();
   }
 
   componentDidMount() {
@@ -130,7 +133,7 @@ export class Map extends React.Component {
       const {google} = this.props;
       const maps = google.maps;
 
-      const mapRef = this.refs.map;
+      const mapRef = this.mapRef.current;
       const node = ReactDOM.findDOMNode(mapRef);
       const curr = this.state.currentLocation;
       const center = new maps.LatLng(curr.lat, curr.lng);
@@ -257,7 +260,7 @@ export class Map extends React.Component {
 
     return (
       <div style={containerStyles} className={this.props.className}>
-        <div style={style} ref="map">
+        <div style={style} ref={this.mapRef}>
           Loading map...
         </div>
         {this.renderChildren()}
