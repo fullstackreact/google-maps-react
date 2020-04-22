@@ -55,6 +55,15 @@ export default GoogleApiWrapper({
 })(MapContainer)
 ```
 
+If you want a custom class for the top level 'div'
+
+```javascript
+export default GoogleApiWrapper({
+  apiKey: (YOUR_GOOGLE_API_KEY_GOES_HERE),
+  wrapperClassName: 'my-custom-css-class'
+})(MapContainer)
+```
+
 ## Sample Usage With Lazy-loading Google API:
 
 ```javascript

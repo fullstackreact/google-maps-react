@@ -106,6 +106,8 @@ export const wrapper = input => WrappedComponent => {
       // Store information about loading container
       this.LoadingContainer =
         options.LoadingContainer || DefaultLoadingContainer;
+      // add custom className to the top div
+      this.wrapperClassName = options.wrapperClassName || '';
     }
 
     onLoad(err, tag) {
@@ -126,7 +128,7 @@ export const wrapper = input => WrappedComponent => {
       });
 
       return (
-        <div>
+        <div className={this.wrapperClassName}>
           <WrappedComponent {...props} />
           <div ref={this.mapRef} />
         </div>
