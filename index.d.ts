@@ -62,6 +62,13 @@ export interface IMapProps extends google.maps.MapOptions {
   onTilesloaded?: mapEventHandler
   onTiltChanged?: mapEventHandler
   onZoomChanged?: mapEventHandler
+
+  streetViewControl?: boolean
+  fullscreenControl?: boolean
+  mapTypeControl?: boolean
+  rotateControl?: boolean
+  scaleControl?: boolean
+  zoomControl?: boolean
 }
 
 type markerEventHandler = (props?: IMarkerProps, marker?: google.maps.Marker, event?) => any
