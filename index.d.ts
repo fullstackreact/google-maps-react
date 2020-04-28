@@ -1,108 +1,119 @@
-import 'googlemaps'
-import * as React from 'react'
+import 'googlemaps';
+import * as React from 'react';
 
-interface IGoogleApiOptions {
-  apiKey: string,
-  libraries?: string[],
-  client?: string,
-  url?: string,
-  version?: string,
-  language?: string,
-  region?: string,
-  LoadingContainer?: any
+export interface GoogleApiOptions {
+  apiKey: string;
+  libraries?: string[];
+  client?: string;
+  url?: string;
+  version?: string;
+  language?: string;
+  region?: string;
+  LoadingContainer?: any;
 }
-type GoogleApiOptionsFunc = (props: any) => IGoogleApiOptions
+export type GoogleApiOptionsFunc = (props: any) => GoogleApiOptions;
 
-type Omit<T1, T2> = Pick<T1, Exclude<keyof T1, keyof T2>>
+type Omit<T1, T2> = Pick<T1, Exclude<keyof T1, keyof T2>>;
 
-export type GoogleAPI = typeof google
-export function GoogleApiWrapper(opts: IGoogleApiOptions | GoogleApiOptionsFunc):
-  <TProps extends IProvidedProps>(ctor: React.ComponentType<TProps>) => React.ComponentType<Omit<TProps, IProvidedProps>>
+export type GoogleAPI = typeof google;
+export function GoogleApiWrapper(opts: GoogleApiOptions | GoogleApiOptionsFunc):
+  <TProps extends ProvidedProps>(ctor: React.ComponentType<TProps>) => React.ComponentType<Omit<TProps, ProvidedProps>>;
 
-export interface IProvidedProps {
-  google: GoogleAPI
-  loaded?: boolean
-}
-
-type mapEventHandler = (mapProps?: IMapProps, map?: google.maps.Map, event?) => any
-
-type Style = Object<string, string | number | boolean>
-
-export interface IMapProps extends google.maps.MapOptions {
-  google: GoogleAPI
-  loaded?: boolean
-
-  style?: Style
-  containerStyle?: Style
-
-  bounds?: google.maps.LatLngBounds | google.maps.LatLngBoundsLiteral
-  centerAroundCurrentLocation?: boolean
-  initialCenter?: google.maps.LatLngLiteral
-  center?: google.maps.LatLngLiteral
-
-  visible?: boolean
-
-  onReady?: mapEventHandler
-  onClick?: mapEventHandler
-  onDragend?: mapEventHandler
-  onRecenter?: mapEventHandler
-  onBoundsChanged?: mapEventHandler
-  onCenterChanged?: mapEventHandler
-  onDblclick?: mapEventHandler
-  onDragstart?: mapEventHandler
-  onHeadingChange?: mapEventHandler
-  onIdle?: mapEventHandler
-  onMaptypeidChanged?: mapEventHandler
-  onMousemove?: mapEventHandler
-  onMouseover?: mapEventHandler
-  onMouseout?: mapEventHandler
-  onProjectionChanged?: mapEventHandler
-  onResize?: mapEventHandler
-  onRightclick?: mapEventHandler
-  onTilesloaded?: mapEventHandler
-  onTiltChanged?: mapEventHandler
-  onZoomChanged?: mapEventHandler
+export interface ProvidedProps {
+  google: GoogleAPI;
+  loaded?: boolean;
 }
 
-type markerEventHandler = (props?: IMarkerProps, marker?: google.maps.Marker, event?) => any
+type mapEventHandler = (mapProps?: MapProps, map?: google.maps.Map, event?: any) => any;
 
-export interface IMarkerProps extends Partial<google.maps.MarkerOptions> {
-  mapCenter?: google.maps.LatLng | google.maps.LatLngLiteral
+export interface MapProps extends google.maps.MapOptions {
+  google: GoogleAPI;
+  loaded?: boolean;
 
-  onClick?: markerEventHandler
-  onMouseover?: markerEventHandler
+  bounds?: google.maps.LatLngBounds | google.maps.LatLngBoundsLiteral;
+  centerAroundCurrentLocation?: boolean;
+  initialCenter?: google.maps.LatLngLiteral;
+
+  visible?: boolean;
+
+  onReady?: mapEventHandler;
+  onClick?: mapEventHandler;
+  onDragend?: mapEventHandler;
+  onRecenter?: mapEventHandler;
+  onBoundsChanged?: mapEventHandler;
+  onCenterChanged?: mapEventHandler;
+  onDblclick?: mapEventHandler;
+  onDragstart?: mapEventHandler;
+  onHeadingChange?: mapEventHandler;
+  onIdle?: mapEventHandler;
+  onMaptypeidChanged?: mapEventHandler;
+  onMousemove?: mapEventHandler;
+  onMouseover?: mapEventHandler;
+  onMouseout?: mapEventHandler;
+  onProjectionChanged?: mapEventHandler;
+  onResize?: mapEventHandler;
+  onRightclick?: mapEventHandler;
+  onTilesloaded?: mapEventHandler;
+  onTiltChanged?: mapEventHandler;
+  onZoomChanged?: mapEventHandler;
 }
 
-export class Map extends React.Component<IMapProps, any> {
+type markerEventHandler = (props?: MarkerProps, marker?: google.maps.Marker, event?: any) => any;
 
+export interface MarkerProps extends Partial<google.maps.MarkerOptions> {
+  mapCenter?: google.maps.LatLng | google.maps.LatLngLiteral;
+
+  onClick?: markerEventHandler;
+  onDblclick?: markerEventHandler;
+  onDragend?: markerEventHandler;
+  onMousedown?: markerEventHandler;
+  onMouseout?: markerEventHandler;
+  onMouseover?: markerEventHandler;
+  onMouseup?: markerEventHandler;
+  onRecenter?: markerEventHandler;
 }
 
-export class Marker extends React.Component<IMarkerProps, any> {
+export class Map extends React.Component<MapProps, any> {
+}
 
+export class Marker<P extends MarkerProps = MarkerProps, S = any> extends React.Component<P, S> {
+  marker?: google.maps.Marker;
+
+  renderMarker(): void;
+  getMarker(): Promise<google.maps.Marker>;
 }
 
 export class Polygon extends React.Component<any, any> {
-
 }
 
 export class Polyline extends React.Component<any, any> {
-
 }
 
 export class Circle extends React.Component<any, any> {
-
 }
 
-export interface IInfoWindowProps extends Partial<google.maps.InfoWindowOptions> {
-  google: typeof google
-  map: google.maps.Map
-  marker: google.maps.Marker
-
-  mapCenter?: google.maps.LatLng | google.maps.LatLngLiteral
-  visible?: boolean
-
+export class HeatMap extends React.Component<any, any> {
 }
 
-export class InfoWindow extends React.Component<IInfoWindowProps, any> {
+export interface InfoWindowProps extends Partial<google.maps.InfoWindowOptions> {
+  google?: typeof google;
+  map?: google.maps.Map;
+  marker?: google.maps.Marker;
 
+  mapCenter?: google.maps.LatLng | google.maps.LatLngLiteral;
+  visible?: boolean;
+
+  onOpen?: () => void;
+  onClose?: () => void;
 }
+
+export class InfoWindow<P extends InfoWindowProps = InfoWindowProps, S = any> extends React.Component<P, S> {
+  renderInfoWindow(): void;
+  openWindow(): void;
+  updatePosition(): void;
+  updateContent(): void;
+  closeWindow(): void;
+  renderChildren(): void;
+}
+
+export {};
