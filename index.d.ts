@@ -41,6 +41,8 @@ export interface IMapProps extends google.maps.MapOptions {
   center?: google.maps.LatLngLiteral
 
   visible?: boolean
+  
+  zoom?: number
 
   onReady?: mapEventHandler
   onClick?: mapEventHandler
