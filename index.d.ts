@@ -71,6 +71,12 @@ export interface IMarkerProps extends Partial<google.maps.MarkerOptions> {
 
   onClick?: markerEventHandler
   onMouseover?: markerEventHandler
+  onDblclick?: markerEventHandler
+  onDragend?: markerEventHandler
+  onMousedown?: markerEventHandler
+  onMouseout?: markerEventHandler
+  onMouseup?: markerEventHandler
+  onRecenter?: markerEventHandler
 }
 
 export class Map extends React.Component<IMapProps, any> {
