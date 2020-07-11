@@ -1,14 +1,11 @@
 import React from 'react';
-
-import {shallow, mount, render} from 'enzyme';
+import {mount, configure} from 'enzyme';
 import {expect} from 'chai';
-import sinon from 'sinon';
-
 import Map from '../index';
+import Adapter from 'enzyme-adapter-react-16';
+configure({adapter: new Adapter()});
 
 describe('Map', () => {
-  let wrapper;
-
   describe('google prop', () => {
     it('explodes without a `google` prop', () => {
       expect(() => mount(<Map />)).to.throw(Error);
