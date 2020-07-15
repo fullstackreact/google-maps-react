@@ -106,3 +106,16 @@ export interface IInfoWindowProps extends Partial<google.maps.InfoWindowOptions>
 export class InfoWindow extends React.Component<IInfoWindowProps, any> {
 
 }
+
+
+export interface ICustomOverlayProps {
+  google?: typeof google
+  map?: google.maps.Map
+  position: google.maps.LatLng | google.maps.LatLngLiteral,
+  visible?: boolean,
+  passThroughMouseEvents?: boolean
+}
+
+export class CustomOverlay extends React.Component<ICustomOverlayProps, any> {
+
+}

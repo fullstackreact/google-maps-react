@@ -1,0 +1,13 @@
+.overlayContainer {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  transform: translate(-50%, -100%);
+}
+
+.button {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  z-index: 1;
+}
