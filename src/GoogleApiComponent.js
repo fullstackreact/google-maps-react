@@ -126,7 +126,7 @@ export const wrapper = input => WrappedComponent => {
       });
 
       return (
-        <div>
+        <div className={this.state.options.className}>
           <WrappedComponent {...props} />
           <div ref={this.mapRef} />
         </div>
