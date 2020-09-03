@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { camelize } from '../lib/String'
+import { verifyMarkerPosition } from '../lib/verifyMarkerPosition'
 
 const evtNames = [
   'click',
@@ -35,11 +36,9 @@ export class Marker extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if ((this.props.map !== prevProps.map) ||
-      ((this.props.position && prevProps.position) 
-        ? this.props.position.lat !== prevProps.position.lat || this.props.position.lng !== prevProps.position.lng 
-        : this.props.position !== prevProps.position) ||
-      (this.props.icon !== prevProps.icon)) {
+    if (this.props.map !== prevProps.map ||
+      this.props.icon !== prevProps.icon ||
+      verifyMarkerPosition(this.props.position, prevProps.position)) {
         if (this.marker) {
             this.marker.setMap(null);
         }
