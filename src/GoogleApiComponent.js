@@ -34,7 +34,7 @@ const defaultCreateCache = options => {
 
 const DefaultLoadingContainer = props => <div>Loading...</div>;
 
-export const wrapper = input => WrappedComponent => {
+export const wrapper = (input, className, style) => WrappedComponent => {
   class Wrapper extends React.Component {
     constructor(props, context) {
       super(props, context);
@@ -126,7 +126,7 @@ export const wrapper = input => WrappedComponent => {
       });
 
       return (
-        <div>
+        <div className={className} style={style}>
           <WrappedComponent {...props} />
           <div ref={this.mapRef} />
         </div>
