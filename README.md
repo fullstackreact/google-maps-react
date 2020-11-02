@@ -305,6 +305,12 @@ You can also pass any other `props` you want with the `<Marker />`. It will be p
 The marker component can also accept a child InfoMarker component for situations where there is only 1 marker and 1 infowindow.
 
 ```javascript
+   moveMarker(props, marker, e) {
+        console.log(e.latLng.lat(), e.latLng.lng()) // get the new coordinates after drag end
+    }
+```
+
+```javascript
 <Marker
   title="Location"
   id={1}
