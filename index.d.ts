@@ -96,11 +96,12 @@ export class Circle extends React.Component<any, any> {
 export interface IInfoWindowProps extends Partial<google.maps.InfoWindowOptions> {
   google: typeof google
   map: google.maps.Map
-  marker: google.maps.Marker
-
-  mapCenter?: google.maps.LatLng | google.maps.LatLngLiteral
+  marker?: google.maps.Marker
+  position?: google.maps.LatLng | google.maps.LatLngLiteral
   visible?: boolean
-
+  children: React.ReactNode
+  onClose(): void
+  onOpen(): void
 }
 
 export class InfoWindow extends React.Component<IInfoWindowProps, any> {
