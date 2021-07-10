@@ -77,9 +77,18 @@ type markerEventHandler = (props?: IMarkerProps, marker?: google.maps.Marker, ev
 
 export interface IMarkerProps extends Partial<google.maps.MarkerOptions> {
   mapCenter?: google.maps.LatLng | google.maps.LatLngLiteral
+  position?: google.maps.LatLng | google.maps.LatLngLiteral
+  title?: string
+  name?: string
 
   onClick?: markerEventHandler
+  onDblclick?: markerEventHandler
+  onDragend?: markerEventHandler
+  onMousedown?: markerEventHandler
+  onMouseout?: markerEventHandler
   onMouseover?: markerEventHandler
+  onMouseup?: markerEventHandler
+  onRecenter?: markerEventHandler
 }
 
 export class Map extends React.Component<IMapProps, any> {
@@ -105,10 +114,14 @@ export class Circle extends React.Component<any, any> {
 export interface IInfoWindowProps extends Partial<google.maps.InfoWindowOptions> {
   google: typeof google
   map: google.maps.Map
-  marker: google.maps.Marker
+  marker?: google.maps.Marker
 
-  mapCenter?: google.maps.LatLng | google.maps.LatLngLiteral
+  position?: google.maps.LatLng | google.maps.LatLngLiteral
   visible?: boolean
+
+  children: React.ReactNode
+  onClose(): void
+  onOpen(): void
 
 }
 
