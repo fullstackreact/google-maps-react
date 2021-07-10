@@ -121,8 +121,8 @@ export interface IInfoWindowProps extends Partial<google.maps.InfoWindowOptions>
   visible?: boolean
 
   children: React.ReactNode
-  onClose()?: void
-  onOpen()?: void
+  onClose?(): void
+  onOpen?(): void
 
 }
 
