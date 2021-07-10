@@ -21,7 +21,6 @@
   "scripts": {
     "prepublish": "./scripts/prepublish.sh",
     "preversion": ". ./scripts/prepublish.sh",
-    "postinstall": "npm run build",
     "dev": "NODE_ENV=development ./node_modules/hjs-webpack/bin/hjs-dev-server.js",
     "build": "NODE_ENV=production webpack",
     "publish_pages": "gh-pages -d public/",
