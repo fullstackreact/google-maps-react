@@ -81,8 +81,6 @@ export interface IMarkerProps extends Partial<google.maps.MarkerOptions> {
   label?: string
   title?: string
   name?: string
-  icon?: string
-  draggable?: boolean
 
   onClick?: markerEventHandler
   onDblclick?: markerEventHandler
