@@ -24,9 +24,9 @@ export interface IProvidedProps {
   loaded?: boolean
 }
 
-type mapEventHandler = (mapProps?: IMapProps, map?: google.maps.Map, event?) => any
+type mapEventHandler = (mapProps?: IMapProps, map?: google.maps.Map, event?: any) => any
 
-type Style = Object<string, string | number | boolean>
+type Style = Object
 
 export interface IMapProps extends google.maps.MapOptions {
   google: GoogleAPI
@@ -39,7 +39,7 @@ export interface IMapProps extends google.maps.MapOptions {
   centerAroundCurrentLocation?: boolean
   initialCenter?: google.maps.LatLngLiteral
   center?: google.maps.LatLngLiteral
-  zoom?: boolean
+  zoom?: number
 
   zoomControl?: boolean
   mapTypeControl?: boolean
@@ -73,7 +73,7 @@ export interface IMapProps extends google.maps.MapOptions {
   onZoomChanged?: mapEventHandler
 }
 
-type markerEventHandler = (props?: IMarkerProps, marker?: google.maps.Marker, event?) => any
+type markerEventHandler = (props?: IMarkerProps, marker?: google.maps.Marker, event?: any) => any
 
 export interface IMarkerProps extends Partial<google.maps.MarkerOptions> {
   mapCenter?: google.maps.LatLng | google.maps.LatLngLiteral
