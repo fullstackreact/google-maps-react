@@ -26,7 +26,7 @@ export interface IProvidedProps {
 
 type mapEventHandler = (mapProps?: IMapProps, map?: google.maps.Map, event?) => any
 
-type Style = Object<string, string | number | boolean>
+type Style = React.CSSProperties;
 
 export interface IMapProps extends google.maps.MapOptions {
   google: GoogleAPI
