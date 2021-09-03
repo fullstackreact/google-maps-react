@@ -1,8 +1,8 @@
 {
   "name": "psiclopz-google-maps-react",
-  "version": "2.0.7",
+  "version": "1.0.0",
   "description": "Forked Google maps container",
-  "author": "Fullstack.io <us@fullstack.io>",
+  "author": "Forked Fullstack.io <us@fullstack.io>",
   "license": "MIT",
   "options": {
     "mocha": "--require scripts/mocha_runner -t rewireify src/**/__tests__/**/*.js"
