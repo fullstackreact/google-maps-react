@@ -93,6 +93,8 @@ export class Circle extends React.Component<any, any> {
 
 }
 
+type infoWindowEventHandler = (props?: IInfoWindowProps, infoWindow?: google.maps.InfoWindow, event?) => any
+
 export interface IInfoWindowProps extends Partial<google.maps.InfoWindowOptions> {
   google: typeof google
   map: google.maps.Map
@@ -100,7 +102,8 @@ export interface IInfoWindowProps extends Partial<google.maps.InfoWindowOptions>
 
   mapCenter?: google.maps.LatLng | google.maps.LatLngLiteral
   visible?: boolean
-
+  onClose?: infoWindowEventHandler;
+  onOpen?: infoWindowEventHandler;
 }
 
 export class InfoWindow extends React.Component<IInfoWindowProps, any> {
