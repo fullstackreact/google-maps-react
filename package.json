@@ -1,7 +1,7 @@
 {
-  "name": "google-maps-react",
-  "version": "2.0.6",
-  "description": "Google maps container",
+  "name": "psiclopz-google-maps-react",
+  "version": "2.0.7",
+  "description": "Forked Google maps container",
   "author": "Fullstack.io <us@fullstack.io>",
   "license": "MIT",
   "options": {
