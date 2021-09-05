@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { arePathsEqual } from '../lib/arePathsEqual';
 import { camelize } from '../lib/String';
 const evtNames = ['click', 'mouseout', 'mouseover'];
+const pathEvtNames = ['insert_at', 'remove_at', 'set_at'];
 
 const wrappedPromise = function() {
     var wrappedPromise = {},
@@ -76,6 +77,9 @@ export class Polygon extends React.Component {
       this.polygon.addListener(e, this.handleEvent(e));
     });
 
+    pathEvtNames.forEach(e => {
+      this.polygon.getPath().addListener(e, this.handlePathEvent(e));
+    })
     this.polygonPromise.resolve(this.polygon);
   }
 
@@ -88,6 +92,15 @@ export class Polygon extends React.Component {
       const evtName = `on${camelize(evt)}`
       if (this.props[evtName]) {
         this.props[evtName](this.props, this.polygon, e);
+      }
+    }
+  }
+
+  handlePathEvent(evt) {
+    return (e) => {
+      const evtName = `on${camelize(evt)}`
+      if (this.props[evtName]) {
+        this.props[evtName](this.props, this.polygon.getPath(), e);
       }
     }
   }
@@ -107,6 +120,7 @@ Polygon.propTypes = {
 }
 
 evtNames.forEach(e => Polygon.propTypes[e] = PropTypes.func)
+pathEvtNames.forEach(e => Polygon.propTypes[e] = PropTypes.func)
 
 Polygon.defaultProps = {
   name: 'Polygon'
