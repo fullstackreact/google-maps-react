@@ -4,6 +4,8 @@
 
 # Google Map React Component Tutorial [![Dolpins](https://cdn.rawgit.com/fullstackreact/google-maps-react/master/resources/readme/dolphins-badge-ff00ff.svg)](https://www.fullstackreact.com)
 
+> This was forked from google-maps-react, in order to add extra events and correct typing.
+
 > A declarative Google Map React component using React, lazy-loading dependencies, current-location finder and a test-driven approach by the [Fullstack React](https://fullstackreact.com) team.
 
 See the [demo](https://fullstackreact.github.io/google-maps-react) and [accompanying blog post](https://www.fullstackreact.com/articles/how-to-write-a-google-maps-react-component/).
@@ -13,7 +15,7 @@ See the [demo](https://fullstackreact.github.io/google-maps-react) and [accompan
 First, install the library:
 
 ```shell
-npm install --save google-maps-react
+npm install --save psiclopz-google-maps-react
 ```
 ## Automatically Lazy-loading Google API
 
@@ -397,7 +399,7 @@ render() {
 
 #### Events
 
-The `<Polygon />` component listens to `onClick`, `onMouseover` and `onMouseout` events.
+The `<Polygon />` component listens to `onClick`, `onMouseover`, `onMouseout`, `onInsertAt`, `onRemoveAt`, and `onSetAt` events.
 
 ### Polyline
 
@@ -606,27 +608,13 @@ An example template might look like: [https://codesandbox.io/s/rzwrk2854](https:
 ## Contributing
 
 ```shell
-git clone https://github.com/fullstackreact/google-maps-react.git
-cd google-maps-react
+git clone https://github.com/psiclopz/google-maps-react.git
+cd psiclopz-google-maps-react
 npm install
 make dev
 ```
 
 The Google Map React component library uses React and the Google API to give easy access to the Google Maps library.
-
-___
-
-# Fullstack React Book
-
-<a href="https://fullstackreact.com">
-<img align="right" src="resources/readme/fullstack-react-hero-book.png" alt="Fullstack React Book" width="155" height="250" />
-</a>
-
-This Google Map React component library was built alongside the blog post [How to Write a Google Maps React Component](https://www.fullstackreact.com/articles/how-to-write-a-google-maps-react-component/).
-
-This repo was written and is maintained by the [Fullstack React](https://fullstackreact.com) team. In the book we cover many more projects like this. We walk through each line of code, explain why it's there and how it works.
-
-This app is only one of several apps we have in the book. If you're looking to learn React, there's no faster way than by spending a few hours with the Fullstack React book.
 
 <div style="clear:both"></div>
 
