@@ -55,7 +55,7 @@ export const wrapper = input => WrappedComponent => {
       this.mapRef=React.createRef();
     }
 
-    UNSAFE_componentWillReceiveProps(props) {
+    componentDidUpdate(props) {
       // Do not update input if it's not dynamic
       if (typeof input !== 'function') {
         return;
@@ -75,11 +75,11 @@ export const wrapper = input => WrappedComponent => {
 
       // Save new options in component state,
       // and remove information about previous API handlers
-      this.setState({
+      this.state= {
         options: options,
         loaded: false,
         google: null
-      });
+      };
     }
     
     componentWillUnmount() {
