@@ -88,6 +88,7 @@ export interface IMarkerProps extends Partial<google.maps.MarkerOptions> {
   onMousedown?: markerEventHandler
   onMouseout?: markerEventHandler
   onMouseover?: markerEventHandler
+  onDragend?: markerEventHandler
   onMouseup?: markerEventHandler
   onRecenter?: markerEventHandler
 }
