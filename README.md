@@ -88,7 +88,7 @@ export default GoogleApiWrapper({
 
 ## Examples
 
-Check out the example site at: [http://fullstackreact.github.io/google-maps-react](http://fullstackreact.github.io/basic)
+Check out the example site at: [http://fullstackreact.github.io/google-maps-react](http://fullstackreact.github.io/google-maps-react)
 
 ## Additional Map Props
 The Map component takes a number of optional props.
