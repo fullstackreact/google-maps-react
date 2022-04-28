@@ -92,7 +92,7 @@ export default GoogleApiWrapper({
 
 ## Examples
 
-Check out the example site at: [http://fullstackreact.github.io/google-maps-react](http://fullstackreact.github.io/basic)
+Check out the example site at: [http://fullstackreact.github.io/google-maps-react](http://fullstackreact.github.io/google-maps-react)
 
 ## Additional Map Props
 The Map component takes a number of optional props.
@@ -307,6 +307,12 @@ If no `position` is passed in the `props`, the marker will default to the curren
 You can also pass any other `props` you want with the `<Marker />`. It will be passed back through marker events.
 
 The marker component can also accept a child InfoMarker component for situations where there is only 1 marker and 1 infowindow.
+
+```javascript
+   moveMarker(props, marker, e) {
+        console.log(e.latLng.lat(), e.latLng.lng()) // get the new coordinates after drag end
+    }
+```
 
 ```javascript
 <Marker
