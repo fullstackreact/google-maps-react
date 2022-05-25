@@ -88,7 +88,7 @@ export default GoogleApiWrapper({
 
 ## Examples
 
-Check out the example site at: [http://fullstackreact.github.io/google-maps-react](http://fullstackreact.github.io/basic)
+Check out the example site at: [http://fullstackreact.github.io/google-maps-react](http://fullstackreact.github.io/google-maps-react)
 
 ## Additional Map Props
 The Map component takes a number of optional props.
@@ -103,7 +103,23 @@ const style = {
   height: '100%'
 }
 ```
-initalCenter: Takes an object containing latitude and longitude coordinates. Sets the maps center upon loading.
+
+Container Style: Takes CSS style object - optional, commonly when you want to change from the default of position "absolute".
+
+```javascript
+const containerStyle = {
+  position: 'relative',  
+  width: '100%',
+  height: '100%'
+}
+```
+
+```javascript
+    <Map
+          containerStyle={containerStyle}
+```
+
+initialCenter: Takes an object containing latitude and longitude coordinates. Sets the maps center upon loading.
 
 ```javascript
     <Map
@@ -229,7 +245,7 @@ render() {
 }
 ```
 
-The `<Map />` component also listens to `onRecenter`, `onBoundsChanged`, `onCenterChanged`, `onDblclick`, `onDragstart`, `onHeadingChange`, `onIdle`, `onMaptypeidChanged`, `onMousemove`, `onMouseout`, `onMouseover`, `onProjectionChanged`, `onResize`, `onRightclick`, `onTilesloaded`, `onTiltChanged`, and `onZoomChanged` events. See Google Maps [Events](https://developers.google.com/maps/documentation/javascript/events) for more information.
+The `<Map />` component also listens to `onRecenter`, `onBounds_changed`, `onCenter_changed`, `onDblclick`, `onDragstart`, `onHeading_change`, `onIdle`, `onMaptypeid_changed`, `onMousemove`, `onMouseout`, `onMouseover`, `onProjection_changed`, `onResize`, `onRightclick`, `onTilesloaded`, `onTilt_changed`, and `onZoom_changed` events. See Google Maps [Events](https://developers.google.com/maps/documentation/javascript/events) for more information.
 
 ### Visibility
 
@@ -287,6 +303,12 @@ If no `position` is passed in the `props`, the marker will default to the curren
 You can also pass any other `props` you want with the `<Marker />`. It will be passed back through marker events.
 
 The marker component can also accept a child InfoMarker component for situations where there is only 1 marker and 1 infowindow.
+
+```javascript
+   moveMarker(props, marker, e) {
+        console.log(e.latLng.lat(), e.latLng.lng()) // get the new coordinates after drag end
+    }
+```
 
 ```javascript
 <Marker
@@ -533,6 +555,45 @@ render() {
 The `<Circle />` component listens to `onClick`, `onMouseover` and `onMouseout` events.
 
 The `GoogleApiWrapper` automatically passes the `google` instance loaded when the component mounts (and will only load it once).
+
+#### Custom Map Style
+
+To set your own custom map style, import your custom map style in JSON format.
+
+```javascript
+const mapStyle = [
+  {
+    featureType: 'landscape.man_made',
+    elementType: 'geometry.fill',
+    stylers: [
+      {
+        color: '#dceafa'
+      }
+    ]
+  },
+  ]
+
+ _mapLoaded(mapProps, map) {
+    map.setOptions({
+       styles: mapStyle
+    })
+ }
+
+render() {
+  return (
+    <Map
+      style={style}
+      google={this.props.google}
+      zoom={this.state.zoom}
+      initialCenter={this.state.center}
+      onReady={(mapProps, map) => this._mapLoaded(mapProps, map)}
+    >
+      ...
+    </Map>
+   );
+ }
+      
+```
 
 ## Manually loading the Google API
 

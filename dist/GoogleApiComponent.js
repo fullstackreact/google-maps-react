@@ -118,7 +118,7 @@
     );
   };
 
-  var wrapper = exports.wrapper = function wrapper(input) {
+  var wrapper = exports.wrapper = function wrapper(input, className, style) {
     return function (WrappedComponent) {
       var Wrapper = function (_React$Component) {
         _inherits(Wrapper, _React$Component);
@@ -140,12 +140,14 @@
             google: null,
             options: options
           };
+
+          _this.mapRef = _react2.default.createRef();
           return _this;
         }
 
         _createClass(Wrapper, [{
-          key: 'componentWillReceiveProps',
-          value: function componentWillReceiveProps(props) {
+          key: 'componentDidUpdate',
+          value: function componentDidUpdate(props) {
             // Do not update input if it's not dynamic
             if (typeof input !== 'function') {
               return;
@@ -165,11 +167,18 @@
 
             // Save new options in component state,
             // and remove information about previous API handlers
-            this.setState({
+            this.state = {
               options: options,
               loaded: false,
               google: null
-            });
+            };
+          }
+        }, {
+          key: 'componentWillUnmount',
+          value: function componentWillUnmount() {
+            if (this.unregisterLoadHandler) {
+              this.unregisterLoadHandler();
+            }
           }
         }, {
           key: 'initialize',
@@ -213,9 +222,9 @@
 
             return _react2.default.createElement(
               'div',
-              null,
+              { className: className, style: style },
               _react2.default.createElement(WrappedComponent, props),
-              _react2.default.createElement('div', { ref: 'map' })
+              _react2.default.createElement('div', { ref: this.mapRef })
             );
           }
         }]);

@@ -40,6 +40,8 @@
                             }
 
                             return stored;
+                        }).catch(function (error) {
+                            return cb(error);
                         });
                     } else {
                         // TODO:
@@ -57,9 +59,7 @@
 
                     var tag = document.createElement('script');
                     var promise = new Promise(function (resolve, reject) {
-                        var resolved = false,
-                            errored = false,
-                            body = document.getElementsByTagName('body')[0];
+                        var body = document.getElementsByTagName('body')[0];
 
                         tag.type = 'text/javascript';
                         tag.async = false; // Load in order
@@ -122,7 +122,7 @@
                     };
                     scriptMap.set(key, initialState);
                 }
-                return scriptMap.get(key);
+                return scriptMap.get(key).tag;
             };
 
             // let scriptTags = document.querySelectorAll('script')

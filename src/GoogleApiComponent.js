@@ -34,7 +34,7 @@ const defaultCreateCache = options => {
 
 const DefaultLoadingContainer = props => <div>Loading...</div>;
 
-export const wrapper = input => WrappedComponent => {
+export const wrapper = (input, className, style) => WrappedComponent => {
   class Wrapper extends React.Component {
     constructor(props, context) {
       super(props, context);
@@ -51,9 +51,11 @@ export const wrapper = input => WrappedComponent => {
         google: null,
         options: options
       };
+
+      this.mapRef=React.createRef();
     }
 
-    componentWillReceiveProps(props) {
+    componentDidUpdate(props) {
       // Do not update input if it's not dynamic
       if (typeof input !== 'function') {
         return;
@@ -73,11 +75,17 @@ export const wrapper = input => WrappedComponent => {
 
       // Save new options in component state,
       // and remove information about previous API handlers
-      this.setState({
+      this.state= {
         options: options,
         loaded: false,
         google: null
-      });
+      };
+    }
+    
+    componentWillUnmount() {
+      if (this.unregisterLoadHandler) {
+        this.unregisterLoadHandler();
+      }  
     }
 
     initialize(options) {
@@ -118,9 +126,9 @@ export const wrapper = input => WrappedComponent => {
       });
 
       return (
-        <div>
+        <div className={className} style={style}>
           <WrappedComponent {...props} />
-          <div ref="map" />
+          <div ref={this.mapRef} />
         </div>
       );
     }
