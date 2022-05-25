@@ -27,6 +27,7 @@ export class Polyline extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (
+      this.propsChanged(prevProps) ||
       this.props.map !== prevProps.map ||
       !arePathsEqual(this.props.path, prevProps.path)
     ) {
@@ -42,6 +43,12 @@ export class Polyline extends React.Component {
       this.polyline.setMap(null);
     }
   }
+
+  propsChanged(newProps) {
+    return Object.keys(Polyline.propTypes).some(key => (
+      this.props[key] !== newProps[key]
+    ));
+  };
 
   renderPolyline() {
     const {
