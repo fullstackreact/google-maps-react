@@ -135,7 +135,7 @@
     }, {
       key: 'componentDidUpdate',
       value: function componentDidUpdate(prevProps) {
-        if (this.props.map !== prevProps.map || !(0, _arePathsEqual.arePathsEqual)(this.props.path, prevProps.path)) {
+        if (this.propsChanged(prevProps) || this.props.map !== prevProps.map || !(0, _arePathsEqual.arePathsEqual)(this.props.path, prevProps.path)) {
           if (this.polyline) {
             this.polyline.setMap(null);
           }
@@ -150,9 +150,18 @@
         }
       }
     }, {
+      key: 'propsChanged',
+      value: function propsChanged(newProps) {
+        var _this2 = this;
+
+        return Object.keys(Polyline.propTypes).some(function (key) {
+          return _this2.props[key] !== newProps[key];
+        });
+      }
+    }, {
       key: 'renderPolyline',
       value: function renderPolyline() {
-        var _this2 = this;
+        var _this3 = this;
 
         var _props = this.props,
             map = _props.map,
@@ -178,7 +187,7 @@
         this.polyline = new google.maps.Polyline(params);
 
         evtNames.forEach(function (e) {
-          _this2.polyline.addListener(e, _this2.handleEvent(e));
+          _this3.polyline.addListener(e, _this3.handleEvent(e));
         });
 
         this.polylinePromise.resolve(this.polyline);
@@ -191,12 +200,12 @@
     }, {
       key: 'handleEvent',
       value: function handleEvent(evt) {
-        var _this3 = this;
+        var _this4 = this;
 
         return function (e) {
           var evtName = 'on' + (0, _String.camelize)(evt);
-          if (_this3.props[evtName]) {
-            _this3.props[evtName](_this3.props, _this3.polyline, e);
+          if (_this4.props[evtName]) {
+            _this4.props[evtName](_this4.props, _this4.polyline, e);
           }
         };
       }
