@@ -1,6 +1,6 @@
 {
   "name": "psiclopz-google-maps-react",
-  "version": "1.0.4",
+  "version": "1.1.4",
   "description": "Forked Google maps container",
   "author": "Forked Fullstack.io <us@fullstack.io>",
   "license": "MIT",
@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "@types/googlemaps": "^3",
-    "@types/react": "^15.0.0",
+    "@types/react": "^18.0.0",
     "autoprefixer": "^6.3.6",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.7.4",
@@ -68,9 +68,9 @@
     "postcss-loader": "^0.9.1",
     "precss": "^1.4.0",
     "prop-types": "^15.5.10",
-    "react": "^15.0.0",
+    "react": "^18.0.0",
     "react-addons-test-utils": "^15.0.0",
-    "react-dom": "^15.0.0",
+    "react-dom": "^18.0.0",
     "react-github-fork-ribbon": "^0.5.1",
     "react-router-dom": "^4.2.2",
     "sinon": "^1.17.3",
@@ -79,7 +79,7 @@
     "webpack": "^1.13.0"
   },
   "peerDependencies": {
-    "react": "~0.14.8 || ^15.0.0 || ^16.0.0 || ^17.0.0",
-    "react-dom": "~0.14.8 || ^15.0.0 || ^16.0.0 || ^17.0.0"
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
   }
 }
