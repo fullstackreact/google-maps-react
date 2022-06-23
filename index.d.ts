@@ -71,6 +71,7 @@ export interface IMapProps extends google.maps.MapOptions {
   onTilesloaded?: mapEventHandler
   onTiltChanged?: mapEventHandler
   onZoomChanged?: mapEventHandler
+  children?: React.ReactNode;
 }
 
 type markerEventHandler = (props?: IMarkerProps, marker?: google.maps.Marker, event?: any) => any
