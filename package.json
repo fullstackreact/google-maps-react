@@ -1,6 +1,6 @@
 {
   "name": "google-maps-react",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "description": "Google maps container",
   "author": "Fullstack.io <us@fullstack.io>",
   "license": "MIT",
@@ -79,8 +79,8 @@
     "webpack": "^1.13.0"
   },
   "peerDependencies": {
-    "react": "~0.14.8 || ^15.0.0 || ^16.0.0 || ^17.0.0",
-    "react-dom": "~0.14.8 || ^15.0.0 || ^16.0.0 || ^17.0.0"
+    "react": "~0.14.8 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0",
+    "react-dom": "~0.14.8 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0"
   },
   "dependencies": {}
 }
