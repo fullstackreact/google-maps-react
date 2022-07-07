@@ -8,7 +8,7 @@ const mapStyles = {
   container: {
     position: 'absolute',
     width: '100%',
-    height: '100%'
+    height: '90%'
   },
   map: {
     position: 'absolute',
@@ -168,7 +168,9 @@ export class Map extends React.Component {
           disableDoubleClickZoom: this.props.disableDoubleClickZoom,
           noClear: this.props.noClear,
           styles: this.props.styles,
-          gestureHandling: this.props.gestureHandling
+          gestureHandling: this.props.gestureHandling,
+          streetViewControlOptions:this.props.streetViewControlOptions,
+          zoomControlOptions:this.props.zoomControlOptions
         }
       );
 
@@ -302,7 +304,9 @@ Map.propTypes = {
   noClear: PropTypes.bool,
   styles: PropTypes.array,
   gestureHandling: PropTypes.string,
-  bounds: PropTypes.object
+  bounds: PropTypes.object,
+  streetViewControlOptions:PropTypes.object,
+  zoomControlOptions:PropTypes.object
 };
 
 evtNames.forEach(e => (Map.propTypes[camelize(e)] = PropTypes.func));
