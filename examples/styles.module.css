@@ -64,5 +64,12 @@ html, body {
     order: 2;
     position: relative;
     min-height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .mapContainer {
+      flex: 1;
+      position: relative; 
+    }
   }
 }

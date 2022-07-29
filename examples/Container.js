@@ -52,6 +52,7 @@ class Container extends Component {
               </h2>
             </div>
 
+            <div className={styles.mapContainer}>
             <Switch>
               {routes.map(route => (
                 <Route
@@ -74,6 +75,7 @@ class Container extends Component {
             </Switch>
           </div>
         </div>
+      </div>
       </div>
     );
   }
