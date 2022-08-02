@@ -50,6 +50,8 @@ export interface IMapProps extends google.maps.MapOptions {
   fullscreenControl?: boolean
 
   visible?: boolean
+  
+  zoom?: number
 
   onReady?: mapEventHandler
   onClick?: mapEventHandler
