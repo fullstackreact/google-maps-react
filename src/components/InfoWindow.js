@@ -62,13 +62,13 @@ export class InfoWindow extends React.Component {
 
   onOpen() {
     if (this.props.onOpen) {
-      this.props.onOpen();
+      this.props.onOpen(this.props);
     }
   }
 
   onClose() {
     if (this.props.onClose) {
-      this.props.onClose();
+      this.props.onClose(this.props);
     }
   }
 
