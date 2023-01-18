@@ -160,6 +160,7 @@ export class Map extends React.Component {
           streetViewControlOptions: this.props.streetViewControlOptions,
           panControl: this.props.panControl,
           rotateControl: this.props.rotateControl,
+          restriction: this.props.restriction,
           fullscreenControl: this.props.fullscreenControl,
           scrollwheel: this.props.scrollwheel,
           draggable: this.props.draggable,
