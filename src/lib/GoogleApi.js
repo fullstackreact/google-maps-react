@@ -15,7 +15,7 @@ export const GoogleApi = function(opts) {
   let script = null;
   let google = (typeof window !== 'undefined' && window.google) || null;
   let loading = false;
-  let channel = null;
+  let channel = opts.channel || null;
   let language = opts.language;
   let region = opts.region || null;
 
